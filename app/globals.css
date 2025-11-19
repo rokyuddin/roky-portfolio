@@ -1,26 +1,142 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  /* zinc-50 */
+  --foreground: #27272a;
+  /* zinc-800 */
+
+  --card: #ffffff;
+  /* white */
+  --card-foreground: #27272a;
+  /* zinc-800 */
+
+  --popover: #ffffff;
+  /* white */
+  --popover-foreground: #27272a;
+  /* zinc-800 */
+
+  --primary: #18181b;
+  /* zinc-900 */
+  --primary-foreground: #fafafa;
+  /* zinc-50 */
+
+  --secondary: #f4f4f5;
+  /* zinc-100 */
+  --secondary-foreground: #18181b;
+  /* zinc-900 */
+
+  --muted: #f4f4f5;
+  /* zinc-100 */
+  --muted-foreground: #71717a;
+  /* zinc-500 */
+
+  --accent: #f4f4f5;
+  /* zinc-100 */
+  --accent-foreground: #18181b;
+  /* zinc-900 */
+
+  --destructive: #ef4444;
+  /* red-500 */
+  --destructive-foreground: #fafafa;
+  /* zinc-50 */
+
+  --border: #e4e4e7;
+  /* zinc-200 */
+  --input: #e4e4e7;
+  /* zinc-200 */
+  --ring: #18181b;
+  /* zinc-900 */
+}
+
+
+.dark {
+  --background: #09090b;
+  /* zinc-950 */
+  --foreground: #e4e4e7;
+  /* zinc-200 */
+
+  --card: #09090b;
+  /* zinc-950 */
+  --card-foreground: #e4e4e7;
+  /* zinc-200 */
+
+  --popover: #09090b;
+  /* zinc-950 */
+  --popover-foreground: #e4e4e7;
+  /* zinc-200 */
+
+  --primary: #fafafa;
+  /* zinc-50 */
+  --primary-foreground: #18181b;
+  /* zinc-900 */
+
+  --secondary: #27272a;
+  /* zinc-800 */
+  --secondary-foreground: #fafafa;
+  /* zinc-50 */
+
+  --muted: #27272a;
+  /* zinc-800 */
+  --muted-foreground: #a1a1aa;
+  /* zinc-400 */
+
+  --accent: #27272a;
+  /* zinc-800 */
+  --accent-foreground: #fafafa;
+  /* zinc-50 */
+
+  --destructive: #7f1d1d;
+  /* red-900 */
+  --destructive-foreground: #fafafa;
+  /* zinc-50 */
+
+  --border: #27272a;
+  /* zinc-800 */
+  --input: #27272a;
+  /* zinc-800 */
+  --ring: #d4d4d8;
+  /* zinc-300 */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+  --font-mono: var(--font-jetbrains-mono);
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
