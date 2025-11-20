@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, FileText } from "lucide-react";
 import { PROFILE } from "@/lib/data";
 import Image from "next/image";
 
@@ -38,13 +38,22 @@ export function Hero() {
                         </span>{" "}
                         with <span className="text-primary font-normal">3+ years of experience</span>, crafting refined digital experiences with Next.js & TypeScript.
                     </p>
-                    <div className="flex gap-6 animate-fade-in-up delay-300">
+                    <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
                         <a
                             href="#contact"
                             onClick={(e) => handleScroll(e, "#contact")}
-                            className="px-8 py-4 bg-primary text-primary-foreground font-medium tracking-wide hover:bg-primary/90 transition-colors shadow-lg shadow-border"
+                            className="px-8 py-4 bg-primary text-primary-foreground font-medium tracking-wide hover:bg-primary/90 transition-colors shadow-lg shadow-border text-center"
                         >
                             GET IN TOUCH
+                        </a>
+                        <a
+                            href="https://drive.google.com/file/d/1CicoWtA6dflZz6hErdzGjboKsgvXzCy9/view"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-8 py-4 border-2 border-primary text-primary font-medium tracking-wide hover:bg-primary hover:text-primary-foreground transition-colors shadow-lg shadow-border flex items-center justify-center gap-2"
+                        >
+                            <FileText size={20} />
+                            VIEW RESUME
                         </a>
                     </div>
                 </div>

@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
+import { FileText } from "lucide-react";
 
 const NavItem = ({
     href,
@@ -62,6 +64,7 @@ export function Nav() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -117,9 +120,38 @@ export function Nav() {
                     }`}
             >
                 <div className="max-w-4xl mx-auto flex justify-between items-center">
-                    <div className="text-xl font-serif tracking-tighter text-primary border-2 border-primary w-10 h-10 flex items-center justify-center transition-colors duration-500">
-                        M
-                    </div>
+                    <Link
+                        href="#home"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            const targetId = "home";
+                            if (pathname !== "/") {
+                                router.push("/");
+                                setTimeout(() => {
+                                    const element = document.getElementById(targetId);
+                                    if (element) {
+                                        element.scrollIntoView({ behavior: "smooth" });
+                                    }
+                                }, 100);
+                            } else {
+                                const element = document.getElementById(targetId);
+                                if (element) {
+                                    element.scrollIntoView({ behavior: "smooth" });
+                                }
+                            }
+                        }}
+                        className="group relative flex items-center justify-center w-10 h-10"
+                        aria-label="Home"
+                    >
+                        <Image
+                            src="/logo.png"
+                            alt="Roky Portfolio Logo"
+                            width={40}
+                            height={40}
+                            className="object-contain transition-all duration-300 group-hover:scale-110 dark:invert"
+                            priority
+                        />
+                    </Link>
                     <div className="flex items-center gap-4 md:gap-8">
                         <div className="hidden md:flex gap-8">
                             <NavItem

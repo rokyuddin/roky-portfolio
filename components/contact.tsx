@@ -1,8 +1,32 @@
-import React from "react";
-import { Github, Linkedin, Mail, MapPin, Smartphone } from "lucide-react";
+"use client"
+import { Copy, Github, Linkedin, Mail, MapPin, Smartphone } from "lucide-react";
 import { PROFILE } from "@/lib/data";
+import Link from "next/link";
+import { useState } from "react";
+
+type CopiedCard = "email" | "phone" | "location" | null;
+
+const CopiedBadge = () => (
+    <div className="absolute top-3 right-3 px-1.5 py-0.5 text-[10px] font-medium text-green-600 border border-green-600 rounded-sm">
+        Copied!
+    </div>
+);
 
 export function Contact() {
+    const [copiedCard, setCopiedCard] = useState<CopiedCard>(null);
+
+    const handleCopy = (text: string, cardType: CopiedCard) => {
+        navigator.clipboard.writeText(text);
+        setCopiedCard(cardType);
+        setTimeout(() => {
+            setCopiedCard(null);
+        }, 3000);
+    };
+
+    const getGoogleMapsUrl = (location: string) => {
+        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+    };
+
     return (
         <section
             id="contact"
@@ -22,39 +46,87 @@ export function Contact() {
                 </h2>
 
                 <div className="grid md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-16">
-                    <div className="flex flex-col items-center gap-4 p-6 border border-border hover:border-primary transition-colors">
+                    {/* Email Card */}
+                    <div className="relative group flex flex-col items-center gap-4 p-6 border border-border hover:border-primary transition-colors">
+                        {copiedCard === "email" && <CopiedBadge />}
+                        {copiedCard !== "email" && (
+                            <button
+                                onClick={() => handleCopy(PROFILE.email, "email")}
+                                className="absolute top-3 right-3 p-1.5 rounded-md bg-secondary/80 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all opacity-0 group-hover:opacity-100"
+                                aria-label="Copy email"
+                            >
+                                <Copy size={16} />
+                            </button>
+                        )}
                         <Mail className="text-muted-foreground" size={28} />
-                        <span className="text-sm text-muted-foreground">
+                        <Link
+                            href={`mailto:${PROFILE.email}`}
+                            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                        >
                             {PROFILE.email}
-                        </span>
+                        </Link>
                     </div>
-                    <div className="flex flex-col items-center gap-4 p-6 border border-border hover:border-primary transition-colors">
+
+                    {/* Phone Card */}
+                    <div className="relative group flex flex-col items-center gap-4 p-6 border border-border hover:border-primary transition-colors">
+                        {copiedCard === "phone" && <CopiedBadge />}
+                        {copiedCard !== "phone" && (
+                            <button
+                                onClick={() => handleCopy(PROFILE.phone, "phone")}
+                                className="absolute top-3 right-3 p-1.5 rounded-md bg-secondary/80 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all opacity-0 group-hover:opacity-100"
+                                aria-label="Copy phone number"
+                            >
+                                <Copy size={16} />
+                            </button>
+                        )}
                         <Smartphone className="text-muted-foreground" size={28} />
-                        <span className="text-sm text-muted-foreground">
+                        <Link
+                            href={`tel:${PROFILE.phone}`}
+                            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                        >
                             {PROFILE.phone}
-                        </span>
+                        </Link>
                     </div>
-                    <div className="flex flex-col items-center gap-4 p-6 border border-border hover:border-primary transition-colors">
+
+                    {/* Location Card */}
+                    <div className="relative group flex flex-col items-center gap-4 p-6 border border-border hover:border-primary transition-colors">
+                        {copiedCard === "location" && <CopiedBadge />}
+                        {copiedCard !== "location" && (
+                            <button
+                                onClick={() => handleCopy(PROFILE.location, "location")}
+                                className="absolute top-3 right-3 p-1.5 rounded-md bg-secondary/80 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all opacity-0 group-hover:opacity-100"
+                                aria-label="Copy location"
+                            >
+                                <Copy size={16} />
+                            </button>
+                        )}
                         <MapPin className="text-muted-foreground" size={28} />
-                        <span className="text-sm text-muted-foreground text-center">
+                        <Link
+                            href={getGoogleMapsUrl(PROFILE.location)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-muted-foreground hover:text-primary transition-colors text-center"
+                        >
                             {PROFILE.location}
-                        </span>
+                        </Link>
                     </div>
                 </div>
 
                 <div className="flex justify-center gap-8">
-                    <a
+                    <Link
                         href={PROFILE.socials.github}
+                        target="_blank"
                         className="text-muted-foreground hover:text-primary transition-colors transform hover:scale-110 duration-300"
                     >
                         <Github size={24} />
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                         href={PROFILE.socials.linkedin}
+                        target="_blank"
                         className="text-muted-foreground hover:text-primary transition-colors transform hover:scale-110 duration-300"
                     >
                         <Linkedin size={24} />
-                    </a>
+                    </Link>
                 </div>
 
                 <footer className="mt-24 text-muted-foreground text-xs tracking-widest uppercase">

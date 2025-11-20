@@ -346,20 +346,23 @@ Accessibility benefits everyone. Build it into your process from day one, not as
 /**
  * Get all blog posts sorted by date (newest first)
  */
-export function getAllPosts(): BlogPost[] {
+export async function getAllPosts(): Promise<BlogPost[]> {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 /**
  * Get a single blog post by slug
  */
-export function getPostBySlug(slug: string): BlogPost | undefined {
+export async function getPostBySlug(slug: string): Promise<BlogPost | undefined> {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     return blogPosts.find((post) => post.slug === slug);
 }
 
 /**
  * Get blog posts by tag
  */
-export function getPostsByTag(tag: string): BlogPost[] {
+export async function getPostsByTag(tag: string): Promise<BlogPost[]> {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return blogPosts.filter((post) => post.tags.includes(tag));
 }

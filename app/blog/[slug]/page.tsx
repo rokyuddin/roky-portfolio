@@ -9,7 +9,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/blog-data";
 import { ArrowLeft } from "lucide-react";
 
 export async function generateStaticParams() {
-    const posts = getAllPosts();
+    const posts = await getAllPosts();
     return posts.map((post) => ({
         slug: post.slug,
     }));
@@ -21,7 +21,7 @@ type Props = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
     const params = await Promise.resolve(props.params);
-    const post = getPostBySlug(params.slug);
+    const post = await getPostBySlug(params.slug);
 
     if (!post) {
         return {
@@ -45,7 +45,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function BlogDetailPage(props: Props) {
     const params = await Promise.resolve(props.params);
-    const post = getPostBySlug(params.slug);
+    const post = await getPostBySlug(params.slug);
+
 
     if (!post) {
         notFound();

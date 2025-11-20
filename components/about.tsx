@@ -1,3 +1,4 @@
+"use client"
 import { Code2, Layers, User } from "lucide-react";
 import { SectionHeader } from "./section-header";
 

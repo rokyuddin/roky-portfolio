@@ -1,4 +1,4 @@
-import React from "react";
+"use client"
 import { Briefcase, ExternalLink } from "lucide-react";
 import { SectionHeader } from "./section-header";
 import { PROJECTS } from "@/lib/data";

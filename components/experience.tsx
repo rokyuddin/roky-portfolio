@@ -1,4 +1,4 @@
-import React from "react";
+"use client"
 import { SectionHeader } from "./section-header";
 import { EXPERIENCE } from "@/lib/data";
 

@@ -3,6 +3,7 @@ import { Nav } from "@/components/nav";
 import { BlogHero } from "@/components/blog-hero";
 import { BlogList } from "@/components/blog-list";
 import { getAllPosts } from "@/lib/blog-data";
+import { use } from "react";
 
 export const metadata: Metadata = {
     title: "Blog - Roky Uddin",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-    const posts = getAllPosts();
+    const posts = use(getAllPosts())
 
     return (
         <div className="bg-background min-h-screen text-foreground selection:bg-primary selection:text-primary-foreground font-sans transition-colors duration-500">
