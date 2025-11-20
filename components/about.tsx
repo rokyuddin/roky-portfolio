@@ -1,5 +1,5 @@
 "use client"
-import { Code2, Layers, User } from "lucide-react";
+import { Code2, Layers, User, Zap } from "lucide-react";
 import { SectionHeader } from "./section-header";
 
 export function About() {
@@ -97,6 +97,19 @@ export function About() {
                                     <p className="text-sm text-muted-foreground">
                                         Tailwind CSS & Material UI for bespoke, responsive
                                         interfaces.
+                                    </p>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-4">
+                                <div className="p-2 bg-secondary text-secondary-foreground rounded-sm transition-colors duration-500">
+                                    <Zap size={20} />
+                                </div>
+                                <div>
+                                    <h4 className="text-foreground font-medium mb-1 transition-colors duration-500">
+                                        Performance
+                                    </h4>
+                                    <p className="text-sm text-muted-foreground">
+                                        Core Web Vitals optimization & efficient rendering strategies.
                                     </p>
                                 </div>
                             </li>

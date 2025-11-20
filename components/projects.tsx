@@ -2,6 +2,7 @@
 import { Briefcase, ExternalLink } from "lucide-react";
 import { SectionHeader } from "./section-header";
 import { PROJECTS } from "@/lib/data";
+import Link from "next/link";
 
 export function Projects() {
     return (
@@ -14,8 +15,9 @@ export function Projects() {
 
                 <div className="flex flex-col gap-6">
                     {PROJECTS.map((project, idx) => (
-                        <a
+                        <Link
                             href={`https://${project.link}`}
+                            target="_blank"
                             key={idx}
                             className="group block bg-card border border-border p-6 hover:shadow-xl hover:shadow-muted/50 hover:border-muted-foreground transition-all duration-500"
                         >
@@ -61,7 +63,7 @@ export function Projects() {
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </div>
