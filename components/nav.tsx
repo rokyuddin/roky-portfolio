@@ -67,20 +67,32 @@ export function Nav() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
-            const sections = ["home", "about", "experience", "projects", "contact"];
-            for (const section of sections) {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
-                        setActiveSection(section);
+            // Only detect active sections when on the home page
+            if (pathname === "/") {
+                const sections = ["home", "about", "experience", "projects", "contact"];
+                for (const section of sections) {
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const rect = element.getBoundingClientRect();
+                        if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
+                            setActiveSection(section);
+                        }
                     }
                 }
             }
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [pathname]);
+
+    // Reset active section when navigating away from home page
+    useEffect(() => {
+        if (pathname !== "/") {
+            setActiveSection("");
+        } else {
+            setActiveSection("home");
+        }
+    }, [pathname]);
 
     // Close mobile menu when clicking outside
     useEffect(() => {
@@ -104,7 +116,7 @@ export function Nav() {
                     : "bg-transparent py-8"
                     }`}
             >
-                <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
+                <div className="max-w-4xl mx-auto flex justify-between items-center">
                     <div className="text-xl font-serif tracking-tighter text-primary border-2 border-primary w-10 h-10 flex items-center justify-center transition-colors duration-500">
                         M
                     </div>

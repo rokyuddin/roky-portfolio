@@ -18,9 +18,9 @@ export function Hero() {
     return (
         <section
             id="home"
-            className="min-h-screen flex flex-col justify-center px-6 relative pt-20"
+            className="flex flex-col justify-center px-6 relative py-40"
         >
-            <div className="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="max-w-4xl mx-auto  w-full grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <div className="lg:col-span-8 flex flex-col justify-center">
                     <p className="text-muted-foreground font-mono mb-6 tracking-widest text-sm animate-fade-in-up">
                         HELLO, I AM
@@ -45,13 +45,6 @@ export function Hero() {
                             className="px-8 py-4 bg-primary text-primary-foreground font-medium tracking-wide hover:bg-primary/90 transition-colors shadow-lg shadow-border"
                         >
                             GET IN TOUCH
-                        </a>
-                        <a
-                            href="#projects"
-                            onClick={(e) => handleScroll(e, "#projects")}
-                            className="px-8 py-4 border border-border text-primary font-medium tracking-wide hover:border-primary transition-colors"
-                        >
-                            VIEW WORK
                         </a>
                     </div>
                 </div>
