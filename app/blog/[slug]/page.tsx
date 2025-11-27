@@ -5,6 +5,7 @@ import { Nav } from "@/components/nav";
 import { BackButton } from "@/components/back-button";
 import { BlogHeader } from "@/components/blog-header";
 import { BlogContent } from "@/components/blog-content";
+import { ScrollProgress } from "@/components/scroll-progress";
 import { getPostBySlug, getAllPosts } from "@/lib/blog-data";
 import { ArrowLeft } from "lucide-react";
 
@@ -54,6 +55,7 @@ export default async function BlogDetailPage(props: Props) {
 
     return (
         <div className="bg-background min-h-screen text-foreground selection:bg-primary selection:text-primary-foreground font-sans transition-colors duration-500">
+            <ScrollProgress />
             <Nav />
 
             <article className="pt-32 pb-20 px-6">
