@@ -5,7 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: "/private/",
     },
-    sitemap: "https://roky.dev/sitemap.xml", // Replace with actual domain
+    sitemap: "https://rokyuddin.vercel.app/sitemap.xml",
+    host: "https://rokyuddin.vercel.app",
   };
 }

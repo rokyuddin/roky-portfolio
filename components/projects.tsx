@@ -3,9 +3,10 @@ import { Briefcase, ExternalLink } from "lucide-react";
 import { SectionHeader } from "./section-header";
 import { PROJECTS } from "@/lib/data";
 import Link from "next/link";
+import { useState } from "react";
 
 export function Projects() {
-    const [filter, setFilter] = React.useState("All");
+    const [filter, setFilter] = useState("All");
 
     const categories = ["All", ...Array.from(new Set(PROJECTS.flatMap((p) => p.tags)))];
 
