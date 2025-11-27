@@ -1,6 +1,6 @@
 export function BlogHero() {
     return (
-        <section className="pt-32 pb-16 px-6 border-b border-border transition-colors duration-500">
+        <section className="pt-32 px-6 border-b border-border transition-colors duration-500">
             <div className="max-w-4xl mx-auto">
                 <div className="space-y-6 mb-12">
                     {/* Decorative element */}
