@@ -154,38 +154,40 @@ export function Nav() {
                     </Link>
                     <div className="flex items-center gap-4 md:gap-8">
                         <div className="hidden md:flex gap-8">
-                            <NavItem
-                                href="#home"
-                                label="Start"
-                                active={activeSection === "home"}
-                            />
-                            <NavItem
-                                href="#about"
-                                label="Profile"
-                                active={activeSection === "about"}
-                            />
-                            <NavItem
-                                href="#experience"
-                                label="Work"
-                                active={activeSection === "experience"}
-                            />
-                            <NavItem
-                                href="#projects"
-                                label="Creation"
-                                active={activeSection === "projects"}
-                            />
-                            <NavItem
-                                href="/blog"
-                                label="Blog"
-                                active={pathname.startsWith("/blog")}
-                                isHashLink={false}
-                            />
-                            <NavItem
-                                href="#contact"
-                                label="Connect"
-                                active={activeSection === "contact"}
-                            />
-                        </div>
+                        <NavItem
+                            href="#home"
+                            label="Start"
+                            active={activeSection === "home"}
+                        />
+                        <NavItem
+                            href="/about"
+                            label="About"
+                            active={pathname === "/about"}
+                            isHashLink={false}
+                        />
+                        <NavItem
+                            href="#projects"
+                            label="Projects"
+                            active={activeSection === "projects"}
+                        />
+                        <NavItem
+                            href="/case-studies"
+                            label="Case Studies"
+                            active={pathname.startsWith("/case-studies")}
+                            isHashLink={false}
+                        />
+                        <NavItem
+                            href="/blog"
+                            label="Blog"
+                            active={pathname.startsWith("/blog")}
+                            isHashLink={false}
+                        />
+                        <NavItem
+                            href="#contact"
+                            label="Connect"
+                            active={activeSection === "contact"}
+                        />
+                    </div>
 
                         <ThemeToggle />
 
@@ -259,23 +261,25 @@ export function Nav() {
                         </div>
                         <div onClick={closeMobileMenu}>
                             <NavItem
-                                href="#about"
-                                label="Profile"
-                                active={activeSection === "about"}
-                            />
-                        </div>
-                        <div onClick={closeMobileMenu}>
-                            <NavItem
-                                href="#experience"
-                                label="Work"
-                                active={activeSection === "experience"}
+                                href="/about"
+                                label="About"
+                                active={pathname === "/about"}
+                                isHashLink={false}
                             />
                         </div>
                         <div onClick={closeMobileMenu}>
                             <NavItem
                                 href="#projects"
-                                label="Creation"
+                                label="Projects"
                                 active={activeSection === "projects"}
+                            />
+                        </div>
+                        <div onClick={closeMobileMenu}>
+                            <NavItem
+                                href="/case-studies"
+                                label="Case Studies"
+                                active={pathname.startsWith("/case-studies")}
+                                isHashLink={false}
                             />
                         </div>
                         <div onClick={closeMobileMenu}>

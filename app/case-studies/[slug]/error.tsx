@@ -1,0 +1,54 @@
+"use client";
+
+import { useEffect } from "react";
+import Link from "next/link";
+import { AlertCircle, RefreshCw, ArrowLeft } from "lucide-react";
+
+export default function CaseStudyError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  useEffect(() => {
+    console.error("Case study error:", error);
+  }, [error]);
+
+  return (
+    <div className="bg-background min-h-screen text-foreground flex items-center justify-center px-6">
+      <div className="max-w-2xl mx-auto text-center">
+        <div className="mb-8">
+          <AlertCircle className="w-20 h-20 text-destructive mx-auto mb-6" />
+          <h1 className="text-4xl font-serif text-primary mb-4">
+            Failed to Load Case Study
+          </h1>
+          <p className="text-lg text-muted-foreground mb-2">
+            We couldn't load this case study. Please try again.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {error.message || "An unexpected error occurred"}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-4">
+          <button
+            onClick={reset}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Try Again
+          </button>
+          
+          <Link
+            href="/case-studies"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground border border-border rounded-lg hover:bg-secondary/80 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            All Case Studies
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

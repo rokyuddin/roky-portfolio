@@ -6,7 +6,6 @@ import { Experience } from "@/components/experience";
 import { Projects } from "@/components/projects";
 import { Contact } from "@/components/contact";
 import { Testimonials } from "@/components/testimonials";
-import { ChatWidget } from "@/components/chat/chat-widget";
 
 export default function Portfolio() {
   return (
@@ -19,7 +18,6 @@ export default function Portfolio() {
       <Projects />
       <Testimonials />
       <Contact />
-      <ChatWidget />
     </div>
   );
 }
