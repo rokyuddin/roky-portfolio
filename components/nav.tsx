@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
-import { FileText } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const NavItem = ({
     href,
@@ -56,6 +56,160 @@ const NavItem = ({
         >
             {label}
         </Link>
+    );
+};
+
+// Nested Menu Component
+const NestedMenu = ({ pathname }: { pathname: string }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+
+    const handleMouseEnter = () => {
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+            setTimeoutId(null);
+        }
+        setIsOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+        const id = setTimeout(() => {
+            setIsOpen(false);
+        }, 150);
+        setTimeoutId(id);
+    };
+
+    const isActive = pathname.startsWith("/case-studies") || 
+                     pathname.startsWith("/blog") || 
+                     pathname.startsWith("/playground");
+
+    return (
+        <div 
+            className="relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
+            <button
+                className={`text-sm uppercase tracking-widest transition-all duration-300 flex items-center gap-1 ${
+                    isActive
+                        ? "text-primary border-b border-primary pb-1"
+                        : "text-muted-foreground hover:text-primary"
+                }`}
+            >
+                Explore
+                <ChevronDown 
+                    size={14} 
+                    className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                />
+            </button>
+            
+            {/* Dropdown Menu */}
+            <div
+                className={`absolute top-full left-0 mt-2 w-48 bg-background border border-border rounded-md shadow-lg overflow-hidden transition-all duration-300 origin-top ${
+                    isOpen 
+                        ? "opacity-100 scale-y-100 translate-y-0" 
+                        : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none"
+                }`}
+            >
+                <div className="py-2">
+                    <Link
+                        href="/case-studies"
+                        className={`block px-4 py-2.5 text-sm transition-colors ${
+                            pathname.startsWith("/case-studies")
+                                ? "text-primary bg-primary/10"
+                                : "text-muted-foreground hover:text-primary hover:bg-muted/50"
+                        }`}
+                    >
+                        Case Studies
+                    </Link>
+                    <Link
+                        href="/blog"
+                        className={`block px-4 py-2.5 text-sm transition-colors ${
+                            pathname.startsWith("/blog")
+                                ? "text-primary bg-primary/10"
+                                : "text-muted-foreground hover:text-primary hover:bg-muted/50"
+                        }`}
+                    >
+                        Blog
+                    </Link>
+                    <Link
+                        href="/playground"
+                        className={`block px-4 py-2.5 text-sm transition-colors flex items-center justify-between ${
+                            pathname.startsWith("/playground")
+                                ? "text-primary bg-primary/10"
+                                : "text-muted-foreground hover:text-primary hover:bg-muted/50"
+                        }`}
+                    >
+                        Playground
+                        <span className="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Mobile Nested Menu Component
+const MobileNestedMenu = ({ pathname, closeMobileMenu }: { pathname: string; closeMobileMenu: () => void }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    return (
+        <div>
+            <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-sm uppercase tracking-widest text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-1 w-full"
+            >
+                Explore
+                <ChevronDown 
+                    size={14} 
+                    className={`transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
+                />
+            </button>
+            
+            {/* Expandable Menu Items */}
+            <div
+                className={`overflow-hidden transition-all duration-300 ${
+                    isExpanded ? "max-h-40 mt-4" : "max-h-0"
+                }`}
+            >
+                <div className="flex flex-col gap-3 pl-4 border-l-2 border-border">
+                    <Link
+                        href="/case-studies"
+                        onClick={closeMobileMenu}
+                        className={`text-sm transition-colors ${
+                            pathname.startsWith("/case-studies")
+                                ? "text-primary"
+                                : "text-muted-foreground hover:text-primary"
+                        }`}
+                    >
+                        Case Studies
+                    </Link>
+                    <Link
+                        href="/blog"
+                        onClick={closeMobileMenu}
+                        className={`text-sm transition-colors ${
+                            pathname.startsWith("/blog")
+                                ? "text-primary"
+                                : "text-muted-foreground hover:text-primary"
+                        }`}
+                    >
+                        Blog
+                    </Link>
+                    <Link
+                        href="/playground"
+                        onClick={closeMobileMenu}
+                        className={`text-sm transition-colors flex items-center gap-1 ${
+                            pathname.startsWith("/playground")
+                                ? "text-primary"
+                                : "text-muted-foreground hover:text-primary"
+                        }`}
+                    >
+                        Playground
+                        <span className="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+                    </Link>
+                </div>
+            </div>
+        </div>
     );
 };
 
@@ -153,41 +307,29 @@ export function Nav() {
                         />
                     </Link>
                     <div className="flex items-center gap-4 md:gap-8">
-                        <div className="hidden md:flex gap-8">
-                        <NavItem
-                            href="#home"
-                            label="Start"
-                            active={activeSection === "home"}
-                        />
-                        <NavItem
-                            href="/about"
-                            label="About"
-                            active={pathname === "/about"}
-                            isHashLink={false}
-                        />
-                        <NavItem
-                            href="#projects"
-                            label="Projects"
-                            active={activeSection === "projects"}
-                        />
-                        <NavItem
-                            href="/case-studies"
-                            label="Case Studies"
-                            active={pathname.startsWith("/case-studies")}
-                            isHashLink={false}
-                        />
-                        <NavItem
-                            href="/blog"
-                            label="Blog"
-                            active={pathname.startsWith("/blog")}
-                            isHashLink={false}
-                        />
-                        <NavItem
-                            href="#contact"
-                            label="Connect"
-                            active={activeSection === "contact"}
-                        />
-                    </div>
+                        <div className="hidden md:flex gap-8 items-center">
+                            <NavItem
+                                href="#home"
+                                label="Start"
+                                active={activeSection === "home"}
+                            />
+                            <NavItem
+                                href="#about"
+                                label="About"
+                                active={activeSection === "about"}
+                            />  
+                            <NavItem
+                                href="#projects"
+                                label="Projects"
+                                active={activeSection === "projects"}
+                            />
+                            <NestedMenu pathname={pathname} />
+                            <NavItem
+                                href="#contact"
+                                label="Connect"
+                                active={activeSection === "contact"}
+                            />
+                        </div>
 
                         <ThemeToggle />
 
@@ -261,10 +403,9 @@ export function Nav() {
                         </div>
                         <div onClick={closeMobileMenu}>
                             <NavItem
-                                href="/about"
+                                href="#about"
                                 label="About"
-                                active={pathname === "/about"}
-                                isHashLink={false}
+                                active={activeSection === "about"}
                             />
                         </div>
                         <div onClick={closeMobileMenu}>
@@ -274,22 +415,7 @@ export function Nav() {
                                 active={activeSection === "projects"}
                             />
                         </div>
-                        <div onClick={closeMobileMenu}>
-                            <NavItem
-                                href="/case-studies"
-                                label="Case Studies"
-                                active={pathname.startsWith("/case-studies")}
-                                isHashLink={false}
-                            />
-                        </div>
-                        <div onClick={closeMobileMenu}>
-                            <NavItem
-                                href="/blog"
-                                label="Blog"
-                                active={pathname.startsWith("/blog")}
-                                isHashLink={false}
-                            />
-                        </div>
+                        <MobileNestedMenu pathname={pathname} closeMobileMenu={closeMobileMenu} />
                         <div onClick={closeMobileMenu}>
                             <NavItem
                                 href="#contact"

@@ -20,7 +20,7 @@ export function CaseStudyCard({ study, index }: CaseStudyCardProps) {
       viewport={{ once: true }}
       className="group"
     >
-      <div className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+      <div className="bg-card border border-border rounded-lg overflow-hidden transition-all duration-300">
         {/* Image */}
         <Link href={`/case-studies/${study.slug}`} className="block">
           <div className="relative aspect-video overflow-hidden">

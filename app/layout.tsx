@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SmoothScroll } from "@/components/smoth-scroll";
 import { ChatWidget } from "@/components/chat/chat-widget";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
           >
             {children}
             <ChatWidget />
+            <Toaster />
           </ThemeProvider>
         </SmoothScroll>
       </body>
