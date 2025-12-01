@@ -24,6 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Md Rokyuddin | Frontend Developer",
   description: "Frontend Developer specializing in React, Next.js, and TypeScript.",
+  metadataBase: new URL("https://rokyuddin.vercel.app"),
 };
 
 export default function RootLayout({

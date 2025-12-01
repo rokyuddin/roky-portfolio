@@ -11,11 +11,6 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
   // Simulate API delay
   await delay(1000);
   
-  // Simulate random error (10% chance)
-  if (Math.random() < 0.1) {
-    throw new Error("Failed to fetch case studies");
-  }
-  
   return REAL_CASE_STUDIES;
 }
 
@@ -25,12 +20,7 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
 export async function fetchCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
   // Simulate API delay
   await delay(1000);
-  
-  // Simulate random error (10% chance)
-  if (Math.random() < 0.1) {
-    throw new Error(`Failed to fetch case study: ${slug}`);
-  }
-  
+
   const caseStudy = REAL_CASE_STUDIES.find((study: CaseStudy) => study.slug === slug);
   return caseStudy || null;
 }
