@@ -115,6 +115,7 @@ export const PROJECTS = [
         title: "Rydr",
         subtitle: "Ride-Sharing & Concierge Platform",
         link: "rydr.app",
+        github: "#",
         description:
             "A comprehensive platform for trip booking, chauffeur services, and real-time tracking. Features include automated invoices, admin dashboards, and business management systems for third-party organizations.",
         tags: ["Google Maps", "Stripe", "Admin Panel"],
@@ -123,6 +124,7 @@ export const PROJECTS = [
         title: "Skinsight",
         subtitle: "Personalized Skincare Guide",
         link: "skinsight.me",
+        github: "#",
         description:
             "An intelligent recommendation engine for skincare. Users get suggestions based on skin type, build regimens, and manage profiles. Features account deletion and data management.",
         tags: ["Recommendation Engine", "Personalization", "HealthTech"],
@@ -131,6 +133,7 @@ export const PROJECTS = [
         title: "AslamCGA",
         subtitle: "Portfolio Landing Page",
         link: "aslamcga.com",
+        github: "#",
         description:
             "High-performance portfolio with dynamic Framer Motion animations. Optimized for speed and efficient content delivery.",
         tags: ["Framer Motion", "Performance", "Animation"],

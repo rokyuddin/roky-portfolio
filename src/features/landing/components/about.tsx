@@ -9,7 +9,7 @@ export function About() {
             className="px-6 py-24 border-border border-t transition-colors duration-500 scroll-mt-28"
         >
             <div className="mx-auto max-w-4xl">
-                <SectionHeader title="Competencies" number="01" />
+                <SectionHeader title="Competencies" number="02" />
 
                 <div className="gap-16 grid md:grid-cols-2">
                     <div className="group relative">

@@ -40,11 +40,11 @@ export function Hero() {
                     </p>
                     <div className="flex sm:flex-row flex-col gap-4 animate-fade-in-up delay-300">
                         <a
-                            href="#contact"
-                            onClick={(e) => handleScroll(e, "#contact")}
+                            href="#projects"
+                            onClick={(e) => handleScroll(e, "#projects")}
                             className="bg-primary hover:bg-primary/90 shadow-border shadow-lg px-8 py-4 font-medium text-primary-foreground text-center tracking-wide transition-colors"
                         >
-                            GET IN TOUCH
+                            VIEW WORK
                         </a>
                         <a
                             href="https://drive.google.com/file/d/1CicoWtA6dflZz6hErdzGjboKsgvXzCy9/view"

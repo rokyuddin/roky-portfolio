@@ -7,9 +7,9 @@ export default function Portfolio() {
       <Nav />
       <Hero />
       <TechStack />
+      <Projects />
       <About />
       <Experience />
-      <Projects />
       <Testimonials />
       <Contact />
     </div>

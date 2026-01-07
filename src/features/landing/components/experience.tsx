@@ -9,7 +9,7 @@ export function Experience() {
             className="bg-secondary/50 px-6 py-24 transition-colors duration-500 scroll-mt-28"
         >
             <div className="mx-auto max-w-4xl">
-                <SectionHeader title="Trajectory" number="02" />
+                <SectionHeader title="Trajectory" number="03" />
 
                 <div className="space-y-12">
                     {EXPERIENCE.map((job, idx) => (

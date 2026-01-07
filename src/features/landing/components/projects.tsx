@@ -1,5 +1,5 @@
 "use client"
-import { Briefcase, ExternalLink } from "lucide-react";
+import { Briefcase, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { SectionHeader } from "@/components/organisms/section-header";
@@ -20,7 +20,7 @@ export function Projects() {
             className="px-6 py-24 transition-colors duration-500 scroll-mt-28"
         >
             <div className="mx-auto max-w-4xl">
-                <SectionHeader title="Selected Works" number="03" />
+                <SectionHeader title="Selected Works" number="01" />
 
                 {/* Filter Buttons */}
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -51,7 +51,7 @@ export function Projects() {
                             >
                                 <div className="flex items-start gap-6">
                                     {/* Icon Section */}
-                                    <div className="flex-shrink-0 bg-secondary p-3 border border-border group-hover:border-muted-foreground transition-colors">
+                                    <div className="bg-secondary p-3 border border-border group-hover:border-muted-foreground transition-colors shrink-0">
                                         <Briefcase
                                             size={24}
                                             className="text-muted-foreground group-hover:text-primary transition-colors"
@@ -59,7 +59,7 @@ export function Projects() {
                                     </div>
 
                                     {/* Content Section */}
-                                    <div className="flex-grow min-w-0">
+                                    <div className="min-w-0 grow">
                                         <div className="flex justify-between items-start gap-4 mb-3">
                                             <div>
                                                 <h3 className="mb-1 font-serif text-primary text-2xl transition-transform group-hover:translate-x-2 duration-300">
@@ -105,6 +105,14 @@ export function Projects() {
                                                     View Case Study
                                                 </Link>
                                             )}
+                                            <Link
+                                                href={project.github}
+                                                target="_blank"
+                                                className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-4 py-2 border border-border rounded-lg text-secondary-foreground text-sm transition-colors"
+                                            >
+                                                <Github size={14} />
+                                                Source Code
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
