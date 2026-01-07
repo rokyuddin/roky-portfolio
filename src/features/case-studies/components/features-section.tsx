@@ -32,18 +32,18 @@ export function FeaturesSection({ title, items }: FeaturesSectionProps) {
   };
 
   return (
-    <section className="py-16 px-6 bg-muted/20 border-y border-border">
-      <div className="max-w-4xl mx-auto">
+    <section className="bg-muted/20 px-6 py-16 border-border border-y">
+      <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-serif text-primary mb-8 text-center">{title}</h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {items.map((feature, index) => {
+          <h2 className="mb-8 font-serif text-primary text-3xl text-center">{title}</h2>
+
+          <div className="gap-6 grid md:grid-cols-2 lg:grid-cols-3">
+            {items?.map((feature, index) => {
               const Icon = iconMap[feature.icon] || Code2;
               return (
                 <motion.div
@@ -52,10 +52,10 @@ export function FeaturesSection({ title, items }: FeaturesSectionProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-card border border-border p-6 rounded-lg hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+                  className="bg-card hover:shadow-lg hover:shadow-primary/5 p-6 border border-border rounded-lg transition-all duration-300"
                 >
-                  <Icon className="w-10 h-10 text-primary mb-4" />
-                  <h3 className="text-xl font-semibold text-foreground mb-2">{feature.name}</h3>
+                  <Icon className="mb-4 w-10 h-10 text-primary" />
+                  <h3 className="mb-2 font-semibold text-foreground text-xl">{feature.name}</h3>
                   <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
                 </motion.div>
               );

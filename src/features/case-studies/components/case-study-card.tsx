@@ -13,7 +13,6 @@ interface CaseStudyCardProps {
 }
 
 export function CaseStudyCard({ study, index }: CaseStudyCardProps) {
-  console.log(study.heroImage)
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

@@ -11,22 +11,22 @@ interface ChallengeSectionProps {
 
 export function ChallengeSection({ title, description, problems }: ChallengeSectionProps) {
   return (
-    <section className="py-16 px-6 bg-muted/20 border-y border-border">
-      <div className="max-w-4xl mx-auto">
+    <section className="bg-muted/20 px-6 py-16 border-border border-y">
+      <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-serif text-primary mb-6">{title}</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+          <h2 className="mb-6 font-serif text-primary text-3xl">{title}</h2>
+          <p className="mb-6 text-muted-foreground text-lg leading-relaxed">
             {description}
           </p>
           <ul className="space-y-3">
-            {problems.map((problem, index) => (
+            {problems?.map((problem, index) => (
               <li key={index} className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="mt-0.5 w-5 h-5 text-primary shrink-0" />
                 <span className="text-muted-foreground">{problem}</span>
               </li>
             ))}

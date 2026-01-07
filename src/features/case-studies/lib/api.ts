@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { caseStudiesQuery, caseStudyBySlugQuery } from "@/sanity/lib/queries";
 import { CaseStudy } from "../types";
+import { urlFor } from "@/sanity/lib/image";
 
 import { cacheLife, cacheTag } from "next/cache";
 
@@ -39,9 +40,9 @@ function transformCaseStudy(sanityStudy: any): CaseStudy {
     return {
         ...sanityStudy,
         slug: sanityStudy.slug?.current,
-        heroImage: sanityStudy.heroImage?.asset,
+        heroImage: sanityStudy.heroImage?.asset ? urlFor(sanityStudy.heroImage.asset).url() : "",
         gallery: (sanityStudy.gallery || []).map((item: any) => ({
-            image: item.image?.asset,
+            image: item.image?.asset ? urlFor(item.image.asset).url() : "",
             caption: item.caption
         })),
         relatedProjects: sanityStudy.relatedProjects || []

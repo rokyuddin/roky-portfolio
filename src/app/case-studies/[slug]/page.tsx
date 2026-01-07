@@ -27,24 +27,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `${caseStudy.title} Case Study | Md Rokyuddin - Frontend Developer`,
-    description: caseStudy.overview.description,
+    title: `${caseStudy?.title} Case Study | Md Rokyuddin - Frontend Developer`,
+    description: caseStudy?.overview.description,
     keywords: [
-      caseStudy.title,
-      caseStudy.category,
-      ...caseStudy.techStack.frontend,
+      caseStudy?.title,
+      caseStudy?.category,
+      ...caseStudy?.techStack.frontend,
       "case study",
       "web development",
       "frontend development"
     ],
     openGraph: {
-      title: `${caseStudy.title} - ${caseStudy.subtitle}`,
-      description: caseStudy.overview.description,
+      title: `${caseStudy?.title} - ${caseStudy?.subtitle}`,
+      description: caseStudy?.overview.description,
       type: "article",
       images: [
         {
-          url: caseStudy.heroImage,
-          alt: `${caseStudy.title} preview`,
+          url: caseStudy?.heroImage,
+          alt: `${caseStudy?.title} preview`,
         },
       ],
     },
@@ -71,14 +71,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       {/* Hero Section */}
       <HeroSection
-        title={caseStudy.title}
-        subtitle={caseStudy.subtitle}
-        category={caseStudy.category}
-        role={caseStudy.overview.role}
-        duration={caseStudy.overview.duration}
-        team={caseStudy.overview.team}
-        liveUrl={caseStudy.overview.liveUrl}
-        heroImage={caseStudy.heroImage}
+        title={caseStudy?.title}
+        subtitle={caseStudy?.subtitle}
+        category={caseStudy?.category}
+        role={caseStudy?.overview.role}
+        duration={caseStudy?.overview.duration}
+        team={caseStudy?.overview.team}
+        liveUrl={caseStudy?.overview.liveUrl}
+        heroImage={caseStudy?.heroImage}
       />
 
       {/* Overview */}
@@ -87,7 +87,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div>
             <h2 className="mb-6 font-serif text-primary text-3xl">Project Overview</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              {caseStudy.overview.description}
+              {caseStudy?.overview.description}
             </p>
           </div>
         </div>
@@ -95,22 +95,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       {/* Challenge */}
       <ChallengeSection
-        title={caseStudy.challenge.title}
-        description={caseStudy.challenge.description}
-        problems={caseStudy.challenge.problems}
+        title={caseStudy?.challenge?.title}
+        description={caseStudy?.challenge?.description}
+        problems={caseStudy?.challenge?.problems}
       />
 
       {/* Solution */}
       <SolutionSection
-        title={caseStudy.solution.title}
-        description={caseStudy.solution.description}
-        approach={caseStudy.solution.approach}
+        title={caseStudy?.solution?.title}
+        description={caseStudy?.solution?.description}
+        approach={caseStudy?.solution?.approach}
       />
 
       {/* Key Features */}
       <FeaturesSection
-        title={caseStudy.features.title}
-        items={caseStudy.features.items}
+        title={caseStudy?.features?.title}
+        items={caseStudy?.features?.items}
       />
 
       {/* Tech Stack */}
@@ -126,7 +126,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   Frontend
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {caseStudy.techStack.frontend.map((tech, index) => (
+                  {caseStudy?.techStack.frontend.map((tech, index) => (
                     <span
                       key={index}
                       className="bg-secondary px-3 py-1.5 border border-border rounded-full text-secondary-foreground text-sm"
@@ -143,7 +143,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   Backend & APIs
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {caseStudy.techStack.backend.map((tech, index) => (
+                  {caseStudy?.techStack.backend.map((tech, index) => (
                     <span
                       key={index}
                       className="bg-secondary px-3 py-1.5 border border-border rounded-full text-secondary-foreground text-sm"
@@ -160,7 +160,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   Tools
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {caseStudy.techStack.tools.map((tech, index) => (
+                  {caseStudy?.techStack.tools.map((tech, index) => (
                     <span
                       key={index}
                       className="bg-secondary px-3 py-1.5 border border-border rounded-full text-secondary-foreground text-sm"
@@ -179,20 +179,20 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <section className="bg-muted/20 px-6 py-16 border-border border-y">
         <div className="mx-auto max-w-4xl">
           <div>
-            <h2 className="mb-6 font-serif text-primary text-3xl">{caseStudy.results.title}</h2>
+            <h2 className="mb-6 font-serif text-primary text-3xl">{caseStudy?.results?.title}</h2>
             <p className="mb-8 text-muted-foreground text-lg leading-relaxed">
-              {caseStudy.results.description}
+              {caseStudy?.results?.description}
             </p>
 
             <div className="gap-6 grid grid-cols-2 md:grid-cols-4">
-              {caseStudy.results.metrics.map((metric, index) => (
+              {caseStudy?.results?.metrics?.map((metric, index) => (
                 <div
                   key={index}
                   className="bg-card p-6 border border-border rounded-lg text-center"
                 >
-                  <div className="mb-2 font-bold text-primary text-3xl">{metric.value}</div>
-                  <div className="mb-1 font-semibold text-foreground text-sm">{metric.label}</div>
-                  <div className="text-muted-foreground text-xs">{metric.description}</div>
+                  <div className="mb-2 font-bold text-primary text-3xl">{metric?.value}</div>
+                  <div className="mb-1 font-semibold text-foreground text-sm">{metric?.label}</div>
+                  <div className="text-muted-foreground text-xs">{metric?.description}</div>
                 </div>
               ))}
             </div>
@@ -201,7 +201,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Gallery */}
-      <GallerySection items={caseStudy.gallery} />
+      <GallerySection items={caseStudy?.gallery} />
 
       {/* CTA */}
       <section className="px-6 py-16 border-border border-t">

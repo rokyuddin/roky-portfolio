@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import { ArrowLeft, ExternalLink, Users, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
 
 interface HeroSectionProps {
   title: string;
@@ -101,7 +100,7 @@ export function HeroSection({
           className="relative border border-border rounded-lg aspect-video overflow-hidden"
         >
           <Image
-            src={urlFor(heroImage).url()}
+            src={heroImage}
             alt={`${title} preview`}
             fill
             className="object-cover"

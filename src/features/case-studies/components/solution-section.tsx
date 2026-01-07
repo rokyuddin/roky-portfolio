@@ -10,22 +10,22 @@ interface SolutionSectionProps {
 
 export function SolutionSection({ title, description, approach }: SolutionSectionProps) {
   return (
-    <section className="py-16 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section className="px-6 py-16">
+      <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-serif text-primary mb-6">{title}</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+          <h2 className="mb-6 font-serif text-primary text-3xl">{title}</h2>
+          <p className="mb-6 text-muted-foreground text-lg leading-relaxed">
             {description}
           </p>
           <ul className="space-y-3">
-            {approach.map((item, index) => (
+            {approach?.map((item, index) => (
               <li key={index} className="flex items-start gap-3">
-                <span className="text-primary mt-1">▸</span>
+                <span className="mt-1 text-primary">▸</span>
                 <span className="text-muted-foreground">{item}</span>
               </li>
             ))}
