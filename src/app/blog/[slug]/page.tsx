@@ -16,12 +16,12 @@ export async function generateStaticParams() {
 }
 
 type Props = {
-    params: Promise<{ slug: string }> | { slug: string };
+    params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-    const params = await Promise.resolve(props.params);
-    const post = await getPostBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+    const post = await getPostBySlug(slug);
 
     if (!post) {
         return {
@@ -30,7 +30,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     }
 
     return {
-        title: `${post.title} - Roky Uddin`,
+        title: `${post.title} - RokyUddin`,
         description: post.excerpt,
         openGraph: {
             title: post.title,
@@ -43,9 +43,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     };
 }
 
-export default async function BlogDetailPage(props: Props) {
-    const params = await Promise.resolve(props.params);
-    const post = await getPostBySlug(params.slug);
+export default async function BlogDetailPage({ params }: Props) {
+    const { slug } = await params;
+    const post = await getPostBySlug(slug);
 
 
     if (!post) {
@@ -64,7 +64,7 @@ export default async function BlogDetailPage(props: Props) {
                     <BlogContent content={post.content} />
 
                     {/* Divider */}
-                    <div className="bg-gradient-to-r from-transparent to-transparent my-8 md:my-16 via-border w-full h-px" />
+                    <div className="bg-linear-to-r from-transparent to-transparent my-8 md:my-16 via-border w-full h-px" />
 
                     {/* Back to Blog Footer */}
                     <div className="text-center">

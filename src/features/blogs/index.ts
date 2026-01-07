@@ -6,4 +6,4 @@ export { BlogContent } from './components/blog-content'
 export { BackButton } from './components/back-button'
 
 export * from './types'
-export * from './utils'
+export * from './lib/api'

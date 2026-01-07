@@ -1,19 +1,27 @@
 "use client"
-import { Copy, Github, Linkedin, Mail, MapPin, Smartphone } from "lucide-react";
+import { Copy, Github, Linkedin, Mail, MapPin, Smartphone, Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { PROFILE } from "../utils";
 
 type CopiedCard = "email" | "phone" | "location" | null;
 
-const CopiedBadge = () => (
-    <div className="top-3 right-3 absolute px-1.5 py-0.5 border border-green-600 rounded-sm font-medium text-[10px] text-green-600">
-        Copied!
-    </div>
-);
+interface ContactProps {
+    profile: any;
+}
 
-export function Contact() {
+function CopiedBadge() {
+    return (
+        <div className="top-3 right-3 absolute flex items-center gap-1.5 bg-primary/10 px-2 py-1 rounded-md text-primary text-xs animate-in duration-300 fade-in zoom-in">
+            <Check size={14} />
+            <span>Copied!</span>
+        </div>
+    );
+}
+
+export function Contact({ profile }: ContactProps) {
     const [copiedCard, setCopiedCard] = useState<CopiedCard>(null);
+
+    if (!profile) return null;
 
     const handleCopy = (text: string, cardType: CopiedCard) => {
         navigator.clipboard.writeText(text);
@@ -51,7 +59,7 @@ export function Contact() {
                         {copiedCard === "email" && <CopiedBadge />}
                         {copiedCard !== "email" && (
                             <button
-                                onClick={() => handleCopy(PROFILE.email, "email")}
+                                onClick={() => handleCopy(profile.email, "email")}
                                 className="top-3 right-3 absolute bg-secondary/80 hover:bg-primary/10 opacity-0 group-hover:opacity-100 p-1.5 rounded-md text-muted-foreground hover:text-primary transition-all"
                                 aria-label="Copy email"
                             >
@@ -60,10 +68,10 @@ export function Contact() {
                         )}
                         <Mail className="text-muted-foreground" size={28} />
                         <Link
-                            href={`mailto:${PROFILE.email}`}
+                            href={`mailto:${profile.email}`}
                             className="text-muted-foreground hover:text-primary text-sm transition-colors"
                         >
-                            {PROFILE.email}
+                            {profile.email}
                         </Link>
                     </div>
 
@@ -72,7 +80,7 @@ export function Contact() {
                         {copiedCard === "phone" && <CopiedBadge />}
                         {copiedCard !== "phone" && (
                             <button
-                                onClick={() => handleCopy(PROFILE.phone, "phone")}
+                                onClick={() => handleCopy(profile.phone, "phone")}
                                 className="top-3 right-3 absolute bg-secondary/80 hover:bg-primary/10 opacity-0 group-hover:opacity-100 p-1.5 rounded-md text-muted-foreground hover:text-primary transition-all"
                                 aria-label="Copy phone number"
                             >
@@ -81,10 +89,10 @@ export function Contact() {
                         )}
                         <Smartphone className="text-muted-foreground" size={28} />
                         <Link
-                            href={`tel:${PROFILE.phone}`}
+                            href={`tel:${profile.phone}`}
                             className="text-muted-foreground hover:text-primary text-sm transition-colors"
                         >
-                            {PROFILE.phone}
+                            {profile.phone}
                         </Link>
                     </div>
 
@@ -93,7 +101,7 @@ export function Contact() {
                         {copiedCard === "location" && <CopiedBadge />}
                         {copiedCard !== "location" && (
                             <button
-                                onClick={() => handleCopy(PROFILE.location, "location")}
+                                onClick={() => handleCopy(profile.location, "location")}
                                 className="top-3 right-3 absolute bg-secondary/80 hover:bg-primary/10 opacity-0 group-hover:opacity-100 p-1.5 rounded-md text-muted-foreground hover:text-primary transition-all"
                                 aria-label="Copy location"
                             >
@@ -102,26 +110,26 @@ export function Contact() {
                         )}
                         <MapPin className="text-muted-foreground" size={28} />
                         <Link
-                            href={getGoogleMapsUrl(PROFILE.location)}
+                            href={getGoogleMapsUrl(profile.location)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-muted-foreground hover:text-primary text-sm text-center transition-colors"
                         >
-                            {PROFILE.location}
+                            {profile.location}
                         </Link>
                     </div>
                 </div>
 
                 <div className="flex justify-center gap-8">
                     <Link
-                        href={PROFILE.socials.github}
+                        href={profile.socials?.github || "#"}
                         target="_blank"
                         className="text-muted-foreground hover:text-primary hover:scale-110 transition-colors duration-300 transform"
                     >
                         <Github size={24} />
                     </Link>
                     <Link
-                        href={PROFILE.socials.linkedin}
+                        href={profile.socials?.linkedin || "#"}
                         target="_blank"
                         className="text-muted-foreground hover:text-primary hover:scale-110 transition-colors duration-300 transform"
                     >
@@ -130,7 +138,7 @@ export function Contact() {
                 </div>
 
                 <footer className="mt-24 text-muted-foreground text-xs uppercase tracking-widest">
-                    © {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
+                    © {new Date().getFullYear()} {profile.name}. All rights reserved.
                 </footer>
             </div>
         </section>

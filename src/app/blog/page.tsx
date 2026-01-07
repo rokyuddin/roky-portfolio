@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { Nav } from "@/components/organisms/nav";
 import { BlogHero } from "@/features/blogs/components/blog-hero";
 import { BlogList } from "@/features/blogs/components/blog-list";
-import { use } from "react";
 import { getAllPosts } from "@/features/blogs";
 
 export const metadata: Metadata = {
@@ -15,8 +14,8 @@ export const metadata: Metadata = {
     },
 };
 
-export default function BlogPage() {
-    const posts = use(getAllPosts())
+export default async function BlogPage() {
+    const posts = await getAllPosts()
 
     return (
         <div className="bg-background selection:bg-primary min-h-screen font-sans text-foreground selection:text-primary-foreground transition-colors duration-500">

@@ -2,7 +2,11 @@
 import { SectionHeader } from "@/components/organisms/section-header";
 import { Code2, Layers, User, Zap } from "lucide-react";
 
-export function About() {
+interface AboutProps {
+    profile: any;
+}
+
+export function About({ profile }: AboutProps) {
     return (
         <section
             id="about"

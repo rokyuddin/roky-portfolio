@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getAllPosts } from "@/src/lib/blog-data";
+import { getAllPosts } from "@/features/blogs";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://rokyuddin.vercel.app"; // Replace with actual domain

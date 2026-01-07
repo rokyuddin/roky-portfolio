@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
@@ -37,19 +38,21 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <SmoothScroll>
+        {/* <SmoothScroll> */}
 
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <ChatWidget />
-            <Toaster />
-          </ThemeProvider>
-        </SmoothScroll>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          {/* <Suspense>
+              <ChatWidget />
+            </Suspense> */}
+          <Toaster />
+        </ThemeProvider>
+        {/* </SmoothScroll> */}
       </body>
     </html>
   );

@@ -1,20 +1,13 @@
-import { CASE_STUDIES } from "@/features/case-studies";
+import { fetchCaseStudyBySlug } from "@/features/case-studies";
 import { NextResponse } from "next/server";
-
-// Simulated API delay
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+  const { slug } = await params;
   try {
-    const { slug } = await params;
-
-    // Simulate API delay of 1 second
-    await delay(1000);
-
-    const caseStudy = CASE_STUDIES.find((study) => study.slug === slug);
+    const caseStudy = await fetchCaseStudyBySlug(slug);
 
     if (!caseStudy) {
       return NextResponse.json(
@@ -29,6 +22,7 @@ export async function GET(
       timestamp: new Date().toISOString()
     });
   } catch (error) {
+    console.error(`Error fetching case study ${slug} from API:`, error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

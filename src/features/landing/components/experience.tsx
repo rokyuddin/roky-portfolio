@@ -1,8 +1,11 @@
-"use client"
 import { SectionHeader } from "@/components/organisms/section-header";
-import { EXPERIENCE } from "../utils";
 
-export function Experience() {
+interface ExperienceProps {
+    experience: any[];
+}
+
+export function Experience({ experience }: ExperienceProps) {
+    if (!experience) return null;
     return (
         <section
             id="experience"
@@ -12,7 +15,7 @@ export function Experience() {
                 <SectionHeader title="Trajectory" number="03" />
 
                 <div className="space-y-12">
-                    {EXPERIENCE.map((job, idx) => (
+                    {experience.map((job, idx) => (
                         <div
                             key={idx}
                             className="group relative pl-8 border-border hover:border-primary border-l transition-colors duration-500"
@@ -37,7 +40,7 @@ export function Experience() {
                             </p>
 
                             <div className="flex flex-wrap gap-4 font-mono text-muted-foreground text-xs uppercase tracking-wider">
-                                {job.tech.map((t, i) => (
+                                {job.techStack?.map((t: string, i: number) => (
                                     <span
                                         key={i}
                                         className="pb-1 border-border border-b"

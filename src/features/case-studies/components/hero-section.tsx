@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { ArrowLeft, ExternalLink, Users, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 interface HeroSectionProps {
   title: string;
@@ -27,17 +28,17 @@ export function HeroSection({
   heroImage
 }: HeroSectionProps) {
   return (
-    <section className="pt-32 pb-16 px-6 border-b border-border">
-      <div className="max-w-4xl mx-auto">
+    <section className="px-6 pt-32 pb-16 border-border border-b">
+      <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           {/* Back Button */}
-          <Link 
+          <Link
             href="/#projects"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
+            className="inline-flex items-center gap-2 mb-8 text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Projects
@@ -45,19 +46,19 @@ export function HeroSection({
 
           {/* Title */}
           <div className="mb-8">
-            <h1 className="text-5xl md:text-6xl font-serif mb-4 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+            <h1 className="bg-clip-text bg-linear-to-r from-primary via-primary/80 to-primary/60 mb-4 font-serif text-transparent text-5xl md:text-6xl">
               {title}
             </h1>
-            <p className="text-2xl text-muted-foreground mb-4">{subtitle}</p>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="px-3 py-1 bg-primary/10 text-primary rounded-full border border-primary/20">
+            <p className="mb-4 text-muted-foreground text-2xl">{subtitle}</p>
+            <div className="flex items-center gap-2 text-muted-foreground text-sm">
+              <span className="bg-primary/10 px-3 py-1 border border-primary/20 rounded-full text-primary">
                 {category}
               </span>
             </div>
           </div>
 
           {/* Meta Info */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="gap-4 grid grid-cols-2 md:grid-cols-4 mb-8">
             <div className="flex items-center gap-2 text-sm">
               <Users className="w-4 h-4 text-primary" />
               <div>
@@ -83,7 +84,7 @@ export function HeroSection({
               <Link
                 href={liveUrl}
                 target="_blank"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
+                className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-4 py-2 rounded-lg text-primary-foreground text-sm transition-colors"
               >
                 <ExternalLink className="w-4 h-4" />
                 Visit Live Site
@@ -93,19 +94,19 @@ export function HeroSection({
         </motion.div>
 
         {/* Hero Image */}
-        <motion.div
+        {heroImage && <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative aspect-video rounded-lg overflow-hidden border border-border"
+          className="relative border border-border rounded-lg aspect-video overflow-hidden"
         >
           <Image
-            src={heroImage}
+            src={urlFor(heroImage).url()}
             alt={`${title} preview`}
             fill
             className="object-cover"
           />
-        </motion.div>
+        </motion.div>}
       </div>
     </section>
   );

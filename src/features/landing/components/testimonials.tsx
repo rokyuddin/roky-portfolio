@@ -1,17 +1,20 @@
-"use client";
-
+"use client"
 import { motion } from "motion/react";
-import { TESTIMONIALS_DATA } from "../utils";
 import { SectionHeader } from "@/components/organisms/section-header";
 
-export function Testimonials() {
+interface TestimonialsProps {
+  testimonials: any[];
+}
+
+export function Testimonials({ testimonials }: TestimonialsProps) {
+  if (!testimonials) return null;
   return (
     <section id="testimonials" className="px-6 py-24 border-border border-t transition-colors duration-500">
       <div className="mx-auto w-full max-w-4xl">
         <SectionHeader title="Client Testimonials" number="04" />
 
         <div className="space-y-12 mt-16">
-          {TESTIMONIALS_DATA.slice(0, 4).map((testimonial, index) => (
+          {testimonials.slice(0, 6).map((testimonial, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -26,9 +29,9 @@ export function Testimonials() {
                 </p>
 
                 <footer className="flex items-center gap-4 not-italic">
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.avatarColor} flex items-center justify-center flex-shrink-0`}>
+                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.avatarColor || "from-blue-500 to-indigo-600"} flex items-center justify-center flex-shrink-0`}>
                     <span className="font-semibold text-white text-sm">
-                      {testimonial.initials}
+                      {testimonial.author?.split(" ").map((n: string) => n[0]).join("")}
                     </span>
                   </div>
                   <div>

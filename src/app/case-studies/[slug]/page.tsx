@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 // Generate static params for all case studies
 export async function generateStaticParams() {
-  const slugs = getAllCaseStudySlugs();
+  const slugs = await getAllCaseStudySlugs();
   return slugs.map((slug) => ({ slug }));
 }
 

@@ -5,6 +5,7 @@ import { ExternalLink, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { CaseStudy } from "../types";
+import { urlFor } from "@/sanity/lib/image";
 
 interface CaseStudyCardProps {
   study: CaseStudy;
@@ -12,6 +13,7 @@ interface CaseStudyCardProps {
 }
 
 export function CaseStudyCard({ study, index }: CaseStudyCardProps) {
+  console.log(study.heroImage)
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -25,12 +27,12 @@ export function CaseStudyCard({ study, index }: CaseStudyCardProps) {
         <Link href={`/case-studies/${study.slug}`} className="block">
           <div className="relative aspect-video overflow-hidden">
             <Image
-              src={study.heroImage}
+              src={urlFor(study.heroImage).url()}
               alt={study.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
             <div className="right-4 bottom-4 left-4 absolute">
               <span className="inline-block bg-primary/90 mb-2 px-3 py-1 rounded-full text-primary-foreground text-xs">
                 {study.category}

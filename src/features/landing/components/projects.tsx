@@ -3,16 +3,21 @@ import { Briefcase, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { SectionHeader } from "@/components/organisms/section-header";
-import { PROJECTS } from "../utils";
 
-export function Projects() {
+interface ProjectsProps {
+    projects: any[];
+}
+
+export function Projects({ projects }: ProjectsProps) {
     const [filter, setFilter] = useState("All");
 
-    const categories = ["All", ...Array.from(new Set(PROJECTS.flatMap((p) => p.tags)))];
+    if (!projects) return null;
+
+    const categories = ["All", ...Array.from(new Set(projects.flatMap((p) => p.tags || [])))];
 
     const filteredProjects = filter === "All"
-        ? PROJECTS
-        : PROJECTS.filter((p) => p.tags.includes(filter));
+        ? projects
+        : projects.filter((p) => p.tags?.includes(filter));
 
     return (
         <section
@@ -39,10 +44,8 @@ export function Projects() {
                 </div>
 
                 <div className="flex flex-col gap-6">
-                    {PROJECTS.map((project, idx) => {
-                        // Check if project has a case study
-                        const hasCaseStudy = project.title === "Rydr" || project.title === "Skinsight";
-                        const caseStudySlug = project.title.toLowerCase();
+                    {filteredProjects.map((project, idx) => {
+                        const caseStudySlug = project.slug?.current || project.title?.toLowerCase();
 
                         return (
                             <div
@@ -76,7 +79,7 @@ export function Projects() {
                                         </p>
 
                                         <div className="flex flex-wrap gap-2 mb-4">
-                                            {project.tags.map((tag, i) => (
+                                            {project.tags?.map((tag: string, i: number) => (
                                                 <span
                                                     key={i}
                                                     className="font-mono text-muted-foreground text-xs"
@@ -88,31 +91,34 @@ export function Projects() {
 
                                         {/* Action Buttons */}
                                         <div className="flex flex-wrap gap-3">
-                                            <Link
-                                                href={`https://${project.link}`}
-                                                target="_blank"
-                                                className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-4 py-2 border border-border rounded-lg text-secondary-foreground text-sm transition-colors"
-                                            >
-                                                <ExternalLink size={14} />
-                                                Visit Site
-                                            </Link>
-
-                                            {hasCaseStudy && (
+                                            {project.links?.live && (
                                                 <Link
-                                                    href={`/case-studies/${caseStudySlug}`}
-                                                    className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-4 py-2 rounded-lg text-primary-foreground text-sm transition-colors"
+                                                    href={project.links.live}
+                                                    target="_blank"
+                                                    className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-4 py-2 border border-border rounded-lg text-secondary-foreground text-sm transition-colors"
                                                 >
-                                                    View Case Study
+                                                    <ExternalLink size={14} />
+                                                    Visit Site
                                                 </Link>
                                             )}
+
                                             <Link
-                                                href={project.github}
-                                                target="_blank"
-                                                className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-4 py-2 border border-border rounded-lg text-secondary-foreground text-sm transition-colors"
+                                                href={`/case-studies/${caseStudySlug}`}
+                                                className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-4 py-2 rounded-lg text-primary-foreground text-sm transition-colors"
                                             >
-                                                <Github size={14} />
-                                                Source Code
+                                                View Case Study
                                             </Link>
+
+                                            {project.links?.github && (
+                                                <Link
+                                                    href={project.links.github}
+                                                    target="_blank"
+                                                    className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-4 py-2 border border-border rounded-lg text-secondary-foreground text-sm transition-colors"
+                                                >
+                                                    <Github size={14} />
+                                                    Source Code
+                                                </Link>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

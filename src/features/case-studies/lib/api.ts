@@ -1,35 +1,49 @@
+import { client } from "@/sanity/lib/client";
+import { caseStudiesQuery, caseStudyBySlugQuery } from "@/sanity/lib/queries";
 import { CaseStudy } from "../types";
-import { CASE_STUDIES as REAL_CASE_STUDIES } from "../utils";
 
-
-// Simulated API delay
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
+import { cacheLife, cacheTag } from "next/cache";
 
 /**
- * Fetch all case studies with simulated API delay
+ * Fetch all case studies from Sanity
  */
 export async function fetchCaseStudies(): Promise<CaseStudy[]> {
-    // Simulate API delay
-    await delay(1000);
-
-    return REAL_CASE_STUDIES;
+    "use cache";
+    cacheLife("case-studies");
+    cacheTag("case-studies");
+    const studies = await client.fetch(caseStudiesQuery);
+    return studies.map(transformCaseStudy);
 }
 
 /**
- * Fetch a single case study by slug with simulated API delay
+ * Fetch a single case study by slug from Sanity
  */
 export async function fetchCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
-    // Simulate API delay
-    await delay(1000);
-
-    const caseStudy = REAL_CASE_STUDIES.find((study: CaseStudy) => study.slug === slug);
-    return caseStudy || null;
+    "use cache";
+    cacheLife("case-studies");
+    cacheTag("case-studies", `case-study-${slug}`);
+    const study = await client.fetch(caseStudyBySlugQuery, { slug });
+    if (!study) return null;
+    return transformCaseStudy(study);
 }
 
 /**
  * Get all case study slugs for static generation
  */
-export function getAllCaseStudySlugs(): string[] {
-    return REAL_CASE_STUDIES.map((study: CaseStudy) => study.slug);
+export async function getAllCaseStudySlugs(): Promise<string[]> {
+    const studies = await client.fetch(caseStudiesQuery);
+    return studies.map((study: any) => study.slug?.current);
+}
+
+function transformCaseStudy(sanityStudy: any): CaseStudy {
+    return {
+        ...sanityStudy,
+        slug: sanityStudy.slug?.current,
+        heroImage: sanityStudy.heroImage?.asset,
+        gallery: (sanityStudy.gallery || []).map((item: any) => ({
+            image: item.image?.asset,
+            caption: item.caption
+        })),
+        relatedProjects: sanityStudy.relatedProjects || []
+    };
 }

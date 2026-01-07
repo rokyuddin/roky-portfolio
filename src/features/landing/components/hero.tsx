@@ -1,11 +1,14 @@
-"use client";
-
-import React from "react";
+"use client"
+import { urlFor } from "@/sanity/lib/image";
 import { ChevronDown, FileText } from "lucide-react";
 import Image from "next/image";
-import { PROFILE } from "../utils";
 
-export function Hero() {
+interface HeroProps {
+    profile: any;
+}
+
+export function Hero({ profile }: HeroProps) {
+    if (!profile) return null;
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         const targetId = href.replace("#", "");
@@ -26,15 +29,15 @@ export function Hero() {
                         HELLO, I AM
                     </p>
                     <h1 className="mb-8 font-serif font-medium text-primary text-5xl md:text-7xl lg:text-8xl sm:leading-[0.9] tracking-tight transition-colors animate-fade-in-up duration-500 delay-100">
-                        {PROFILE.name.split(" ")[0]} <br />
+                        {profile.name?.split(" ")[0]} <br />
                         <span className="font-light text-muted-foreground italic">
-                            {PROFILE.name.split(" ")[1]}
+                            {profile.name?.split(" ").slice(1).join(" ")}
                         </span>
                     </h1>
                     <p className="mb-10 max-w-2xl font-light text-muted-foreground text-xl md:text-2xl leading-relaxed transition-colors animate-fade-in-up duration-500 delay-200">
                         A specialized{" "}
                         <span className="font-normal text-primary">
-                            Frontend Developer
+                            {profile.role || "Frontend Developer"}
                         </span>{" "}
                         with <span className="font-normal text-primary">3+ years of experience</span>, crafting refined digital experiences with Next.js & TypeScript.
                     </p>
@@ -74,8 +77,8 @@ export function Hero() {
 
                             {/* Image */}
                             <Image
-                                src="/profile.jpg"
-                                alt="Roky Uddin - Frontend Developer"
+                                src={profile.image ? urlFor(profile.image).url() : "/profile.jpg"}
+                                alt={`${profile.name} - ${profile.role}`}
                                 width={350}
                                 height={450}
                                 className="grayscale hover:grayscale-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"

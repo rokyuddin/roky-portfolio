@@ -27,7 +27,7 @@ export default async function CaseStudiesPage() {
       <section className="px-6 pt-32 pb-16">
         <div className="mx-auto max-w-4xl">
           <div>
-            <h1 className="bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary/60 mb-6 font-serif text-transparent text-5xl md:text-6xl">
+            <h1 className="bg-clip-text bg-linear-to-r from-primary via-primary/80 to-primary/60 mb-6 font-serif text-transparent text-5xl md:text-6xl">
               Case Studies
             </h1>
             <p className="max-w-3xl text-muted-foreground text-xl leading-relaxed">

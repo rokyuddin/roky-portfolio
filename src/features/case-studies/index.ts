@@ -6,4 +6,4 @@ export { HeroSection } from "./components/hero-section";
 export { SolutionSection } from "./components/solution-section";
 
 export * from "./types";
-export * from "./utils"
+export * from "./lib/api";
