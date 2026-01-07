@@ -1,6 +1,6 @@
 import { streamText, convertToModelMessages, UIMessage } from "ai";
-import { portfolioContext } from "@/src/lib/data/portfolio-context";
 import { groq } from '@ai-sdk/groq';
+import { portfolioContext } from "@/lib/data/portfolio-context";
 
 export const maxDuration = 30;
 

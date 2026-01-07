@@ -1,5 +1,5 @@
+import { CASE_STUDIES } from "@/features/case-studies";
 import { NextResponse } from "next/server";
-import { CASE_STUDIES } from "@/src/lib/data/case-studies-data";
 
 // Simulated API delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
