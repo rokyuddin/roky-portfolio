@@ -1,86 +1,55 @@
 # Roky Portfolio
 
-A modern, high-performance personal portfolio website built with Next.js 16, Tailwind CSS 4, and integrated AI features. This project showcases my work, experience, and thoughts, featuring an interactive playground and an AI-powered assistant.
+## Overview
+A cutting-edge personal portfolio engineered to demonstrate expertise in modern web development, UI/UX design, and AI integration. This project serves as both a showcase of professional work and a playground for experimental web technologies, featuring a custom-built AI assistant and an interactive coding environment.
 
-## 🚀 Features
+## Core Features
+- **🤖 AI-Powered Assistant**: A conversational interface built with Vercel AI SDK that provides context-aware answers about professional background and skills.
+- **⚡ Interactive Code Playground**: Live Monaco Editor integration allowing visitors to run and experiment with code snippets directly in the browser.
+- **🎨 Premium UI/UX**: Implements high-end design principles with glassmorphism, fluid animations (Framer Motion), and smooth scrolling (Lenis).
+- **🌗 Dark/Light Mode**: Fully responsive theming system respecting user preferences.
+- **📱 Responsive Layout**: Optimized experiences across mobile, tablet, and desktop devices.
+- **📝 Dynamic Content**: Dedicated sections for case studies and technical blog posts.
 
-- **Modern UI/UX**: Built with a clean, responsive design using Tailwind CSS and Framer Motion for smooth animations.
-- **AI-Powered Assistant**: Integrated chatbot using Vercel AI SDK to answer questions about my background and skills.
-- **Interactive Playground**: A code playground powered by Monaco Editor to demonstrate coding skills live.
-- **Case Studies & Blog**: Dedicated sections for detailed project breakdowns and technical articles.
-- **Smooth Scrolling**: Implemented with Lenis for a premium browsing experience.
-- **Dark/Light Mode**: Fully supported theming system.
-- **Responsive Design**: Optimized for all devices from mobile to desktop.
+## Key Engineering Highlights
+- **Performance-First Architecture**: Built on **Next.js 16** (App Router) for server-side optimization and rapid content delivery.
+- **Advanced Styling System**: Utilizes **Tailwind CSS 4** to implement a responsive, fluid design system with dark mode support.
+- **Type Safety**: strict TypeScript implementation across components and API routes.
 
-## 🛠️ Tech Stack
-
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **AI Integration**: [Vercel AI SDK](https://sdk.vercel.ai/docs) (Groq)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Code Editor**: [Monaco Editor](https://microsoft.github.io/monaco-editor/)
-- **Smooth Scroll**: [Lenis](https://lenis.studiofreight.com/)
-- **Markdown**: React Markdown, Rehype, Remark
-
-## 🏁 Getting Started
-
-Follow these steps to set up the project locally.
-
-### Prerequisites
-
-- Node.js (v18 or later recommended)
-- pnpm (or npm/yarn/bun)
-
-### Installation
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/yourusername/roky-portfolio.git
-    cd roky-portfolio
-    ```
-
-2.  **Install dependencies:**
-
-    ```bash
-    npm install
-    # or
-    pnpm install
-    # or
-    yarn install
-    ```
-
-3.  **Environment Setup:**
-
-    Create a `.env.local` file in the root directory and add the necessary API keys for the AI features (e.g., Groq API Key).
-
-    ```env
-    GROQ_API_KEY=your_api_key_here
-    ```
-
-4.  **Run the development server:**
-
-    ```bash
-    npm run dev
-    # or
-    pnpm dev
-    ```
-
-    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 📂 Project Structure
+## Project Structure
+A scalable architecture combining **Feature-Sliced Design** principles with **Atomic Design** components:
 
 ```
 roky-portfolio/
-├── app/                # Next.js App Router pages and layouts
-├── components/         # Reusable UI components
-│   ├── ui/             # Generic UI components (buttons, inputs, etc.)
-│   ├── chat/           # AI Chatbot components
-│   ├── playground/     # Interactive playground components
-│   └── ...             # Section-specific components (Hero, About, etc.)
-├── lib/                # Utility functions and shared logic
-├── public/             # Static assets (images, fonts)
-└── ...
+├── src/
+│   ├── app/                  # Next.js 16 App Router
+│   │   ├── (landing)/        # Landing page route group
+│   │   ├── api/              # API routes (Chat, etc.)
+│   │   ├── blog/             # Blog pages
+│   │   ├── case-studies/     # Case study pages
+│   │   ├── playground/       # Interactive code playground
+│   │   └── globals.css       # Tailwind CSS 4 setup and global styles
+│   ├── components/           # Atomic Design System
+│   │   ├── atoms/            # Base UI primitives (buttons, inputs)
+│   │   ├── molecules/        # Composite components
+│   │   └── organisms/        # Complex, self-contained sections
+│   ├── features/             # Domain-Specific Logic
+│   │   ├── blogs/            # Blog components & logic
+│   │   ├── case-studies/     # Case study components & logic
+│   │   ├── landing/          # Hero, About, and Landing sections
+│   │   └── playground/       # Editor configuration & execution logic
+│   └── lib/                  # Core Utilities
+│       ├── data/             # Static content and constants
+│       └── utils.ts          # Shared helper functions
+└── public/                   # Static assets
 ```
+
+## Technology Stack
+- **Core**: Next.js 16, TypeScript, React
+- **Styling**: Tailwind CSS 4
+- **Motion & Interaction**: Framer Motion, Lenis Scroll
+- **AI & Data**: Vercel AI SDK, LLM Integration (Groq)
+- **Editor Tools**: Monaco Editor
+
+---
+*Designed and developed by Roky.*
