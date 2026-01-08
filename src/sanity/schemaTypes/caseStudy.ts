@@ -35,6 +35,10 @@ export const caseStudy = defineType({
             title: 'Hero Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                defineField({ name: 'alt', title: 'Alternative Text', type: 'string', validation: (Rule) => Rule.required() }),
+            ],
+            validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'overview',

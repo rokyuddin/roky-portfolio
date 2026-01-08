@@ -6,13 +6,14 @@ interface ExperienceProps {
 
 export function Experience({ experience }: ExperienceProps) {
     if (!experience) return null;
+
     return (
         <section
             id="experience"
             className="bg-secondary/50 px-6 py-24 transition-colors duration-500 scroll-mt-28"
         >
             <div className="mx-auto max-w-4xl">
-                <SectionHeader title="Trajectory" number="03" />
+                <SectionHeader title="Experiences" number="03" />
 
                 <div className="space-y-12">
                     {experience.map((job, idx) => (
@@ -38,14 +39,13 @@ export function Experience({ experience }: ExperienceProps) {
                             <p className="mb-6 max-w-2xl text-muted-foreground leading-relaxed transition-colors duration-500">
                                 {job.description}
                             </p>
-
-                            <div className="flex flex-wrap gap-4 font-mono text-muted-foreground text-xs uppercase tracking-wider">
-                                {job.techStack?.map((t: string, i: number) => (
+                            <div className="flex flex-wrap gap-2 mb-4">
+                                {job.tech?.map((tag: string, i: number) => (
                                     <span
                                         key={i}
-                                        className="pb-1 border-border border-b"
+                                        className="font-mono text-muted-foreground text-xs"
                                     >
-                                        {t}
+                                        #{tag}
                                     </span>
                                 ))}
                             </div>

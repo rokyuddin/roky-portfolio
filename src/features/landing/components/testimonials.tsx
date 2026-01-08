@@ -29,7 +29,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                 </p>
 
                 <footer className="flex items-center gap-4 not-italic">
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.avatarColor || "from-blue-500 to-indigo-600"} flex items-center justify-center flex-shrink-0`}>
+                  <div className={`w-12 h-12 rounded-full bg-linear-to-br ${testimonial.avatarColor || "from-blue-500 to-indigo-600"} flex items-center justify-center shrink-0`}>
                     <span className="font-semibold text-white text-sm">
                       {testimonial.author?.split(" ").map((n: string) => n[0]).join("")}
                     </span>

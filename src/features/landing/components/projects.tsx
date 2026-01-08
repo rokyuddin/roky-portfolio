@@ -1,23 +1,20 @@
 "use client"
-import { Briefcase, ExternalLink, Github } from "lucide-react";
+import { Briefcase, ExternalLink, Github, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 import { SectionHeader } from "@/components/organisms/section-header";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 interface ProjectsProps {
     projects: any[];
 }
 
 export function Projects({ projects }: ProjectsProps) {
-    const [filter, setFilter] = useState("All");
+    const [selectedImage, setSelectedImage] = useState<any>(null);
 
     if (!projects) return null;
-
-    const categories = ["All", ...Array.from(new Set(projects.flatMap((p) => p.tags || [])))];
-
-    const filteredProjects = filter === "All"
-        ? projects
-        : projects.filter((p) => p.tags?.includes(filter));
 
     return (
         <section
@@ -27,24 +24,8 @@ export function Projects({ projects }: ProjectsProps) {
             <div className="mx-auto max-w-4xl">
                 <SectionHeader title="Selected Works" number="01" />
 
-                {/* Filter Buttons */}
-                <div className="flex flex-wrap gap-2 mb-8">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            onClick={() => setFilter(category)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${filter === category
-                                ? "bg-primary text-primary-foreground"
-                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                                }`}
-                        >
-                            {category}
-                        </button>
-                    ))}
-                </div>
-
                 <div className="flex flex-col gap-6">
-                    {filteredProjects.map((project, idx) => {
+                    {projects.map((project, idx) => {
                         const caseStudySlug = project.slug?.current || project.title?.toLowerCase();
 
                         return (
@@ -54,11 +35,28 @@ export function Projects({ projects }: ProjectsProps) {
                             >
                                 <div className="flex items-start gap-6">
                                     {/* Icon Section */}
-                                    <div className="bg-secondary p-3 border border-border group-hover:border-muted-foreground transition-colors shrink-0">
-                                        <Briefcase
-                                            size={24}
-                                            className="text-muted-foreground group-hover:text-primary transition-colors"
-                                        />
+                                    {/* Image or Icon Section */}
+                                    <div className="shrink-0">
+                                        {project.image ? (
+                                            <button
+                                                onClick={() => setSelectedImage(project.image)}
+                                                className="block relative bg-secondary border border-border group-hover:border-muted-foreground rounded-lg w-24 h-24 overflow-hidden transition-colors cursor-zoom-in"
+                                            >
+                                                <Image
+                                                    src={urlFor(project.image).url()}
+                                                    alt={project.image.alt || project.title}
+                                                    fill
+                                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                                />
+                                            </button>
+                                        ) : (
+                                            <div className="bg-secondary p-3 border border-border group-hover:border-muted-foreground rounded-lg transition-colors">
+                                                <Briefcase
+                                                    size={24}
+                                                    className="text-muted-foreground group-hover:text-primary transition-colors"
+                                                />
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Content Section */}
@@ -91,9 +89,9 @@ export function Projects({ projects }: ProjectsProps) {
 
                                         {/* Action Buttons */}
                                         <div className="flex flex-wrap gap-3">
-                                            {project.links?.live && (
+                                            {project.link && (
                                                 <Link
-                                                    href={project.links.live}
+                                                    href={project.link}
                                                     target="_blank"
                                                     className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-4 py-2 border border-border rounded-lg text-secondary-foreground text-sm transition-colors"
                                                 >
@@ -109,9 +107,9 @@ export function Projects({ projects }: ProjectsProps) {
                                                 View Case Study
                                             </Link>
 
-                                            {project.links?.github && (
+                                            {project.github && (
                                                 <Link
-                                                    href={project.links.github}
+                                                    href={project.github}
                                                     target="_blank"
                                                     className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-4 py-2 border border-border rounded-lg text-secondary-foreground text-sm transition-colors"
                                                 >
@@ -127,6 +125,42 @@ export function Projects({ projects }: ProjectsProps) {
                     })}
                 </div>
             </div>
+
+            <AnimatePresence>
+                {selectedImage && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedImage(null)}
+                        className="z-100 fixed inset-0 flex justify-center items-center bg-background/80 backdrop-blur-md p-4 sm:p-8"
+                    >
+                        <button
+                            className="top-4 right-4 z-50 absolute hover:bg-muted/20 p-2 rounded-full text-muted-foreground hover:text-foreground transition-colors"
+                            onClick={() => setSelectedImage(null)}
+                        >
+                            <X size={32} />
+                        </button>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ duration: 0.3, type: "spring", bounce: 0.2 }}
+                            className="relative shadow-2xl ring-border/50 rounded-xl ring-1 w-full max-w-5xl aspect-video overflow-hidden"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <Image
+                                src={urlFor(selectedImage).url()}
+                                alt={selectedImage.alt || "Project Preview"}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                                quality={95}
+                            />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }

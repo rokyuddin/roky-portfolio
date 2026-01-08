@@ -201,7 +201,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Gallery */}
-      <GallerySection items={caseStudy?.gallery} />
+      {caseStudy?.gallery.length > 0 && <GallerySection items={caseStudy?.gallery} />}
 
       {/* CTA */}
       <section className="px-6 py-16 border-border border-t">

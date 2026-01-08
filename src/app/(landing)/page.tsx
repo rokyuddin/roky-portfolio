@@ -21,7 +21,7 @@ export default async function Portfolio() {
       <Projects projects={projects} />
       <About profile={profile} />
       <Experience experience={experience} />
-      <Testimonials testimonials={testimonials} />
+      {testimonials?.length > 0 && <Testimonials testimonials={testimonials} />}
       <Contact profile={profile} />
     </div>
   );

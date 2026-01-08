@@ -65,7 +65,7 @@ export function Hero({ profile }: HeroProps) {
                 <div className="hidden lg:flex justify-center items-center lg:col-span-4">
                     <div className="group relative">
                         {/* Decorative Background Elements */}
-                        <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent blur-2xl group-hover:blur-3xl rounded-lg transition-all duration-500"></div>
+                        <div className="absolute -inset-4 bg-linear-to-br from-primary/20 to-transparent blur-2xl group-hover:blur-3xl rounded-lg transition-all duration-500"></div>
                         <div className="-top-3 -right-3 absolute border-primary border-t-2 border-r-2 w-24 h-24"></div>
                         <div className="-bottom-3 -left-3 absolute border-primary border-b-2 border-l-2 w-24 h-24"></div>
 
@@ -77,8 +77,8 @@ export function Hero({ profile }: HeroProps) {
 
                             {/* Image */}
                             <Image
-                                src={profile.image ? urlFor(profile.image).url() : "/profile.jpg"}
-                                alt={`${profile.name} - ${profile.role}`}
+                                src={urlFor(profile.profileImage).url()}
+                                alt={profile.profileImage.alt}
                                 width={350}
                                 height={450}
                                 className="grayscale hover:grayscale-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"

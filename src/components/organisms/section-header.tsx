@@ -1,10 +1,3 @@
-import React from "react";
-
-interface SectionHeaderProps {
-    title: string;
-    number: string;
-}
-
 export const SectionHeader = ({
     title,
     number,
@@ -12,13 +5,13 @@ export const SectionHeader = ({
     title: string;
     number: string;
 }) => (
-    <div className="flex items-center gap-4 mb-12 group">
-        <span className="text-muted-foreground font-mono text-sm tracking-widest group-hover:text-foreground transition-colors">
+    <div className="group flex items-center gap-4 mb-12">
+        <span className="font-mono text-muted-foreground group-hover:text-foreground text-sm tracking-widest transition-colors">
             {number}
         </span>
-        <h2 className="text-2xl md:text-3xl font-light tracking-tight text-primary uppercase">
+        <h2 className="font-light text-primary text-2xl md:text-3xl uppercase tracking-tight">
             {title}
         </h2>
-        <div className="h-px bg-border flex-grow max-w-xs ml-4 group-hover:max-w-md transition-all duration-500"></div>
+        <div className="ml-4 bg-border max-w-xs group-hover:max-w-md h-px transition-all duration-500 grow"></div>
     </div>
 );

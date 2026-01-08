@@ -6,6 +6,23 @@ export const profile = defineType({
     type: 'document',
     fields: [
         defineField({
+            name: 'profileImage',
+            title: 'Profile Image',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+            fields: [
+                defineField({
+                    name: 'alt',
+                    title: 'Alternative Text',
+                    type: 'string',
+                    validation: (Rule) => Rule.required(),
+                }),
+            ],
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
             name: 'name',
             title: 'Name',
             type: 'string',
@@ -38,7 +55,7 @@ export const profile = defineType({
             fields: [
                 defineField({ name: 'github', title: 'GitHub', type: 'url' }),
                 defineField({ name: 'linkedin', title: 'LinkedIn', type: 'url' }),
-                defineField({ name: 'portfolio', title: 'Portfolio', type: 'url' }),
+                defineField({ name: 'x', title: 'X', type: 'url' }),
             ]
         })
     ],
