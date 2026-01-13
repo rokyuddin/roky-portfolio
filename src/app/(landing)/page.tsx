@@ -3,8 +3,12 @@ import { Hero, TechStack, Projects, Contact, About, Experience, Testimonials } f
 import { client } from "@/sanity/lib/client";
 import { profileQuery, skillsQuery, experienceQuery, projectsQuery, testimonialsQuery } from "@/sanity/lib/queries";
 
+import { cacheLife, cacheTag } from 'next/cache';
+
 export default async function Portfolio() {
   "use cache"
+  cacheLife('minutes')
+  cacheTag('landing-page')
   const [profile, skills, experience, projects, testimonials] = await Promise.all([
     client.fetch(profileQuery),
     client.fetch(skillsQuery),
