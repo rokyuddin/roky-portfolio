@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import { postsQuery, postBySlugQuery } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 import { BlogPost } from "../types";
 
 import { cacheLife, cacheTag } from "next/cache";
@@ -42,7 +43,7 @@ function transformPost(sanityPost: any): BlogPost {
             avatar: sanityPost.author?.avatar || "👨‍💻",
         },
         tags: sanityPost.tags || [],
-        coverImage: sanityPost.coverImage?.asset ? "image-url-here" : "/placeholder-blog.jpg", // Placeholder for now
+        coverImage: sanityPost.coverImage?.asset ? urlFor(sanityPost.coverImage.asset).url() : "/placeholder-blog.jpg",
         readTime: sanityPost.readTime || "5 min read",
     };
 }

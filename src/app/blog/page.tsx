@@ -3,15 +3,16 @@ import { Nav } from "@/components/organisms/nav";
 import { BlogHero } from "@/features/blogs/components/blog-hero";
 import { BlogList } from "@/features/blogs/components/blog-list";
 import { getAllPosts } from "@/features/blogs";
+import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
 
 export const metadata: Metadata = {
-    title: "Blog - Roky Uddin",
+    title: `Blog - ${SITE_NAME}`,
     description: "Exploring the intersection of design, development, and digital innovation. Deep dives into web technologies, best practices, and creative insights.",
-    openGraph: {
-        title: "Blog - Roky Uddin",
+    ...socialMetadata({
+        title: `Blog - ${SITE_NAME}`,
         description: "Exploring the intersection of design, development, and digital innovation.",
-        type: "website",
-    },
+        url: `${SITE_URL}/blog`,
+    }),
 };
 
 export default async function BlogPage() {

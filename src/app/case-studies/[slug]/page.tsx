@@ -14,6 +14,8 @@ import { SolutionSection } from "@/features/case-studies"
 import { FeaturesSection } from "@/features/case-studies"
 import { GallerySection } from "@/features/case-studies"
 import { fetchCaseStudyBySlug } from "@/features/case-studies/lib";
+import { SITE_URL, socialMetadata } from "@/lib/site";
+import { articleJsonLd, jsonLd } from "@/lib/schema";
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -23,6 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!caseStudy) {
     return {
       title: "Case Study Not Found",
+      robots: { index: false },
     };
   }
 
@@ -37,17 +40,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       "web development",
       "frontend development"
     ],
-    openGraph: {
+    ...socialMetadata({
       title: `${caseStudy?.title} - ${caseStudy?.subtitle}`,
       description: caseStudy?.overview.description,
+      url: `${SITE_URL}/case-studies/${slug}`,
       type: "article",
-      images: [
-        {
-          url: caseStudy?.heroImage,
-          alt: `${caseStudy?.title} preview`,
-        },
-      ],
-    },
+      image: caseStudy?.heroImage,
+      openGraphExtras: {
+        images: [
+          { url: caseStudy?.heroImage, alt: `${caseStudy?.title} preview` },
+        ],
+      },
+    }),
   };
 }
 
@@ -67,6 +71,20 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <div className="bg-background selection:bg-primary min-h-screen font-sans text-foreground selection:text-primary-foreground transition-colors duration-500">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            articleJsonLd({
+              title: caseStudy?.title,
+              subtitle: caseStudy?.subtitle,
+              description: caseStudy?.overview.description,
+              category: caseStudy?.category,
+              heroImage: caseStudy?.heroImage,
+            })
+          ),
+        }}
+      />
       <Nav />
 
       {/* Hero Section */}

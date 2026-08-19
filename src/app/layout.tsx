@@ -6,6 +6,12 @@ import { ThemeProvider } from "@/components/organisms/theme-provider";
 import { SmoothScroll } from "@/components/organisms/smoth-scroll";
 import { ChatWidget } from "@/components/organisms/chat-widget";
 import { Toaster } from "sonner";
+import {
+  SITE_URL,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+} from "@/lib/site";
+import { personJsonLd, websiteJsonLd, jsonLd } from "@/lib/schema";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,9 +29,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Md Rokyuddin | Frontend Developer",
-  description: "Frontend Developer specializing in React, Next.js, and TypeScript.",
-  metadataBase: new URL("https://rokyuddin.vercel.app"),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
 };
 
 export default function RootLayout({
@@ -38,6 +44,14 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(personJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd()) }}
+        />
         {/* <SmoothScroll> */}
 
         <ThemeProvider

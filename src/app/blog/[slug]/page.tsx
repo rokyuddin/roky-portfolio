@@ -7,6 +7,8 @@ import { BlogHeader } from "@/features/blogs";
 import { BlogContent } from "@/features/blogs";
 import { ScrollProgress } from "@/components/atoms/scroll-progress";
 import { ArrowLeft } from "lucide-react";
+import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { blogPostingJsonLd, jsonLd } from "@/lib/schema";
 
 export async function generateStaticParams() {
     const posts = await getAllPosts();
@@ -26,20 +28,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!post) {
         return {
             title: "Post Not Found",
+            robots: { index: false },
         };
     }
 
+    const postUrl = `${SITE_URL}/blog/${post.slug}`;
+    const ogImage =
+        post.coverImage && post.coverImage !== "/placeholder-blog.jpg"
+            ? post.coverImage
+            : undefined;
+
     return {
-        title: `${post.title} - RokyUddin`,
+        title: `${post.title} - ${SITE_NAME}`,
         description: post.excerpt,
-        openGraph: {
+        ...socialMetadata({
             title: post.title,
             description: post.excerpt,
+            url: postUrl,
             type: "article",
-            publishedTime: post.date,
-            authors: [post.author.name],
-            tags: post.tags,
-        },
+            image: ogImage,
+            openGraphExtras: {
+                publishedTime: post.date,
+                authors: [post.author.name],
+                tags: post.tags,
+            },
+        }),
     };
 }
 
@@ -54,6 +67,10 @@ export default async function BlogDetailPage({ params }: Props) {
 
     return (
         <div className="bg-background selection:bg-primary min-h-screen font-sans text-foreground selection:text-primary-foreground transition-colors duration-500">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: jsonLd(blogPostingJsonLd(post)) }}
+            />
             <ScrollProgress />
             <Nav />
 

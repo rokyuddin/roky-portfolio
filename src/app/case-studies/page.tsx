@@ -3,17 +3,18 @@ import { CaseStudyCard } from "@/features/case-studies";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { fetchCaseStudies } from "@/features/case-studies/lib";
+import { SITE_URL, socialMetadata } from "@/lib/site";
 
 
 export const metadata: Metadata = {
   title: "Case Studies | Md Rokyuddin - Frontend Developer",
   description: "Explore detailed case studies of my best projects including Rydr (ride-sharing platform) and Skinsight (AI-powered skincare guide). See the challenges, solutions, and results.",
   keywords: ["case studies", "portfolio", "web development", "React", "Next.js", "frontend development", "Rydr", "Skinsight"],
-  openGraph: {
+  ...socialMetadata({
     title: "Case Studies | Md Rokyuddin",
     description: "Deep dives into my most impactful projects. Explore the challenges, solutions, and results.",
-    type: "website",
-  },
+    url: `${SITE_URL}/case-studies`,
+  }),
 };
 
 export default async function CaseStudiesPage() {
