@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/organisms/theme-provider";
 import { SmoothScroll } from "@/components/organisms/smoth-scroll";
@@ -10,6 +11,7 @@ import {
   SITE_URL,
   SITE_TITLE,
   SITE_DESCRIPTION,
+  GOOGLE_ANALYTICS_ID,
 } from "@/lib/site";
 import { personJsonLd, websiteJsonLd, jsonLd } from "@/lib/schema";
 
@@ -66,6 +68,11 @@ export default function RootLayout({
             </Suspense> */}
           <Toaster />
         </ThemeProvider>
+        {GOOGLE_ANALYTICS_ID && (
+          <Suspense>
+            <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+          </Suspense>
+        )}
         {/* </SmoothScroll> */}
       </body>
     </html>

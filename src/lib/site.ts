@@ -7,6 +7,8 @@ export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://rokyuddin.vercel.app"
 ).replace(/\/+$/, "");
 
+export const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID;
+
 export const SITE_NAME = "Md Rokyuddin";
 export const SITE_TITLE = `${SITE_NAME} | Frontend Developer`;
 export const SITE_DESCRIPTION =
