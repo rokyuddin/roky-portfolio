@@ -2,6 +2,7 @@
 import { urlFor } from "@/sanity/lib/image";
 import { ChevronDown, FileText } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface HeroProps {
     profile: any;
@@ -42,14 +43,14 @@ export function Hero({ profile }: HeroProps) {
                         with <span className="font-normal text-primary">3+ years of experience</span>, crafting refined digital experiences with Next.js & TypeScript.
                     </p>
                     <div className="flex sm:flex-row flex-col gap-4 animate-fade-in-up delay-300">
-                        <a
+                        <Link
                             href="#projects"
                             onClick={(e) => handleScroll(e, "#projects")}
                             className="bg-primary hover:bg-primary/90 shadow-border shadow-lg px-8 py-4 font-medium text-primary-foreground text-center tracking-wide transition-colors"
                         >
                             VIEW WORK
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             href="https://drive.google.com/file/d/1CicoWtA6dflZz6hErdzGjboKsgvXzCy9/view"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -57,7 +58,7 @@ export function Hero({ profile }: HeroProps) {
                         >
                             <FileText size={20} />
                             VIEW RESUME
-                        </a>
+                        </Link>
                     </div>
                 </div>
 

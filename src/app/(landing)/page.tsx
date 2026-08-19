@@ -11,16 +11,30 @@ import {
   CachedContact,
 } from "@/features/landing/cached-sections";
 import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, socialMetadata } from "@/lib/site";
+import { client } from "@/sanity/lib/client";
+import { profileQuery } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
-export const metadata: Metadata = {
-  title: SITE_TITLE,
-  description: SITE_DESCRIPTION,
-  ...socialMetadata({
-    title: SITE_TITLE,
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await client.fetch(profileQuery);
+  const title = profile?.name
+    ? `${profile.name} | ${profile.role || "Frontend Developer"}`
+    : SITE_TITLE;
+  const imageUrl = profile?.profileImage
+    ? urlFor(profile.profileImage).width(1200).height(630).fit("crop").url()
+    : undefined;
+
+  return {
+    title,
     description: SITE_DESCRIPTION,
-    url: SITE_URL,
-  }),
-};
+    ...socialMetadata({
+      title,
+      description: SITE_DESCRIPTION,
+      url: SITE_URL,
+      image: imageUrl,
+    }),
+  };
+}
 
 export default function Portfolio() {
   return (
