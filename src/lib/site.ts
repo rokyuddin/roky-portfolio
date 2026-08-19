@@ -9,6 +9,8 @@ export const SITE_URL = (
 
 export const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID;
 
+export const GOOGLE_SITE_VERIFICATION = process.env.GOOGLE_SITE_VERIFICATION;
+
 export const SITE_NAME = "Md Rokyuddin";
 export const SITE_TITLE = `${SITE_NAME} | Frontend Developer`;
 export const SITE_DESCRIPTION =

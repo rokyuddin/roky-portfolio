@@ -12,8 +12,10 @@ import {
   SITE_TITLE,
   SITE_DESCRIPTION,
   GOOGLE_ANALYTICS_ID,
+  GOOGLE_SITE_VERIFICATION,
 } from "@/lib/site";
 import { personJsonLd, websiteJsonLd, jsonLd } from "@/lib/schema";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,6 +36,9 @@ export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  ...(GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -46,11 +51,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <script
+        <Script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(personJsonLd()) }}
         />
-        <script
+        <Script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd()) }}
         />
