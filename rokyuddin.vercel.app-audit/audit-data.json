@@ -1,0 +1,99 @@
+{
+  "summary": {
+    "health_score": 84,
+    "business_type": "Developer Portfolio / Agency",
+    "top_findings": [
+      "LCP 3.0s fails mobile CWV threshold",
+      "Missing Organization + ProfilePage schema",
+      "Custom domain not wired to metadata",
+      "llms.txt is an empty directory (404)",
+      "3 oversized Sanity project images (84% savings)"
+    ],
+    "quick_wins": [
+      "Optimize hero LCP image width",
+      "Minify unused CSS ~140ms LCP",
+      "Serve real /llms.txt",
+      "Add Organization + ProfilePage JSON-LD"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 92,
+      "what_works": ["robots.ts allows/ disallows /sanity", "sitemap covers all routes", "per-page canonicals", "static prerender + ISR"],
+      "findings": [
+        {"title": "Vercel temp domain as canonical base", "severity": "High", "description": "All URLs hardcode rokyuddin.vercel.app", "recommendation": "Wire NEXT_PUBLIC_SITE_URL once custom domain bought"},
+        {"title": "Playground indexed with thin crawlable content", "severity": "Low", "description": "Interactive JS tooling, minimal text", "recommendation": "Consider noindex unless SEO value"}
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 82,
+      "what_works": ["authored blog posts with dates", "detailed case studies (E-E-A-T)", "llms.txt-aware"],
+      "findings": [
+        {"title": "Blog post depth", "severity": "Medium", "description": "Few topics, possible thin content", "recommendation": "Publish 800+ word posts"},
+        {"title": "Author entity linkage", "severity": "Low", "description": "No per-post author sameAs", "recommendation": "Link author to Author schema"}
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 85,
+      "what_works": ["unique titles/descriptions per route", "semantic H1", "page-level keywords"],
+      "findings": [
+        {"title": "Generic homepage description", "severity": "High", "description": "'Frontend Developer specializing in React, Next.js, and TypeScript'", "recommendation": "Name specifics (projects, years) for CTR"},
+        {"title": "Blog title length", "severity": "Medium", "description": "post.title - Name may truncate >60 chars", "recommendation": "Verify SERP display length"}
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 70,
+      "what_works": ["Person + WebSite in layout", "BlogPosting on posts", "Article on case studies"],
+      "findings": [
+        {"title": "Missing Organization schema", "severity": "High", "description": "No brand entity", "recommendation": "Add Organization with logo+sameAs"},
+        {"title": "Missing ProfilePage schema", "severity": "High", "description": "Portfolio primary entity not defined", "recommendation": "Add ProfilePage with mainEntity=Person"},
+        {"title": "BlogPosting incomplete", "severity": "Medium", "description": "Missing image/author.url/publisher/mainEntityOfPage", "recommendation": "Enrich permanent fields"},
+        {"title": "Article schema incomplete", "severity": "Medium", "description": "Missing datePublished/publisher/mainEntityOfPage", "recommendation": "Add permanent fields"}
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 75,
+      "what_works": ["FCP 0.9s", "CLS 0", "PSI 88"],
+      "findings": [
+        {"title": "LCP 3.0s fails mobile threshold", "severity": "High", "description": "Render-blocking CSS + LCP image", "recommendation": "Inline critical CSS, speed hero image, defer non-critical JS"},
+        {"title": "Unused JavaScript 48KiB", "severity": "Medium", "description": "Two chunks 40% and 57% unused", "recommendation": "Tree-shake / code-split"},
+        {"title": "Legacy polyfill 13.4KiB", "severity": "Low", "description": "Transpiled module waste", "recommendation": "Drop legacy transpilation"}
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 75,
+      "what_works": ["llms.txt route exists", "server-rendered semantic HTML"],
+      "findings": [
+        {"title": "llms.txt route returns 404", "severity": "Medium", "description": "Empty directory, not a text file", "recommendation": "Serve plain-text content at /llms.txt"},
+        {"title": "Citation-ready sameAs", "severity": "Low", "description": "No explicit AI-crawler pointers", "recommendation": "Add GPTBot/PerplexityBot allowance + llms.txt pointer"}
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 85,
+      "what_works": ["alt text", "sizes + fill + priority on key images"],
+      "findings": [
+        {"title": "3 oversized project images", "severity": "Medium", "description": "Up to 84% savings (28.5/18.4/18.0KB)", "recommendation": "Pass explicit smaller width/sizes"},
+        {"title": "Hero LCP image bypasses optimizer sizing", "severity": "Medium", "description": "urlFor().url() raw CDN at 350x450 priority", "recommendation": "Request smaller width to cut LCP bytes"}
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {"name": "Phase 1: Critical Fixes", "timeframe": "Week 1", "items": []},
+      {"name": "Phase 2: High-Impact Improvements", "timeframe": "Weeks 1-2", "items": ["Cut LCP to <2.5s (hero image + render-blocking CSS)", "Add Organization + ProfilePage JSON-LD", "Serve real /llms.txt", "Strengthen homepage description"]},
+      {"name": "Phase 3: Content & Authority", "timeframe": "Month 2", "items": ["Compact 3 oversized images (84%)", "Enrich BlogPosting/Article schema", "Tree-shake 48KiB unused JS", "140ms render-blocking CSS"]},
+      {"name": "Phase 4: Monitoring & Iteration", "timeframe": "Ongoing", "items": ["Wire custom domain into SITE_URL", "Publish 800+ word posts", "Re-run PSI + add to GSC"]}
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "rokyuddin.vercel.app-audit/findings/",
+    "screenshots_dir": "rokyuddin.vercel.app-audit/screenshots/"
+  }
+}
