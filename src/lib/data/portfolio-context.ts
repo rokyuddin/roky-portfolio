@@ -4,7 +4,7 @@ export const portfolioContext = {
   role: "Frontend Developer",
   experience: "3+ years",
   tagline: "A specialized Frontend Developer with 3+ years of experience, crafting refined digital experiences with Next.js & TypeScript.",
-  
+
   about: {
     summary: "3+ years of hands-on experience in frontend development, specializing in high-performance web applications that prioritize both user experience and code quality. My approach combines technical excellence with a keen eye for design, ensuring every project delivers seamless functionality wrapped in intuitive, accessible interfaces. I thrive in collaborative environments where clean code, scalable architecture, and continuous learning drive innovation.",
     coreFocus: [
@@ -90,7 +90,7 @@ export const portfolioContext = {
     email: "rokyuddin.dev@gmail.com",
     phone: "+8801611-695544",
     location: "Jashore, Bangladesh",
-    website: "https://rokyuddin.vercel.app",
+    website: "https://rokyuddin.com",
     resume: "https://drive.google.com/file/d/1CicoWtA6dflZz6hErdzGjboKsgvXzCy9/view"
   }
 };

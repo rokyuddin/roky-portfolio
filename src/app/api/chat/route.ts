@@ -65,7 +65,7 @@ ${JSON.stringify(portfolioContext, null, 2)}
 - Phone: +8801611-695544
 - Location: Jashore, Bangladesh
 - Resume: Available via Google Drive link
-- Website: rokyuddin.vercel.app
+- Website: rokyuddin.com
 
 ## Example Interactions
 

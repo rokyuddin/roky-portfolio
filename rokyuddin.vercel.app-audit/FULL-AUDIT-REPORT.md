@@ -1,6 +1,6 @@
-# SEO Audit: rokyuddin.vercel.app
+# SEO Audit: rokyuddin.com
 
-**Date:** 2026-08-19 | **Target:** `https://rokyuddin.vercel.app`
+**Date:** 2026-08-19 | **Target:** `https://rokyuddin.com`
 **Method:** Live PageSpeed Insights (mobile) + source-level analysis of the Next.js repo.
 **Note:** Sandbox DNS blocked raw crawling; audit combines live PSI field data with static source review. CrUX field data unavailable (no traffic / API restricted).
 
@@ -28,7 +28,7 @@ Solid, well-engineered Next.js portfolio. Strong technical fundamentals (robots,
 ### Top Critical / High Actions
 1. **LCP 3.0s fails mobile threshold** — optimize the LCP image + minimize render-blocking CSS. (High)
 2. **Schema brand/entity missing** — no `Organization`, `ProfilePage`, or author/`sitepage` graph. (High)
-3. **Custom domain not wired to metadata** — everything hardcodes `rokyuddin.vercel.app`. (High)
+3. **Custom domain not wired to metadata** — everything hardcodes `rokyuddin.com`. (High)
 4. **Image `localStorage` misuse** — `urlFor(...).url()` returns full Sanity CDN URL passed through Next `<Image>`; contradicts performance-virtualizer. (Medium, see below)
 
 ---
@@ -44,7 +44,7 @@ Solid, well-engineered Next.js portfolio. Strong technical fundamentals (robots,
 - No crawl-blocking client-side rendering; content server-rendered. ✅
 
 **Findings**
-- **[Info]** `rokyuddin.vercel.app` is a temporary Vercel domain — likely consolidating to a custom domain. No `robots` violations.
+- **[Info]** `rokyuddin.com` is a temporary Vercel domain — likely consolidating to a custom domain. No `robots` violations.
 - **[Low]** Playground is indexed; it is interactive JS tooling with minimal crawlable content — consider `noindex` unless it has SEO value.
 
 ---

@@ -4,7 +4,7 @@
  * Override at deploy time via NEXT_PUBLIC_SITE_URL (e.g. a custom domain).
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://rokyuddin.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://rokyuddin.com"
 ).replace(/\/+$/, "");
 
 export const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID;
