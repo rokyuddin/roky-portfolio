@@ -48,4 +48,9 @@ export interface CaseStudy {
         caption: string;
     }[];
     relatedProjects: string[];
+    seo?: {
+        title?: string;
+        description?: string;
+    };
+    updatedAt?: string;
 }

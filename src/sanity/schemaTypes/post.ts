@@ -65,6 +65,13 @@ export const post = defineType({
             name: 'readTime',
             title: 'Read Time',
             type: 'string',
+        }),
+        defineField({
+            name: 'relatedCaseStudies',
+            title: 'Related Case Studies',
+            type: 'array',
+            of: [{ type: 'string' }],
+            description: 'Slugs of case studies genuinely relevant to this article. Shown as "Explore the work" links at the end of the post. Leave empty when nothing is relevant.',
         })
     ],
 })

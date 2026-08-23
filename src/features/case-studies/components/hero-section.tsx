@@ -36,11 +36,11 @@ export function HeroSection({
         >
           {/* Back Button */}
           <Link
-            href="/#projects"
+            href="/case-studies"
             className="inline-flex items-center gap-2 mb-8 text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Projects
+            Back to Case Studies
           </Link>
 
           {/* Title */}

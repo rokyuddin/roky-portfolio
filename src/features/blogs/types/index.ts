@@ -11,4 +11,6 @@ export interface BlogPost {
     tags: string[];
     coverImage: string;
     readTime: string;
+    relatedCaseStudies?: string[];
+    updatedAt?: string;
 }

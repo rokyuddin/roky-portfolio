@@ -36,11 +36,11 @@ export function Hero({ profile }: HeroProps) {
                         </span>
                     </h1>
                     <p className="mb-10 max-w-2xl font-light text-muted-foreground text-xl md:text-2xl leading-relaxed transition-colors animate-fade-in-up duration-500 delay-200">
-                        A specialized{" "}
+                        A{" "}
                         <span className="font-normal text-primary">
                             {profile.role || "Frontend Developer"}
                         </span>{" "}
-                        with <span className="font-normal text-primary">3+ years of experience</span>, crafting refined digital experiences with Next.js & TypeScript.
+                        with <span className="font-normal text-primary">3+ years of experience</span> building fast, accessible interfaces with React, Next.js & TypeScript — available for remote roles and client projects worldwide.
                     </p>
                     <div className="flex sm:flex-row flex-col gap-4 animate-fade-in-up delay-300">
                         <Link

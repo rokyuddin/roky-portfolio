@@ -8,7 +8,7 @@ Personal portfolio for **Md Rokyuddin** (frontend dev). Built with **Next.js 16 
 - `pnpm start` — serve production build
 - `pnpm lint` — ESLint (flat config, includes TS + core-web-vitals rules)
 - `npx tsc --noEmit` — typecheck (strict; no dedicated typecheck script)
-- There is **no test framework** in this repo.
+- `pnpm test` — Node built-in test runner (`node --test`) via the `tsx` loader. Tests live next to sources as `*.test.ts` (currently `src/lib/schema.test.ts`, `src/lib/site.test.ts`) and cover pure metadata/JSON-LD builders only; no browser/component testing.
 - Sanity CLI available (`sanity`), config in `sanity.config.ts` / `sanity.cli.ts`.
 
 ## Project layout

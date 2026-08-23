@@ -8,7 +8,8 @@ import { BlogContent } from "@/features/blogs";
 import { ScrollProgress } from "@/components/atoms/scroll-progress";
 import { ArrowLeft } from "lucide-react";
 import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
-import { blogPostingJsonLd, jsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, blogPostingJsonLd, jsonLd } from "@/lib/schema";
+import { getCaseStudyRefsBySlugs } from "@/features/case-studies/lib";
 
 export async function generateStaticParams() {
     const posts = await getAllPosts();
@@ -33,16 +34,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const postUrl = `${SITE_URL}/blog/${post.slug}`;
+    const title = `${post.title} | ${SITE_NAME}`;
     const ogImage =
         post.coverImage && post.coverImage !== "/placeholder-blog.jpg"
             ? post.coverImage
             : undefined;
 
     return {
-        title: `${post.title} - ${SITE_NAME}`,
+        title,
         description: post.excerpt,
         ...socialMetadata({
-            title: post.title,
+            title,
             description: post.excerpt,
             url: postUrl,
             type: "article",
@@ -51,6 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 publishedTime: post.date,
                 authors: [post.author.name],
                 tags: post.tags,
+                ...(post.updatedAt ? { modifiedTime: post.updatedAt } : {}),
             },
         }),
     };
@@ -65,11 +68,27 @@ export default async function BlogDetailPage({ params }: Props) {
         notFound();
     }
 
+    const relatedCaseStudies = post.relatedCaseStudies?.length
+        ? await getCaseStudyRefsBySlugs(post.relatedCaseStudies)
+        : [];
+
     return (
         <div className="bg-background selection:bg-primary min-h-screen font-sans text-foreground selection:text-primary-foreground transition-colors duration-500">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: jsonLd(blogPostingJsonLd(post)) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: jsonLd(
+                        breadcrumbJsonLd([
+                            { name: "Home", url: SITE_URL },
+                            { name: "Blog", url: `${SITE_URL}/blog` },
+                            { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
+                        ]),
+                    ),
+                }}
             />
             <ScrollProgress />
             <Nav />
@@ -79,6 +98,44 @@ export default async function BlogDetailPage({ params }: Props) {
                     <BackButton />
                     <BlogHeader post={post} />
                     <BlogContent content={post.content} />
+
+                    {relatedCaseStudies.length > 0 ? (
+                        <aside className="bg-muted/30 mt-10 p-6 border border-border rounded-lg">
+                            <h2 className="font-serif text-primary text-2xl">Explore the work behind this article</h2>
+                            <p className="mt-2 text-muted-foreground">
+                                These case studies cover the project this article draws on.
+                            </p>
+                            <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4">
+                                {relatedCaseStudies.map((study) => (
+                                    <Link
+                                        key={study.slug}
+                                        href={`/case-studies/${study.slug}`}
+                                        className="font-medium text-primary hover:underline"
+                                    >
+                                        {study.title}
+                                    </Link>
+                                ))}
+                                <Link href="/#contact" className="font-medium text-primary hover:underline">
+                                    Start a conversation
+                                </Link>
+                            </div>
+                        </aside>
+                    ) : (
+                        <aside className="bg-muted/30 mt-10 p-6 border border-border rounded-lg">
+                            <h2 className="font-serif text-primary text-2xl">Explore the work behind the writing</h2>
+                            <p className="mt-2 text-muted-foreground">
+                                Browse frontend case studies or get in touch to discuss a role or project.
+                            </p>
+                            <div className="flex flex-wrap gap-3 mt-4">
+                                <Link href="/case-studies" className="font-medium text-primary hover:underline">
+                                    View case studies
+                                </Link>
+                                <Link href="/#contact" className="font-medium text-primary hover:underline">
+                                    Start a conversation
+                                </Link>
+                            </div>
+                        </aside>
+                    )}
 
                     {/* Divider */}
                     <div className="bg-linear-to-r from-transparent to-transparent my-8 md:my-16 via-border w-full h-px" />

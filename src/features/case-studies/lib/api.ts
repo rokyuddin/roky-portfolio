@@ -1,5 +1,9 @@
 import { client } from "@/sanity/lib/client";
-import { caseStudiesQuery, caseStudyBySlugQuery } from "@/sanity/lib/queries";
+import {
+    caseStudiesQuery,
+    caseStudiesBySlugsQuery,
+    caseStudyBySlugQuery,
+} from "@/sanity/lib/queries";
 import { CaseStudy } from "../types";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -36,6 +40,24 @@ export async function getAllCaseStudySlugs(): Promise<string[]> {
     return studies.map((study: any) => study.slug?.current);
 }
 
+/**
+ * Fetch lightweight case-study references (title + slug) for contextual
+ * internal links, e.g. "related case studies" on a blog post.
+ */
+export async function getCaseStudyRefsBySlugs(
+    slugs: string[],
+): Promise<{ title: string; slug: string }[]> {
+    "use cache";
+    cacheLife("case-studies");
+    cacheTag("case-studies");
+    if (!slugs.length) return [];
+    const refs = await client.fetch<{ title: string; slug: string }[]>(
+        caseStudiesBySlugsQuery,
+        { slugs },
+    );
+    return (refs || []).map((ref) => ({ title: ref.title, slug: ref.slug }));
+}
+
 function transformCaseStudy(sanityStudy: any): CaseStudy {
     return {
         ...sanityStudy,
@@ -45,6 +67,7 @@ function transformCaseStudy(sanityStudy: any): CaseStudy {
             image: item.image?.asset ? urlFor(item.image.asset).url() : "",
             caption: item.caption
         })),
-        relatedProjects: sanityStudy.relatedProjects || []
+        relatedProjects: sanityStudy.relatedProjects || [],
+        updatedAt: sanityStudy._updatedAt,
     };
 }

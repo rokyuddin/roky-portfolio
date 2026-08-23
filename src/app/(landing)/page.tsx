@@ -10,26 +10,27 @@ import {
   CachedTestimonials,
   CachedContact,
 } from "@/features/landing/cached-sections";
-import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, socialMetadata } from "@/lib/site";
+import { SITE_URL, SITE_TITLE, socialMetadata } from "@/lib/site";
 import { client } from "@/sanity/lib/client";
 import { profileQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 
 export async function generateMetadata(): Promise<Metadata> {
   const profile = await client.fetch(profileQuery);
-  const title = profile?.name
-    ? `${profile.name} | ${profile.role || "Frontend Developer"}`
-    : SITE_TITLE;
+  const role = profile?.role || "Frontend Developer";
+  const title = profile?.name ? `${profile.name} | ${role}` : SITE_TITLE;
+  const description =
+    "Portfolio of Md Rokyuddin, a frontend developer building fast, accessible web apps with React, Next.js, and TypeScript. Available for remote roles and client projects worldwide.";
   const imageUrl = profile?.profileImage
     ? urlFor(profile.profileImage).width(1200).height(630).fit("crop").url()
     : undefined;
 
   return {
     title,
-    description: SITE_DESCRIPTION,
+    description,
     ...socialMetadata({
       title,
-      description: SITE_DESCRIPTION,
+      description,
       url: SITE_URL,
       image: imageUrl,
     }),

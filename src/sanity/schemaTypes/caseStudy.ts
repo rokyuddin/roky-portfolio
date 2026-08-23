@@ -145,6 +145,28 @@ export const caseStudy = defineType({
             type: 'array',
             of: [{ type: 'string' }],
             description: 'List of slugs of related projects'
+        }),
+        defineField({
+            name: 'seo',
+            title: 'SEO',
+            type: 'object',
+            options: { collapsible: true },
+            description: 'Optional overrides for search-result metadata. Safe to leave empty.',
+            fields: [
+                defineField({
+                    name: 'title',
+                    title: 'SEO Title',
+                    type: 'string',
+                    description: 'Falls back to the case study title when empty.',
+                }),
+                defineField({
+                    name: 'description',
+                    title: 'SEO Description',
+                    type: 'text',
+                    rows: 3,
+                    description: 'Falls back to the overview description when empty.',
+                }),
+            ],
         })
     ],
 })

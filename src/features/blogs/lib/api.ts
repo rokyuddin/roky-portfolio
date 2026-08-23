@@ -4,6 +4,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { BlogPost } from "../types";
 
 import { cacheLife, cacheTag } from "next/cache";
+import { PLACEHOLDER_COVER_IMAGE } from "./cover";
 
 /**
  * Get all blog posts from Sanity sorted by date (newest first)
@@ -43,7 +44,11 @@ function transformPost(sanityPost: any): BlogPost {
             avatar: sanityPost.author?.avatar || "👨‍💻",
         },
         tags: sanityPost.tags || [],
-        coverImage: sanityPost.coverImage?.asset ? urlFor(sanityPost.coverImage.asset).url() : "/placeholder-blog.jpg",
+        coverImage: sanityPost.coverImage?.asset
+            ? urlFor(sanityPost.coverImage.asset).url()
+            : PLACEHOLDER_COVER_IMAGE,
         readTime: sanityPost.readTime || "5 min read",
+        relatedCaseStudies: sanityPost.relatedCaseStudies || [],
+        updatedAt: sanityPost._updatedAt,
     };
 }

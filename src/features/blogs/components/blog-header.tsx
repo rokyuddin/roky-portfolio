@@ -1,24 +1,44 @@
+import Image from "next/image";
 import { BlogPost } from "../types";
+import { hasCoverImage } from "../lib/cover";
 
 interface BlogHeaderProps {
     post: BlogPost;
 }
 
 export function BlogHeader({ post }: BlogHeaderProps) {
+    const updated = post.updatedAt ? new Date(post.updatedAt) : null;
+    const published = new Date(post.date);
+    const showUpdated =
+        updated !== null && updated.getTime() > published.getTime() + 24 * 60 * 60 * 1000;
+
     return (
         <>
             {/* Cover Image Section with Gradient */}
             <div className="relative bg-gradient-to-br from-primary/20 via-accent/30 to-secondary/20 mb-8 md:mb-12 rounded-2xl h-48 sm:h-64 md:h-80 lg:h-96 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                {hasCoverImage(post.coverImage) ? (
+                    <Image
+                        src={post.coverImage}
+                        alt={post.title}
+                        fill
+                        priority
+                        sizes="(max-width: 1024px) 100vw, 896px"
+                        className="object-cover"
+                    />
+                ) : (
+                    <>
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
 
-                {/* Decorative gradient orbs */}
-                <div className="top-0 right-0 absolute bg-primary/30 blur-3xl rounded-full w-64 h-64" />
-                <div className="bottom-0 left-0 absolute bg-accent/40 blur-3xl rounded-full w-72 h-72" />
+                        {/* Decorative gradient orbs */}
+                        <div className="top-0 right-0 absolute bg-primary/30 blur-3xl rounded-full w-64 h-64" />
+                        <div className="bottom-0 left-0 absolute bg-accent/40 blur-3xl rounded-full w-72 h-72" />
 
-                {/* Icon */}
-                <div className="absolute inset-0 flex justify-center items-center">
-                    <div className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl">📝</div>
-                </div>
+                        {/* Icon */}
+                        <div className="absolute inset-0 flex justify-center items-center">
+                            <div className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl">📝</div>
+                        </div>
+                    </>
+                )}
 
                 {/* Glassmorphism overlay at bottom */}
                 <div className="right-0 bottom-0 left-0 absolute bg-background/30 backdrop-blur-sm p-4 sm:p-6 md:p-8 border-border/50 border-t">
@@ -56,11 +76,24 @@ export function BlogHeader({ post }: BlogHeaderProps) {
                                 {post.author.name}
                             </p>
                             <p className="text-muted-foreground text-sm">
-                                {new Date(post.date).toLocaleDateString("en-US", {
-                                    month: "long",
-                                    day: "numeric",
-                                    year: "numeric",
-                                })}
+                                <time dateTime={post.date}>
+                                    {published.toLocaleDateString("en-US", {
+                                        month: "long",
+                                        day: "numeric",
+                                        year: "numeric",
+                                    })}
+                                </time>
+                                {showUpdated && (
+                                    <span> · Updated{" "}
+                                        <time dateTime={post.updatedAt}>
+                                            {updated?.toLocaleDateString("en-US", {
+                                                month: "long",
+                                                day: "numeric",
+                                                year: "numeric",
+                                            })}
+                                        </time>
+                                    </span>
+                                )}
                             </p>
                         </div>
                     </div>

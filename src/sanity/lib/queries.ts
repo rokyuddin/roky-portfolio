@@ -22,3 +22,6 @@ export const postBySlugQuery = defineQuery(`*[_type == "post" && slug.current ==
 // --- Case Studies ---
 export const caseStudiesQuery = defineQuery(`*[_type == "caseStudy"] | order(_createdAt desc)`);
 export const caseStudyBySlugQuery = defineQuery(`*[_type == "caseStudy" && slug.current == $slug][0]`);
+export const caseStudiesBySlugsQuery = defineQuery(
+  `*[_type == "caseStudy" && slug.current in $slugs]{ title, "slug": slug.current }`,
+);

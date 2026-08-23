@@ -3,16 +3,19 @@ import { CaseStudyCard } from "@/features/case-studies";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { fetchCaseStudies } from "@/features/case-studies/lib";
-import { SITE_URL, socialMetadata } from "@/lib/site";
+import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { collectionPageJsonLd, jsonLd } from "@/lib/schema";
 
+const CASE_STUDIES_TITLE = `Case Studies | ${SITE_NAME}`;
+const CASE_STUDIES_DESCRIPTION =
+  "Frontend case studies covering real React, Next.js, and TypeScript projects: the challenges, solutions, tech decisions, and results.";
 
 export const metadata: Metadata = {
-  title: "Case Studies | Md Rokyuddin - Frontend Developer",
-  description: "Explore detailed case studies of my best projects including Rydr (ride-sharing platform) and Skinsight (AI-powered skincare guide). See the challenges, solutions, and results.",
-  keywords: ["case studies", "portfolio", "web development", "React", "Next.js", "frontend development", "Rydr", "Skinsight"],
+  title: CASE_STUDIES_TITLE,
+  description: CASE_STUDIES_DESCRIPTION,
   ...socialMetadata({
-    title: "Case Studies | Md Rokyuddin",
-    description: "Deep dives into my most impactful projects. Explore the challenges, solutions, and results.",
+    title: CASE_STUDIES_TITLE,
+    description: CASE_STUDIES_DESCRIPTION,
     url: `${SITE_URL}/case-studies`,
   }),
 };
@@ -22,6 +25,22 @@ export default async function CaseStudiesPage() {
 
   return (
     <div className="bg-background selection:bg-primary min-h-screen font-sans text-foreground selection:text-primary-foreground transition-colors duration-500">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            collectionPageJsonLd({
+              name: "Case Studies",
+              description: CASE_STUDIES_DESCRIPTION,
+              url: `${SITE_URL}/case-studies`,
+              items: caseStudies.map((study) => ({
+                name: study.title,
+                url: `${SITE_URL}/case-studies/${study.slug}`,
+              })),
+            }),
+          ),
+        }}
+      />
       <Nav />
 
       {/* Hero Section */}
@@ -32,8 +51,8 @@ export default async function CaseStudiesPage() {
               Case Studies
             </h1>
             <p className="max-w-3xl text-muted-foreground text-xl leading-relaxed">
-              Deep dives into my most impactful projects. Explore the challenges, solutions,
-              and results that define my approach to frontend development.
+              Frontend case studies covering real-world React, Next.js, and TypeScript
+              projects: the challenges, the solutions, and the results.
             </p>
           </div>
         </div>

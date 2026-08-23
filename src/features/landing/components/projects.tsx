@@ -1,5 +1,5 @@
 "use client"
-import { Briefcase, ExternalLink, Github, X } from "lucide-react";
+import { ArrowUpRight, Briefcase, ExternalLink, Github, X } from "lucide-react";
 import Link from "next/link";
 import { SectionHeader } from "@/components/organisms/section-header";
 import Image from "next/image";
@@ -123,6 +123,24 @@ export function Projects({ projects }: ProjectsProps) {
                             </div>
                         );
                     })}
+                </div>
+
+                {/* Discovery paths */}
+                <div className="flex flex-wrap justify-between gap-4 mt-8 pt-6 border-border border-t">
+                    <Link
+                        href="/case-studies"
+                        className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary text-sm transition-colors"
+                    >
+                        Read all case studies
+                        <ArrowUpRight size={14} />
+                    </Link>
+                    <Link
+                        href="/blog"
+                        className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary text-sm transition-colors"
+                    >
+                        Read the frontend blog
+                        <ArrowUpRight size={14} />
+                    </Link>
                 </div>
             </div>
 

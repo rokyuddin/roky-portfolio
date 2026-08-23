@@ -14,8 +14,8 @@ import { SolutionSection } from "@/features/case-studies"
 import { FeaturesSection } from "@/features/case-studies"
 import { GallerySection } from "@/features/case-studies"
 import { fetchCaseStudyBySlug } from "@/features/case-studies/lib";
-import { SITE_URL, socialMetadata } from "@/lib/site";
-import { articleJsonLd, jsonLd } from "@/lib/schema";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { articleJsonLd, breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -29,28 +29,31 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
+  const title = caseStudy.seo?.title
+    ? `${caseStudy.seo.title} | ${SITE_NAME}`
+    : `${caseStudy.title} Frontend Case Study | ${SITE_NAME}`;
+  const description =
+    caseStudy.seo?.description || caseStudy.overview.description || SITE_DESCRIPTION;
+
   return {
-    title: `${caseStudy?.title} Case Study | Md Rokyuddin - Frontend Developer`,
-    description: caseStudy?.overview.description,
+    title,
+    description,
     keywords: [
-      caseStudy?.title,
-      caseStudy?.category,
-      ...caseStudy?.techStack.frontend,
-      "case study",
-      "web development",
-      "frontend development"
-    ],
+      caseStudy.title,
+      caseStudy.category,
+      ...caseStudy.techStack.frontend,
+    ].filter(Boolean),
     ...socialMetadata({
-      title: `${caseStudy?.title} - ${caseStudy?.subtitle}`,
-      description: caseStudy?.overview.description,
-      url: `${SITE_URL}/case-studies/${slug}`,
+      title,
+      description,
+      url: `${SITE_URL}/case-studies/${caseStudy.slug}`,
       type: "article",
-      image: caseStudy?.heroImage,
-      openGraphExtras: {
-        images: [
-          { url: caseStudy?.heroImage, alt: `${caseStudy?.title} preview` },
-        ],
-      },
+      image: caseStudy.heroImage
+        ? { url: caseStudy.heroImage, alt: `${caseStudy.title} preview` }
+        : undefined,
+      openGraphExtras: caseStudy.updatedAt
+        ? { modifiedTime: caseStudy.updatedAt }
+        : undefined,
     }),
   };
 }
@@ -76,12 +79,30 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         dangerouslySetInnerHTML={{
           __html: jsonLd(
             articleJsonLd({
-              title: caseStudy?.title,
-              subtitle: caseStudy?.subtitle,
-              description: caseStudy?.overview.description,
-              category: caseStudy?.category,
-              heroImage: caseStudy?.heroImage,
-            })
+              slug: caseStudy.slug,
+              title: caseStudy.title,
+              subtitle: caseStudy.subtitle,
+              description:
+                caseStudy.seo?.description || caseStudy.overview.description,
+              category: caseStudy.category,
+              heroImage: caseStudy.heroImage || undefined,
+              updatedAt: caseStudy.updatedAt,
+            }),
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbJsonLd([
+              { name: "Home", url: SITE_URL },
+              { name: "Case Studies", url: `${SITE_URL}/case-studies` },
+              {
+                name: caseStudy.title,
+                url: `${SITE_URL}/case-studies/${caseStudy.slug}`,
+              },
+            ]),
           ),
         }}
       />
@@ -227,7 +248,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div>
             <h2 className="mb-4 font-serif text-primary text-3xl">Interested in Working Together?</h2>
             <p className="mx-auto mb-8 max-w-2xl text-muted-foreground">
-              I'm always open to discussing new projects and opportunities.
+              I&apos;m always open to discussing new projects and opportunities.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
@@ -236,6 +257,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-6 py-3 rounded-lg text-primary-foreground transition-colors"
               >
                 Get in Touch
+              </Link>
+
+              <Link
+                href="/case-studies"
+                className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-6 py-3 border border-border rounded-lg text-secondary-foreground transition-colors"
+              >
+                Explore More Case Studies
               </Link>
 
               <Link

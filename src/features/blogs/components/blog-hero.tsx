@@ -15,8 +15,9 @@ export function BlogHero() {
                     </h1>
 
                     <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                        Exploring the intersection of design, development, and digital innovation.
-                        Deep dives into web technologies, best practices, and creative insights.
+                        Practical frontend writing on React, Next.js, TypeScript,
+                        performance, and delivery: lessons from real projects and
+                        production work.
                     </p>
                 </div>
             </div>

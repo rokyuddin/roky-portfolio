@@ -4,13 +4,18 @@ import { BlogHero } from "@/features/blogs/components/blog-hero";
 import { BlogList } from "@/features/blogs/components/blog-list";
 import { getAllPosts } from "@/features/blogs";
 import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { collectionPageJsonLd, jsonLd } from "@/lib/schema";
+
+const BLOG_TITLE = `Blog | ${SITE_NAME}`;
+const BLOG_DESCRIPTION =
+    "Practical frontend writing on React, Next.js, TypeScript, performance, and delivery: lessons from real projects and production work.";
 
 export const metadata: Metadata = {
-    title: `Blog - ${SITE_NAME}`,
-    description: "Exploring the intersection of design, development, and digital innovation. Deep dives into web technologies, best practices, and creative insights.",
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
     ...socialMetadata({
-        title: `Blog - ${SITE_NAME}`,
-        description: "Exploring the intersection of design, development, and digital innovation.",
+        title: BLOG_TITLE,
+        description: BLOG_DESCRIPTION,
         url: `${SITE_URL}/blog`,
     }),
 };
@@ -20,6 +25,22 @@ export default async function BlogPage() {
 
     return (
         <div className="bg-background selection:bg-primary min-h-screen font-sans text-foreground selection:text-primary-foreground transition-colors duration-500">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: jsonLd(
+                        collectionPageJsonLd({
+                            name: "Blog",
+                            description: BLOG_DESCRIPTION,
+                            url: `${SITE_URL}/blog`,
+                            items: posts.map((post) => ({
+                                name: post.title,
+                                url: `${SITE_URL}/blog/${post.slug}`,
+                            })),
+                        }),
+                    ),
+                }}
+            />
             <Nav />
             <BlogHero />
 

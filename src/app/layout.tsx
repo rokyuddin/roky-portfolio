@@ -52,10 +52,12 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <Script
+          id="ld-person"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(personJsonLd()) }}
         />
         <Script
+          id="ld-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd()) }}
         />

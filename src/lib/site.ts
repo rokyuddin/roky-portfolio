@@ -32,7 +32,7 @@ export function socialMetadata(params: {
   description: string;
   url: string;
   type?: "website" | "article";
-  image?: string;
+  image?: string | { url: string; alt?: string };
   /** Extra Open Graph fields (publishedTime, authors, tags, ...). */
   openGraphExtras?: Record<string, unknown>;
 }) {
@@ -41,9 +41,12 @@ export function socialMetadata(params: {
     description,
     url,
     type = "website",
-    image = DEFAULT_SOCIAL_IMAGE,
+    image: imageInput = DEFAULT_SOCIAL_IMAGE,
     openGraphExtras,
   } = params;
+
+  const image =
+    typeof imageInput === "string" ? { url: imageInput } : imageInput;
 
   return {
     alternates: { canonical: url },
@@ -54,14 +57,14 @@ export function socialMetadata(params: {
       type,
       url,
       locale: "en_US",
-      images: [{ url: image }],
+      images: [image],
       ...openGraphExtras,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
+      images: [image.url],
     },
   };
 }

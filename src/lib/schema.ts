@@ -1,5 +1,6 @@
-import { SITE_URL } from "./site";
 import type { BlogPost } from "@/features/blogs/types";
+import { hasCoverImage } from "@/features/blogs/lib/cover";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 /**
  * Structured data (JSON-LD) builders used across the app.
@@ -10,6 +11,7 @@ export function personJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${SITE_URL}/#person`,
     name: "Md Rokyuddin",
     jobTitle: "Frontend Developer",
     url: SITE_URL,
@@ -30,48 +32,102 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Md Rokyuddin",
+    "@id": `${SITE_URL}/#website`,
+    name: SITE_NAME,
     url: SITE_URL,
-    description:
-      "Frontend Developer specializing in React, Next.js, and TypeScript.",
+    description: "Frontend Developer specializing in React, Next.js, and TypeScript.",
+    publisher: { "@id": `${SITE_URL}/#person` },
+  };
+}
+
+export function breadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+export function collectionPageJsonLd(params: {
+  name: string;
+  url: string;
+  description?: string;
+  items?: Array<{ name: string; url: string }>;
+}) {
+  const { name, url, description, items = [] } = params;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    url,
+    ...(description ? { description } : {}),
+    ...(items.length
+      ? {
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: items.map((item, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: item.name,
+              url: item.url,
+            })),
+          },
+        }
+      : {}),
   };
 }
 
 export function blogPostingJsonLd(post: BlogPost) {
+  const url = `${SITE_URL}/blog/${post.slug}`;
+
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
+    ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
     author: {
       "@type": "Person",
       name: post.author.name || "Md Rokyuddin",
     },
-    ...(post.coverImage && post.coverImage !== "/placeholder-blog.jpg"
-      ? { image: post.coverImage }
-      : {}),
-    ...(post.tags?.length ? { keywords: post.tags } : {}),
+    publisher: { "@id": `${SITE_URL}/#person` },
+    ...(hasCoverImage(post.coverImage) ? { image: post.coverImage } : {}),
+    ...(post.tags.length ? { keywords: post.tags.join(", ") } : {}),
   };
 }
 
 export function articleJsonLd(caseStudy: {
+  slug: string;
   title: string;
   subtitle?: string;
   description?: string;
   category?: string;
   heroImage?: string;
+  updatedAt?: string;
 }) {
+  const url = `${SITE_URL}/case-studies/${caseStudy.slug}`;
+
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: caseStudy.subtitle || caseStudy.title,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
+    headline: caseStudy.title,
     name: caseStudy.title,
-    description: caseStudy.description || undefined,
-    author: {
-      "@type": "Person",
-      name: "Md Rokyuddin",
-    },
+    ...(caseStudy.subtitle ? { alternativeHeadline: caseStudy.subtitle } : {}),
+    ...(caseStudy.description ? { description: caseStudy.description } : {}),
+    ...(caseStudy.updatedAt ? { dateModified: caseStudy.updatedAt } : {}),
+    author: { "@id": `${SITE_URL}/#person` },
+    publisher: { "@id": `${SITE_URL}/#person` },
     ...(caseStudy.category ? { articleSection: caseStudy.category } : {}),
     ...(caseStudy.heroImage ? { image: caseStudy.heroImage } : {}),
   };
