@@ -79,7 +79,7 @@ export function Hero({ profile }: HeroProps) {
                             {/* Image */}
                             <Image
                                 src={urlFor(profile.profileImage).url()}
-                                alt={profile.profileImage.alt}
+                                alt={profile.profileImage?.alt || profile.name || "Md Rokyuddin"}
                                 width={350}
                                 height={450}
                                 className="grayscale hover:grayscale-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"

@@ -7,7 +7,7 @@ import { SITE_NAME, SITE_URL } from "@/lib/site";
  * Return plain objects; render them in a <script type="application/ld+json"> tag.
  */
 
-export function personJsonLd() {
+export function personJsonLd(image?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -16,14 +16,24 @@ export function personJsonLd() {
     jobTitle: "Frontend Developer",
     url: SITE_URL,
     email: "rokyuddin.dev@gmail.com",
+    ...(image ? { image } : {}),
     address: {
       "@type": "PostalAddress",
       addressLocality: "Jashore",
       addressCountry: "BD",
     },
+    knowsAbout: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Frontend Development",
+      "Web Performance",
+      "Accessibility",
+    ],
     sameAs: [
       "https://github.com/rokyuddin",
-      "https://linkedin.com/in/rokyuddin",
+      "https://linkedin.com/in/itsrokyuddin",
     ],
   };
 }
@@ -75,7 +85,7 @@ export function collectionPageJsonLd(params: {
               "@type": "ListItem",
               position: index + 1,
               name: item.name,
-              url: item.url,
+              item: item.url,
             })),
           },
         }
@@ -94,11 +104,9 @@ export function blogPostingJsonLd(post: BlogPost) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
-    author: {
-      "@type": "Person",
-      name: post.author.name || "Md Rokyuddin",
-    },
+    // Always emit dateModified — fall back to datePublished when no updatedAt.
+    dateModified: post.updatedAt ?? post.date,
+    author: { "@id": `${SITE_URL}/#person` },
     publisher: { "@id": `${SITE_URL}/#person` },
     ...(hasCoverImage(post.coverImage) ? { image: post.coverImage } : {}),
     ...(post.tags.length ? { keywords: post.tags.join(", ") } : {}),

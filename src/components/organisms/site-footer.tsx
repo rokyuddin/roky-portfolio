@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Github, Linkedin, Mail, MapPin, Smartphone } from "lucide-react";
 
@@ -17,7 +15,7 @@ const CONTACT = {
 
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/rokyuddin", Icon: Github },
-  { label: "LinkedIn", href: "https://linkedin.com/in/rokyuddin", Icon: Linkedin },
+  { label: "LinkedIn", href: "https://linkedin.com/in/itsrokyuddin", Icon: Linkedin },
 ];
 
 const NAV_LINKS = [

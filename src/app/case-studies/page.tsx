@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { fetchCaseStudies } from "@/features/case-studies/lib";
 import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
-import { collectionPageJsonLd, jsonLd } from "@/lib/schema";
+import { collectionPageJsonLd, breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
 const CASE_STUDIES_TITLE = `Case Studies | ${SITE_NAME}`;
 const CASE_STUDIES_DESCRIPTION =
@@ -39,6 +39,17 @@ export default async function CaseStudiesPage() {
                 url: `${SITE_URL}/case-studies/${study.slug}`,
               })),
             }),
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbJsonLd([
+              { name: "Home", url: SITE_URL },
+              { name: "Case Studies", url: `${SITE_URL}/case-studies` },
+            ]),
           ),
         }}
       />

@@ -31,6 +31,24 @@ describe("personJsonLd", () => {
     assert.equal(data["@type"], "Person");
     assert.equal(data["@id"], `${SITE_URL}/#person`);
   });
+
+  it("omits image when not provided", () => {
+    const data = personJsonLd();
+    assert.equal("image" in data, false);
+  });
+
+  it("includes image when provided", () => {
+    const url = "https://cdn.sanity.io/profile.jpg";
+    const data = personJsonLd(url);
+    assert.equal(data.image, url);
+  });
+
+  it("includes knowsAbout with at least React and Next.js", () => {
+    const data = personJsonLd();
+    assert.ok(Array.isArray(data.knowsAbout));
+    assert.ok((data.knowsAbout as string[]).includes("React"));
+    assert.ok((data.knowsAbout as string[]).includes("Next.js"));
+  });
 });
 
 describe("websiteJsonLd", () => {
@@ -69,17 +87,16 @@ describe("blogPostingJsonLd", () => {
     assert.equal(data.datePublished, post.date);
   });
 
-  it("only emits dateModified when an updatedAt date exists", () => {
-    assert.equal("dateModified" in blogPostingJsonLd(post), false);
+  it("always emits dateModified, falling back to datePublished", () => {
+    const noUpdated = blogPostingJsonLd(post);
+    assert.equal(noUpdated.dateModified, post.date);
     const updated = blogPostingJsonLd({ ...post, updatedAt: "2026-02-01T10:00:00Z" });
     assert.equal(updated.dateModified, "2026-02-01T10:00:00Z");
   });
 
-  it("does not claim the site owner's URL for other authors", () => {
-    const data = blogPostingJsonLd({ ...post, author: { name: "Guest Author", avatar: "✍️" } });
-    const author = data.author as Record<string, unknown>;
-    assert.equal(author.name, "Guest Author");
-    assert.equal("url" in author && author.url, false);
+  it("uses the site Person @id as author", () => {
+    const data = blogPostingJsonLd(post);
+    assert.deepEqual(data.author, { "@id": `${SITE_URL}/#person` });
   });
 
   it("omits placeholder cover images and joins tags into keywords", () => {

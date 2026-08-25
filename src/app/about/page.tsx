@@ -4,7 +4,7 @@ import { Nav } from "@/components/organisms/nav";
 import { SiteFooter } from "@/components/organisms/site-footer";
 import { portfolioContext } from "@/lib/data/portfolio-context";
 import { SITE_URL, SITE_NAME, socialMetadata } from "@/lib/site";
-import { personJsonLd, jsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
 const ABOUT_TITLE = `About | ${SITE_NAME}`;
 const ABOUT_DESCRIPTION =
@@ -28,7 +28,10 @@ export default function AboutPage() {
     <div className="bg-background selection:bg-primary min-h-screen font-sans text-foreground selection:text-primary-foreground transition-colors duration-500">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd(personJsonLd()) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbJsonLd([
+          { name: "Home", url: SITE_URL },
+          { name: "About", url: `${SITE_URL}/about` },
+        ])) }}
       />
       <Nav />
 
