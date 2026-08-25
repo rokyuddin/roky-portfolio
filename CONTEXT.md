@@ -12,6 +12,10 @@ Roky Portfolio is the personal portfolio of Md Rokyuddin, a frontend developer. 
 - **Sanity**: The CMS and source of truth for published profile, portfolio, blog, and case-study content.
 - **Playground**: An interactive AI/code tooling area. It is not a primary acquisition page.
 - **Revalidation webhook**: The Sanity-triggered `POST /api/revalidate` endpoint that invalidates tagged cached content.
+- **Canonical host**: The single host the site standardizes on, `https://www.rokyuddin.com`. All canonicals, sitemap, robots and schema URLs use it; `SITE_URL` is its source of truth.
+- **About page**: The `/about` route presenting Md Rokyuddin's background, credentials, tools, and approach (a trust/E-E-A-T surface for recruiters and clients).
+- **Contact page**: The `/contact` route giving a contact form, email, phone, socials, and NAP. Distinct from the landing page's `#contact` anchor.
+- **Site footer**: The persistent footer rendered on every route (including content pages) carrying contact + social links.
 
 ## Technical constraints
 
