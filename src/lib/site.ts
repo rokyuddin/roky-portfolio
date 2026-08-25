@@ -2,9 +2,12 @@
  * Central site-wide constants.
  * SITE_URL drives canonical/OG/sitemap/robots metadata.
  * Override at deploy time via NEXT_PUBLIC_SITE_URL (e.g. a custom domain).
+ *
+ * Canonical host is `www.rokyuddin.com` (the host that serves traffic; the bare
+ * host 308-redirects to www). See docs/adr/0001-www-canonical-host.md.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://rokyuddin.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.rokyuddin.com"
 ).replace(/\/+$/, "");
 
 export const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID;
@@ -16,7 +19,9 @@ export const SITE_TITLE = `${SITE_NAME} | Frontend Developer`;
 export const SITE_DESCRIPTION =
   "Frontend Developer specializing in React, Next.js, and TypeScript.";
 
-export const DEFAULT_SOCIAL_IMAGE = "/twitter-image.jpg";
+// `/twitter-image` is the dynamic route (Next.js file-convention route),
+// returns image/png; `/twitter-image.jpg` (with extension) 404s.
+export const DEFAULT_SOCIAL_IMAGE = "/twitter-image";
 
 /**
  * Builds per-page social + canonical metadata.

@@ -1,11 +1,8 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/organisms/theme-provider";
-import { SmoothScroll } from "@/components/organisms/smoth-scroll";
-import { ChatWidget } from "@/components/organisms/chat-widget";
 import { Toaster } from "sonner";
 import {
   SITE_URL,
@@ -15,7 +12,6 @@ import {
   GOOGLE_SITE_VERIFICATION,
 } from "@/lib/site";
 import { personJsonLd, websiteJsonLd, jsonLd } from "@/lib/schema";
-import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,13 +47,15 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <Script
-          id="ld-person"
+        {/* Site-wide JSON-LD must be plain <script> elements rendered by this
+            Server Component so it lands in static HTML. Using next/script
+            <Script> (or RSC page elements) keeps it out of the served HTML —
+            it only materialises client-side and is invisible to crawlers. */}
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(personJsonLd()) }}
         />
-        <Script
-          id="ld-website"
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd()) }}
         />
@@ -75,10 +73,14 @@ export default function RootLayout({
             </Suspense> */}
           <Toaster />
         </ThemeProvider>
+        {/* Analytics: Google Analytics 4 only. The @next/third-parties
+            <GoogleAnalytics> component loads gtag.js asynchronously (not
+            preloaded at high priority), so it doesn't steal the early
+            connection from the LCP hero image — see
+            docs/adr/0002-ga4-single-analytics. Cloudflare Web Analytics is
+            disabled in the Cloudflare dashboard (edge-injected, not repo code). */}
         {GOOGLE_ANALYTICS_ID && (
-          <Suspense>
-            <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
-          </Suspense>
+          <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
         )}
         {/* </SmoothScroll> */}
       </body>
