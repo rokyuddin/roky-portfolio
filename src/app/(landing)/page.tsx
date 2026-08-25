@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Nav } from "@/components/organisms/nav";
+import { SiteFooter } from "@/components/organisms/site-footer";
 import {
   CachedHero,
   CachedTechStack,
@@ -62,6 +63,7 @@ export default function Portfolio() {
       <Suspense fallback={null}>
         <CachedContact />
       </Suspense>
+      <SiteFooter />
     </div>
   );
 }

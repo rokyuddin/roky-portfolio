@@ -1,4 +1,5 @@
 import { Nav } from "@/components/organisms/nav";
+import { SiteFooter } from "@/components/organisms/site-footer";
 import { CaseStudyCard } from "@/features/case-studies";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -87,7 +88,7 @@ export default async function CaseStudiesPage() {
               </Link>
 
               <Link
-                href="/#contact"
+                href="/contact"
                 className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-6 py-3 border border-border rounded-lg text-secondary-foreground transition-colors"
               >
                 Get in Touch
@@ -96,6 +97,7 @@ export default async function CaseStudiesPage() {
           </div>
         </div>
       </section>
+      <SiteFooter />
     </div>
   );
 }

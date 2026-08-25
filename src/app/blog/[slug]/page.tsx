@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/organisms/nav";
+import { SiteFooter } from "@/components/organisms/site-footer";
 import { BackButton, getAllPosts, getPostBySlug } from "@/features/blogs";
 import { BlogHeader } from "@/features/blogs";
 import { BlogContent } from "@/features/blogs";
@@ -152,6 +153,7 @@ export default async function BlogDetailPage({ params }: Props) {
                     </div>
                 </div>
             </article>
+            <SiteFooter />
         </div>
     );
 }

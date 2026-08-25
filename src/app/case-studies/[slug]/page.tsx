@@ -1,4 +1,5 @@
 import { Nav } from "@/components/organisms/nav";
+import { SiteFooter } from "@/components/organisms/site-footer";
 import { notFound } from "next/navigation";
 import {
   Code2,
@@ -277,6 +278,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </div>
       </section>
+      <SiteFooter />
     </div>
   );
 }

@@ -7,7 +7,9 @@ interface TestimonialsProps {
 }
 
 export function Testimonials({ testimonials }: TestimonialsProps) {
-  if (!testimonials) return null;
+  // Auto-hide when there are no testimonials yet (empty array) so the section
+  // isn't a visible empty block. Real quotes come from Sanity as needed.
+  if (!testimonials || testimonials.length === 0) return null;
   return (
     <section id="testimonials" className="px-6 py-24 border-border border-t transition-colors duration-500">
       <div className="mx-auto w-full max-w-4xl">

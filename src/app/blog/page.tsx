@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Nav } from "@/components/organisms/nav";
+import { SiteFooter } from "@/components/organisms/site-footer";
 import { BlogHero } from "@/features/blogs/components/blog-hero";
 import { BlogList } from "@/features/blogs/components/blog-list";
 import { getAllPosts } from "@/features/blogs";
@@ -49,6 +50,7 @@ export default async function BlogPage() {
                     <BlogList posts={posts} />
                 </div>
             </section>
+            <SiteFooter />
         </div>
     );
 }
