@@ -7,4 +7,3 @@ export { Experience } from "./components/experience";
 export { Testimonials } from "./components/testimonials";
 
 export * from './types'
-export * from './utils'
