@@ -274,6 +274,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <ArrowLeft className="w-4 h-4" />
                 View All Projects
               </Link>
+
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 px-6 py-3 border border-border rounded-lg text-secondary-foreground transition-colors"
+              >
+                Read the Blog
+              </Link>
             </div>
           </div>
         </div>

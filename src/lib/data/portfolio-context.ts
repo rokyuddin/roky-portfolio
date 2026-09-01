@@ -3,10 +3,10 @@ export const portfolioContext = {
   nickname: "Roky",
   role: "Frontend Developer",
   experience: "3+ years",
-  tagline: "A specialized Frontend Developer with 3+ years of experience, crafting refined digital experiences with Next.js & TypeScript.",
+  tagline: "Frontend Developer with 3+ years of experience building production apps with Next.js & TypeScript.",
 
   about: {
-    summary: "3+ years of hands-on experience in frontend development, specializing in high-performance web applications that prioritize both user experience and code quality. My approach combines technical excellence with a keen eye for design, ensuring every project delivers seamless functionality wrapped in intuitive, accessible interfaces. I thrive in collaborative environments where clean code, scalable architecture, and continuous learning drive innovation.",
+    summary: "I've spent 3+ years building frontends for production apps, mostly with React and Next.js. I care about two things: code that holds up as the product grows, and interfaces people can actually use. I work closely with designers and backend engineers to ship features end to end, and I've integrated payments, maps, and admin tooling along the way.",
     coreFocus: [
       {
         area: "Architecture",
@@ -18,11 +18,11 @@ export const portfolioContext = {
       },
       {
         area: "User Experience",
-        description: "Tailwind CSS & Material UI for bespoke, responsive interfaces"
+        description: "Responsive interfaces with Tailwind CSS & Material UI"
       },
       {
         area: "Performance",
-        description: "Core Web Vitals optimization & efficient rendering strategies"
+        description: "Core Web Vitals work: lazy loading, code splitting, render tuning"
       }
     ]
   },
@@ -47,14 +47,14 @@ export const portfolioContext = {
       position: "Frontend Developer L2",
       company: "Miicon Solutions Limited",
       type: "Full-time",
-      description: "Collaborating with UX/UI and backend teams to translate designs into functional applications. Integrated Stripe and Google APIs. Built a ride-sharing platform with admin dashboards.",
+      description: "Work with UX/UI and backend teams to turn designs into working features. Integrated Stripe and Google APIs. Built a ride-sharing platform with admin dashboards.",
       technologies: ["React", "Next.js", "Stripe", "Google APIs", "Admin Dashboards"]
     },
     {
       position: "Frontend Developer L2",
       company: "Soft24",
       type: "Part-time",
-      description: "Designing custom landing pages and e-commerce features including product listings and checkout flows. Integrated Redux for state management. Currently working on a multi-vendor e-commerce platform.",
+      description: "Design custom landing pages and e-commerce features: product listings, checkout flows, Redux for state management. Currently building a multi-vendor e-commerce platform.",
       technologies: ["React", "Next.js", "Redux", "E-commerce", "Landing Pages"]
     }
   ],
@@ -63,7 +63,7 @@ export const portfolioContext = {
     {
       name: "Rydr",
       category: "Ride-Sharing & Concierge Platform",
-      description: "A comprehensive platform for trip booking, chauffeur services, and real-time tracking. Features include automated invoices, admin dashboards, and business management systems for third-party organizations.",
+      description: "A platform for trip booking, chauffeur services, and real-time tracking. Handles automated invoices, admin dashboards, and business management for third-party organizations.",
       techStack: ["Google Maps", "Stripe", "Admin Panel"],
       url: "https://rydr.app",
       highlights: ["Real-time tracking", "Automated invoices", "Business management systems", "Third-party integrations"]
@@ -71,18 +71,18 @@ export const portfolioContext = {
     {
       name: "Skinsight",
       category: "Personalized Skincare Guide",
-      description: "An intelligent recommendation engine for skincare. Users get suggestions based on skin type, build regimens, and manage profiles. Features account deletion and data management.",
+      description: "A skincare recommendation app. Users get product suggestions based on skin type, build regimens, and manage profiles. Includes account deletion and data management.",
       techStack: ["Recommendation Engine", "Personalization", "HealthTech"],
       url: "https://skinsight.me",
-      highlights: ["Intelligent recommendations", "Personalized regimens", "Profile management", "Data privacy features"]
+      highlights: ["Recommendations by skin type", "Personalized regimens", "Profile management", "Data privacy features"]
     },
     {
       name: "AslamCGA",
       category: "Portfolio Landing Page",
-      description: "High-performance portfolio with dynamic Framer Motion animations. Optimized for speed and efficient content delivery.",
+      description: "A portfolio site with Framer Motion animations, tuned to load fast on slow connections.",
       techStack: ["Framer Motion", "Performance", "Animation"],
       url: "https://aslamcga.com",
-      highlights: ["Dynamic animations", "Performance optimization", "Modern design"]
+      highlights: ["Framer Motion animations", "Performance tuning", "Fast content delivery"]
     }
   ],
 

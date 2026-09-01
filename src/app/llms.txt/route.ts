@@ -19,7 +19,7 @@ export async function GET() {
 - [Homepage](${SITE_URL}/): Portfolio landing — hero, tech stack, projects, about, experience, testimonials, and contact.
 - [Projects](${SITE_URL}/#projects): Selected frontend projects.
 - [Case Studies](${SITE_URL}/case-studies): In-depth write-ups of projects including challenges, solutions, and results.
-- [Blog](${SITE_URL}/blog): Technical articles on web design trends, TypeScript, and Next.js performance.
+- [Blog](${SITE_URL}/blog): Practical frontend articles on React, TypeScript, Next.js performance, and shipping production work.
 - [Playground](${SITE_URL}/playground): Interactive code playground for experimenting with snippets.
 
 ## Contact

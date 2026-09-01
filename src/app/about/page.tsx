@@ -8,7 +8,7 @@ import { breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
 const ABOUT_TITLE = `About | ${SITE_NAME}`;
 const ABOUT_DESCRIPTION =
-  "Background, experience, and approach of Md Rokyuddin, a Frontend Developer specializing in React, Next.js, and TypeScript — available for remote roles and client projects worldwide.";
+  "Frontend Developer based in Bangladesh, available for remote roles worldwide. 3+ years of experience building production React, Next.js, and TypeScript applications. Currently a Frontend Developer L2, open to new opportunities and client projects.";
 
 export const metadata: Metadata = {
   title: ABOUT_TITLE,
@@ -44,6 +44,11 @@ export default function AboutPage() {
           <p className="max-w-3xl text-muted-foreground text-xl leading-relaxed">
             {portfolioContext.tagline}
           </p>
+          <p className="mt-4 max-w-3xl text-muted-foreground text-sm leading-relaxed">
+            Frontend Developer based in Jashore, Bangladesh, available for
+            remote roles and client projects worldwide. Open to full-time
+            opportunities and freelance work in React, Next.js, and TypeScript.
+          </p>
         </div>
       </section>
 
@@ -52,6 +57,10 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl">
           <p className="text-foreground/90 text-[15px] leading-loose md:text-lg">
             {aboutData.summary}
+          </p>
+          <p className="mt-4 text-foreground/90 text-[15px] leading-loose md:text-lg">
+            If you&apos;re looking to hire a remote React or Next.js developer
+            for your team, I&apos;d love to hear from you.
           </p>
         </div>
       </section>

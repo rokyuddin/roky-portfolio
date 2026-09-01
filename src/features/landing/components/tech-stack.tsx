@@ -95,7 +95,7 @@ export function TechStack({ skills }: TechStackProps) {
                 <div className="z-20 relative space-y-6 bg-linear-to-t from-55% from-background mx-auto mt-12 max-w-lg text-center">
                     <h2 className="font-serif font-semibold text-primary text-3xl md:text-4xl text-balance">My Tech Stack</h2>
                     <p className="text-muted-foreground">
-                        I build with modern, scalable technologies to create fast and reliable applications.
+                        The tools I use day to day for client and production work.
                     </p>
                     <br />
                     <Link

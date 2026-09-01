@@ -39,20 +39,20 @@ export function About({ profile }: AboutProps) {
                                         <span className="inline-flex items-center gap-1.5 bg-primary/5 px-2 py-0.5 border border-primary/20 rounded-sm font-semibold text-primary">
                                             <span className="bg-primary rounded-full size-1 animate-pulse"></span>
                                             3+ years
-                                        </span> of hands-on experience in frontend development, specializing in high-performance web applications that prioritize both user experience and code quality.
+                                        </span> building frontends for production apps, mostly with React and Next.js.
                                     </p>
 
                                     <div className="relative bg-muted/20 hover:bg-muted/30 py-3 pl-5 border-border/50 hover:border-primary/30 border-l-2 rounded-r-sm transition-all duration-300">
                                         <div className="top-1/2 -left-[5px] absolute bg-border rounded-full size-2 -translate-y-1/2"></div>
                                         <p className="text-[15px] text-muted-foreground leading-loose transition-colors duration-500">
-                                            My approach combines <span className="bg-foreground/5 px-1.5 py-0.5 rounded font-semibold text-foreground">technical excellence</span> with a keen eye for design, ensuring every project delivers seamless functionality wrapped in intuitive, accessible interfaces.
+                                            I care about two things: <span className="bg-foreground/5 px-1.5 py-0.5 rounded font-semibold text-foreground">code that holds up</span> as the product grows, and interfaces people can actually use.
                                         </p>
                                     </div>
 
                                     <div className="flex items-start gap-3.5 pt-1">
                                         <div className="flex-shrink-0 bg-gradient-to-br from-primary to-primary/60 shadow-primary/20 shadow-sm mt-2.5 rounded-full size-2"></div>
                                         <p className="text-[15px] text-muted-foreground leading-loose transition-colors duration-500">
-                                            I thrive in collaborative environments where <span className="font-medium text-foreground">clean code</span>, <span className="font-medium text-foreground">scalable architecture</span>, and <span className="font-medium text-foreground">continuous learning</span> drive innovation.
+                                            I work closely with <span className="font-medium text-foreground">designers</span> and <span className="font-medium text-foreground">backend engineers</span> to ship features end to end.
                                         </p>
                                     </div>
                                 </div>
@@ -99,8 +99,7 @@ export function About({ profile }: AboutProps) {
                                         User Experience
                                     </h4>
                                     <p className="text-muted-foreground text-sm">
-                                        Tailwind CSS & Material UI for bespoke, responsive
-                                        interfaces.
+                                        Responsive interfaces with Tailwind CSS & Material UI.
                                     </p>
                                 </div>
                             </li>

@@ -40,7 +40,7 @@ export function Hero({ profile }: HeroProps) {
                         <span className="font-normal text-primary">
                             {profile.role || "Frontend Developer"}
                         </span>{" "}
-                        with <span className="font-normal text-primary">3+ years of experience</span> building fast, accessible interfaces with React, Next.js & TypeScript — available for remote roles and client projects worldwide.
+                        with <span className="font-normal text-primary">3+ years of experience</span> building fast, accessible interfaces with React, Next.js & TypeScript. Available for remote roles and client projects worldwide.
                     </p>
                     <div className="flex sm:flex-row flex-col gap-4 animate-fade-in-up delay-300">
                         <Link
