@@ -26,7 +26,7 @@ export async function GET() {
 
 - Email: rokyuddin.dev@gmail.com
 - GitHub: https://github.com/rokyuddin
-- LinkedIn: https://linkedin.com/in/rokyuddin
+- LinkedIn: https://linkedin.com/in/itsrokyuddin
 
 ## Technology
 

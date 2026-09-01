@@ -8,6 +8,8 @@ import {
   SITE_URL,
   SITE_TITLE,
   SITE_DESCRIPTION,
+  SITE_NAME,
+  DEFAULT_SOCIAL_IMAGE,
   GOOGLE_ANALYTICS_ID,
   GOOGLE_SITE_VERIFICATION,
 } from "@/lib/site";
@@ -29,9 +31,78 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: SITE_TITLE,
+  // Title template: child pages set title: "Page Name" and get "Page Name | Md Rokyuddin".
+  // Use title: { absolute: "..." } to opt out of the template entirely.
+  title: {
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+
+  // Root canonical — per-page metadata adds alternates.canonical via socialMetadata().
+  alternates: {
+    canonical: SITE_URL,
+  },
+
+  keywords: [
+    "Frontend Developer",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript",
+    "JavaScript",
+    "UI Engineer",
+    "Web Developer",
+    "Portfolio",
+    "Md Rokyuddin",
+    "Rokyuddin",
+  ],
+
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "technology",
+
+  // Allow all crawlers by default; individual pages tighten via their own
+  // metadata export (e.g. robots: { index: false } on /playground).
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  // Fallback OG/Twitter used by any route that does not define its own metadata
+  // (error pages, the embedded Sanity Studio, etc.). Per-page generateMetadata
+  // calls always override these, so landing/blog/case-study pages are unaffected.
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
+    type: "website",
+    url: SITE_URL,
+    locale: "en_US",
+    images: [
+      {
+        url: DEFAULT_SOCIAL_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — Frontend Developer`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [DEFAULT_SOCIAL_IMAGE],
+    creator: "@itsrokyuddin",
+  },
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
     : {}),
@@ -73,12 +144,10 @@ export default function RootLayout({
             </Suspense> */}
           <Toaster />
         </ThemeProvider>
-        {/* Analytics: Google Analytics 4 only. The @next/third-parties
+        {/* Analytics: Google Analytics 4 only. The @next/third-parties/google
             <GoogleAnalytics> component loads gtag.js asynchronously (not
-            preloaded at high priority), so it doesn't steal the early
-            connection from the LCP hero image — see
-            docs/adr/0002-ga4-single-analytics. Cloudflare Web Analytics is
-            disabled in the Cloudflare dashboard (edge-injected, not repo code). */}
+            preloaded at high priority), so it does not steal the early
+            connection from the LCP hero image. */}
         {GOOGLE_ANALYTICS_ID && (
           <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
         )}
@@ -87,4 +156,3 @@ export default function RootLayout({
     </html>
   );
 }
-

@@ -71,7 +71,7 @@ export const PROFILE = {
     email: "rokyuddin.dev@gmail.com",
     socials: {
         github: "https://github.com/rokyuddin",
-        linkedin: "https://linkedin.com/in/rokyuddin",
+        linkedin: "https://linkedin.com/in/itsrokyuddin",
         portfolio: "#", // Placeholder
     },
 };
