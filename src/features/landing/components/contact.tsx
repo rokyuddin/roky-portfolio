@@ -124,6 +124,8 @@ export function Contact({ profile }: ContactProps) {
                     <Link
                         href={profile.socials?.github || "#"}
                         target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub profile"
                         className="text-muted-foreground hover:text-primary hover:scale-110 transition-colors duration-300 transform"
                     >
                         <Github size={24} />
@@ -131,6 +133,8 @@ export function Contact({ profile }: ContactProps) {
                     <Link
                         href={profile.socials?.linkedin || "#"}
                         target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn profile"
                         className="text-muted-foreground hover:text-primary hover:scale-110 transition-colors duration-300 transform"
                     >
                         <Linkedin size={24} />

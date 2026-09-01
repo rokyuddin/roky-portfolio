@@ -10,14 +10,13 @@ import {
   CachedExperience,
   CachedTestimonials,
   CachedContact,
+  getCachedProfile,
 } from "@/features/landing/cached-sections";
 import { SITE_URL, SITE_TITLE, socialMetadata } from "@/lib/site";
-import { client } from "@/sanity/lib/client";
-import { profileQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const profile = await client.fetch(profileQuery);
+  const profile = await getCachedProfile();
   const role = profile?.role || "Frontend Developer";
   const title = profile?.name ? `${profile.name} | ${role}` : SITE_TITLE;
   const description =

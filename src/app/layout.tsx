@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/organisms/theme-provider";
@@ -144,12 +144,25 @@ export default function RootLayout({
             </Suspense> */}
           <Toaster />
         </ThemeProvider>
-        {/* Analytics: Google Analytics 4 only. The @next/third-parties/google
-            <GoogleAnalytics> component loads gtag.js asynchronously (not
-            preloaded at high priority), so it does not steal the early
-            connection from the LCP hero image. */}
+        {/* Analytics: Google Analytics 4 only. Loads with the `lazyOnload`
+            strategy — after the window load event and browser idle — so gtag.js
+            (167 KiB, caused the two longest main-thread tasks in PageSpeed)
+            never competes with hydration or the LCP image. */}
         {GOOGLE_ANALYTICS_ID && (
-          <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+              strategy="lazyOnload"
+            />
+            <Script id="ga4-init" strategy="lazyOnload">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GOOGLE_ANALYTICS_ID}');
+              `}
+            </Script>
+          </>
         )}
         {/* </SmoothScroll> */}
       </body>

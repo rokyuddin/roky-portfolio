@@ -46,6 +46,7 @@ export function Projects({ projects }: ProjectsProps) {
                                                     src={urlFor(project.image).url()}
                                                     alt={project.image.alt || project.title}
                                                     fill
+                                                    sizes="96px"
                                                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                                                 />
                                             </button>

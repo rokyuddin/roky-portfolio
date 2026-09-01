@@ -26,23 +26,23 @@ export function Hero({ profile }: HeroProps) {
         >
             <div className="gap-12 grid grid-cols-1 lg:grid-cols-12 mx-auto w-full max-w-4xl">
                 <div className="flex flex-col justify-center lg:col-span-8">
-                    <p className="mb-6 font-mono text-muted-foreground text-sm tracking-widest animate-fade-in-up">
+                    <p className="mb-6 font-mono text-muted-foreground text-sm tracking-widest">
                         HELLO, I AM
                     </p>
-                    <h1 className="mb-8 font-serif font-medium text-primary text-5xl md:text-7xl lg:text-8xl sm:leading-[0.9] tracking-tight transition-colors animate-fade-in-up duration-500 delay-100">
+                    <h1 className="mb-8 font-serif font-medium text-primary text-5xl md:text-7xl lg:text-8xl sm:leading-[0.9] tracking-tight transition-colors duration-500">
                         {profile.name?.split(" ")[0]} <br />
                         <span className="font-light text-muted-foreground italic">
                             {profile.name?.split(" ").slice(1).join(" ")}
                         </span>
                     </h1>
-                    <p className="mb-10 max-w-2xl font-light text-muted-foreground text-xl md:text-2xl leading-relaxed transition-colors animate-fade-in-up duration-500 delay-200">
+                    <p className="mb-10 max-w-2xl font-light text-muted-foreground text-xl md:text-2xl leading-relaxed transition-colors duration-500">
                         A{" "}
                         <span className="font-normal text-primary">
                             {profile.role || "Frontend Developer"}
                         </span>{" "}
                         with <span className="font-normal text-primary">3+ years of experience</span> building fast, accessible interfaces with React, Next.js & TypeScript. Available for remote roles and client projects worldwide.
                     </p>
-                    <div className="flex sm:flex-row flex-col gap-4 animate-fade-in-up delay-300">
+                    <div className="flex sm:flex-row flex-col gap-4">
                         <Link
                             href="#projects"
                             onClick={(e) => handleScroll(e, "#projects")}
