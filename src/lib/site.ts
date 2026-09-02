@@ -62,7 +62,7 @@ export function socialMetadata(params: {
       type,
       url,
       locale: "en_US",
-      images: [image],
+      images: [{ ...image, width: 1200, height: 630 }],
       ...openGraphExtras,
     },
     twitter: {

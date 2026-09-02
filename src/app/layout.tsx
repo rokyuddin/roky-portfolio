@@ -118,6 +118,8 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         {/* Site-wide JSON-LD must be plain <script> elements rendered by this
             Server Component so it lands in static HTML. Using next/script
             <Script> (or RSC page elements) keeps it out of the served HTML —

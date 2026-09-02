@@ -25,7 +25,7 @@ describe("socialMetadata", () => {
       url: SITE_URL,
     });
     assert.equal(meta.openGraph.type, "website");
-    assert.deepEqual(meta.openGraph.images, [{ url: DEFAULT_SOCIAL_IMAGE }]);
+    assert.deepEqual(meta.openGraph.images, [{ url: DEFAULT_SOCIAL_IMAGE, width: 1200, height: 630 }]);
     assert.equal(meta.openGraph.siteName, SITE_NAME);
   });
 

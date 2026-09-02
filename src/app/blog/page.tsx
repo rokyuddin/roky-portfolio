@@ -58,6 +58,7 @@ export default async function BlogPage() {
 
             <section className="px-6 py-16">
                 <div className="mx-auto max-w-4xl">
+                    <h2 className="mb-8 font-serif text-2xl text-foreground">Frontend Articles &amp; Tutorials</h2>
                     <BlogList posts={posts} />
                 </div>
             </section>
