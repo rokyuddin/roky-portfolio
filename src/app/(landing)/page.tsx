@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
     : undefined;
 
   return {
-    title,
+    title: { absolute: title },
     description,
     ...socialMetadata({
       title,

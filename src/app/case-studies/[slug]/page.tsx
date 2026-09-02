@@ -15,7 +15,7 @@ import { SolutionSection } from "@/features/case-studies"
 import { FeaturesSection } from "@/features/case-studies"
 import { GallerySection } from "@/features/case-studies"
 import { fetchCaseStudyBySlug } from "@/features/case-studies/lib";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { SITE_DESCRIPTION, SITE_URL, socialMetadata } from "@/lib/site";
 import { articleJsonLd, breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
 // Generate metadata for SEO
@@ -31,8 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const title = caseStudy.seo?.title
-    ? `${caseStudy.seo.title} | ${SITE_NAME}`
-    : `${caseStudy.title} Frontend Case Study | ${SITE_NAME}`;
+    ? caseStudy.seo.title
+    : `${caseStudy.title} Frontend Case Study`;
   const description =
     caseStudy.seo?.description || caseStudy.overview.description || SITE_DESCRIPTION;
 

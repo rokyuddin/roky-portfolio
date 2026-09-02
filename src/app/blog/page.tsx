@@ -4,10 +4,10 @@ import { SiteFooter } from "@/components/organisms/site-footer";
 import { BlogHero } from "@/features/blogs/components/blog-hero";
 import { BlogList } from "@/features/blogs/components/blog-list";
 import { getAllPosts } from "@/features/blogs";
-import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { SITE_URL, socialMetadata } from "@/lib/site";
 import { collectionPageJsonLd, breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
-const BLOG_TITLE = `Blog | ${SITE_NAME}`;
+const BLOG_TITLE = "Blog";
 const BLOG_DESCRIPTION =
     "Practical frontend writing on React, Next.js, TypeScript, performance, and delivery: lessons from real projects and production work.";
 

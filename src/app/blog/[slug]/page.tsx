@@ -8,7 +8,7 @@ import { BlogHeader } from "@/features/blogs";
 import { BlogContent } from "@/features/blogs";
 import { ScrollProgress } from "@/components/atoms/scroll-progress";
 import { ArrowLeft } from "lucide-react";
-import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { SITE_URL, socialMetadata } from "@/lib/site";
 import { breadcrumbJsonLd, blogPostingJsonLd, jsonLd } from "@/lib/schema";
 import { getCaseStudyRefsBySlugs } from "@/features/case-studies/lib";
 
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const postUrl = `${SITE_URL}/blog/${post.slug}`;
-    const title = `${post.title} | ${SITE_NAME}`;
+    const title = post.title;
     const ogImage =
         post.coverImage && post.coverImage !== "/placeholder-blog.jpg"
             ? post.coverImage

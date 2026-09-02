@@ -3,10 +3,10 @@ import { Github, Linkedin, Mail, MapPin, Smartphone } from "lucide-react";
 import { Nav } from "@/components/organisms/nav";
 import { SiteFooter } from "@/components/organisms/site-footer";
 import { portfolioContext } from "@/lib/data/portfolio-context";
-import { SITE_URL, SITE_NAME, socialMetadata } from "@/lib/site";
+import { SITE_URL, socialMetadata } from "@/lib/site";
 import { breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
-const CONTACT_TITLE = `Contact | ${SITE_NAME}`;
+const CONTACT_TITLE = "Contact";
 const CONTACT_DESCRIPTION =
   "Contact Md Rokyuddin, a Frontend Developer specializing in React, Next.js, and TypeScript, for freelance projects or full-time roles.";
 

@@ -22,7 +22,7 @@ export function BlogContent({ content }: BlogContentProps) {
 
             // Convert markdown headings to HTML
             if (line.startsWith("# ")) {
-                return `<h1 class="mt-8 md:mt-12 mb-4 md:mb-6 font-serif font-bold text-foreground text-2xl sm:text-3xl md:text-4xl">${line.replace("# ", "")}</h1>`;
+                return `<h2 class="mt-8 md:mt-12 mb-4 md:mb-6 font-serif font-bold text-foreground text-2xl sm:text-3xl md:text-4xl">${line.replace("# ", "")}</h2>`;
             }
             if (line.startsWith("## ")) {
                 return `<h2 class="mt-6 md:mt-10 mb-3 md:mb-4 font-serif font-bold text-foreground text-xl sm:text-2xl md:text-3xl">${line.replace("## ", "")}</h2>`;

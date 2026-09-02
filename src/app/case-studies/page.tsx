@@ -4,10 +4,10 @@ import { CaseStudyCard } from "@/features/case-studies";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { fetchCaseStudies } from "@/features/case-studies/lib";
-import { SITE_NAME, SITE_URL, socialMetadata } from "@/lib/site";
+import { SITE_URL, socialMetadata } from "@/lib/site";
 import { collectionPageJsonLd, breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
-const CASE_STUDIES_TITLE = `Case Studies | ${SITE_NAME}`;
+const CASE_STUDIES_TITLE = "Case Studies";
 const CASE_STUDIES_DESCRIPTION =
   "Frontend case studies covering real React, Next.js, and TypeScript projects: the challenges, solutions, tech decisions, and results.";
 

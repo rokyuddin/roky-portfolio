@@ -3,10 +3,10 @@ import Link from "next/link";
 import { Nav } from "@/components/organisms/nav";
 import { SiteFooter } from "@/components/organisms/site-footer";
 import { portfolioContext } from "@/lib/data/portfolio-context";
-import { SITE_URL, SITE_NAME, socialMetadata } from "@/lib/site";
+import { SITE_URL, socialMetadata } from "@/lib/site";
 import { breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
-const ABOUT_TITLE = `About | ${SITE_NAME}`;
+const ABOUT_TITLE = "About";
 const ABOUT_DESCRIPTION =
   "Frontend Developer based in Bangladesh, available for remote roles worldwide. 3+ years of experience building production React, Next.js, and TypeScript applications. Currently a Frontend Developer L2, open to new opportunities and client projects.";
 
