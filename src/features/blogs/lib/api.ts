@@ -30,6 +30,15 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | undefined>
 }
 
 /**
+ * Get blog posts that reference a specific case study in their relatedCaseStudies field.
+ * Reuses the cached getAllPosts() — no new GROQ query needed for 3 posts.
+ */
+export async function getPostsByCaseStudySlug(slug: string): Promise<BlogPost[]> {
+    const posts = await getAllPosts();
+    return posts.filter((post) => post.relatedCaseStudies?.includes(slug));
+}
+
+/**
  * Helper to transform Sanity post to frontend BlogPost type
  */
 function transformPost(sanityPost: any): BlogPost {

@@ -4,11 +4,34 @@ import { Nav } from "@/components/organisms/nav";
 import { SiteFooter } from "@/components/organisms/site-footer";
 import { portfolioContext } from "@/lib/data/portfolio-context";
 import { SITE_URL, socialMetadata } from "@/lib/site";
-import { breadcrumbJsonLd, jsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, faqPageJsonLd, jsonLd } from "@/lib/schema";
 
 const ABOUT_TITLE = "About";
 const ABOUT_DESCRIPTION =
   "Frontend Developer based in Bangladesh, available for remote roles worldwide. 3+ years of experience building production React, Next.js, and TypeScript applications. Currently a Frontend Developer L2, open to new opportunities and client projects.";
+
+const FAQS = [
+  {
+    question: "What kind of projects do you take on?",
+    answer:
+      "Frontend development with React, Next.js, and TypeScript — from full-time roles to freelance client work. I build production web apps, not just landing pages.",
+  },
+  {
+    question: "Are you available for remote roles?",
+    answer:
+      "Yes. I'm based in Jashore, Bangladesh and available for remote positions worldwide. I'm comfortable overlapping with US, EU, and APAC time zones.",
+  },
+  {
+    question: "What's your typical response time?",
+    answer:
+      "Within 24–48 hours for new inquiries. For ongoing projects, I respond same-day during working hours.",
+  },
+  {
+    question: "Do you work with early-stage startups?",
+    answer:
+      "Yes. I have experience building products from scratch and am comfortable with ambiguity, rapid iteration, and wearing multiple hats.",
+  },
+];
 
 export const metadata: Metadata = {
   title: ABOUT_TITLE,
@@ -32,6 +55,10 @@ export default function AboutPage() {
           { name: "Home", url: SITE_URL },
           { name: "About", url: `${SITE_URL}/about` },
         ])) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(faqPageJsonLd(FAQS)) }}
       />
       <Nav />
 
@@ -135,6 +162,25 @@ export default function AboutPage() {
               >
                 {tech}
               </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="px-6 py-12 border-border border-t">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-8 font-serif text-primary text-3xl tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-8">
+            {FAQS.map(({ question, answer }) => (
+              <div key={question}>
+                <h3 className="mb-2 font-medium text-foreground">{question}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {answer}
+                </p>
+              </div>
             ))}
           </div>
         </div>

@@ -141,6 +141,18 @@ export function articleJsonLd(caseStudy: {
   };
 }
 
+export function faqPageJsonLd(faqs: Array<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  };
+}
+
 /** Render helper: serialize with JSON.stringify and minify safely for the DOM. */
 export function jsonLd(data: object) {
   return JSON.stringify(data).replace(/</g, "\\u003c");

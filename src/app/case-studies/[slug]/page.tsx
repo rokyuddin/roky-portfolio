@@ -15,6 +15,7 @@ import { SolutionSection } from "@/features/case-studies"
 import { FeaturesSection } from "@/features/case-studies"
 import { GallerySection } from "@/features/case-studies"
 import { fetchCaseStudyBySlug } from "@/features/case-studies/lib";
+import { getPostsByCaseStudySlug } from "@/features/blogs";
 import { SITE_DESCRIPTION, SITE_URL, socialMetadata } from "@/lib/site";
 import { articleJsonLd, breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
@@ -72,6 +73,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   if (!caseStudy) {
     notFound();
   }
+
+  const relatedPosts = await getPostsByCaseStudySlug(slug);
 
   return (
     <div className="bg-background selection:bg-primary min-h-screen font-sans text-foreground selection:text-primary-foreground transition-colors duration-500">
@@ -242,6 +245,42 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       {/* Gallery */}
       {caseStudy?.gallery.length > 0 && <GallerySection items={caseStudy?.gallery} />}
+
+      {/* Related Articles */}
+      {relatedPosts.length > 0 && (
+        <section className="px-6 py-16 border-border border-t">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="mb-6 font-serif text-primary text-3xl">Related Articles</h2>
+            <div className="space-y-4">
+              {relatedPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="block group"
+                >
+                  <h3 className="font-serif text-lg text-foreground group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
+                    <time>
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </time>
+                    <span>·</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="px-6 py-16 border-border border-t">
