@@ -37,10 +37,9 @@ const PAGE_DESCRIPTIONS: Record<string, string> = {
   "/blog": "Frontend articles on React, TypeScript, Next.js, and production web work.",
   "/case-studies": "Detailed project write-ups: challenges, solutions, and results.",
   "/contact": "Contact page — reach Md Rokyuddin directly.",
-  "/playground": "Interactive code playground for experimenting with frontend snippets.",
 };
 
-const KEY_PAGES = ["/", "/about", "/blog", "/case-studies", "/contact", "/playground"];
+const KEY_PAGES = ["/", "/about", "/blog", "/case-studies", "/contact"];
 
 function keyPagesSection(siteUrl: string): string {
   return KEY_PAGES.map(

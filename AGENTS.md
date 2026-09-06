@@ -12,9 +12,9 @@ Personal portfolio for **Md Rokyuddin** (frontend dev). Built with **Next.js 16 
 - Sanity CLI available (`sanity`), config in `sanity.config.ts` / `sanity.cli.ts`.
 
 ## Project layout
-- `src/app/` — App Router routes. Route groups/features: `(landing)/` (portfolio home), `blog/`, `case-studies/`, `playground/`, `api/`, and `sanity/[[...tool]]` (embedded Sanity Studio).
+- `src/app/` — App Router routes. Route groups/features: `(landing)/` (portfolio home), `blog/`, `case-studies/`, `api/`, and `sanity/[[...tool]]` (embedded Sanity Studio).
 - `src/components/` — **Atomic Design** layers: `atoms/` (base UI primitives), `molecules/` (composite), `organisms/` (self-contained sections like `nav.tsx`).
-- `src/features/` — **Feature-Sliced Design** per domain: `landing/`, `blogs/`, `case-studies/`, `playground/`. Each has `components/`, `lib/`, `types/`, `utils/`, re-exported via `index.ts`.
+- `src/features/` — **Feature-Sliced Design** per domain: `landing/`, `blogs/`, and `case-studies/`. Each has `components/`, `lib/`, `types/`, `utils/`, re-exported via `index.ts`.
 - `src/sanity/` — Sanity schemas (`schemaTypes/`), client (`lib/client.ts`), image helper (`lib/image.ts`), GROQ queries (`lib/queries.ts`).
 - `src/lib/utils.ts` — `cn()` helper (clsx + tailwind-merge) for combining classes.
 - `scripts/migrate-content.ts` — one-off Sanity content migration (reads `.env.local`, needs `SANITY_API_TOKEN`).
@@ -41,4 +41,4 @@ Personal portfolio for **Md Rokyuddin** (frontend dev). Built with **Next.js 16 
 - `.env.local` is gitignored and contains secrets (`SANITY_API_TOKEN`, `SANITY_REVALIDATE_SECRET`, `NEXT_PUBLIC_SANITY_*`, `VERCEL_OIDC_TOKEN`, `GROQ_API_KEY`). Never commit or echo it.
 - Case-study and blog data come from Sanity at runtime; the static `src/lib/data/portfolio-context.ts` holds legacy context data (some landing content may still reference it — check before assuming all data is CMS-driven).
 - Sanity schema/image changes require content migration (`scripts/migrate-content.ts`) and Sanity Studio is embedded at `/sanity`.
-- `src/app/api/chat` and `src/app/api/playground` use the Vercel AI SDK and external LLM keys (Groq/OpenAI/Google); API keys live in `.env.local`.
+- `src/app/api/chat` uses the Vercel AI SDK and external LLM keys (Groq/OpenAI/Google); API keys live in `.env.local`.

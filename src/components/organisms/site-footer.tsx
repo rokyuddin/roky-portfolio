@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, MapPin, Smartphone } from "lucide-react";
 
 /**
  * Persistent footer shown on every public page (landing, blog, case studies,
- * playground, about, contact). Gives content pages (which previously ended
+ * about, contact). Gives content pages (which previously ended
  * with no footer and a dead "Get in Touch" link) a stable way to reach contact
  * and socials. Static/self-contained — no Sanity dependency.
  */

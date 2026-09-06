@@ -1,0 +1,285 @@
+{
+  "summary": {
+    "health_score": 68,
+    "business_type": "Personal Portfolio / Developer Services",
+    "top_findings": [
+      "No JSON-LD structured data on any page (Person, BlogPosting, CreativeWork schemas missing)",
+      "Blog has only 3 thin articles from Nov 2024 — critically low content volume",
+      "No canonical tags detected — potential duplicate content between www and non-www",
+      "Blog titles contain '2024' but it's 2026 — signals stale content",
+      "Case study images have category labels as alt text instead of descriptive text"
+    ],
+    "quick_wins": [
+      "Add Person + WebSite JSON-LD schemas to homepage",
+      "Add canonical tags to every page",
+      "Update blog article titles to remove '2024'",
+      "Add /playground to sitemap",
+      "Fix image alt text on case study pages"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 72,
+      "what_works": [
+        "Valid XML sitemap with lastmod, changefreq, priority",
+        "robots.txt properly configured, blocks /sanity",
+        "Next.js 16 App Router — excellent SSR/ISR foundation",
+        "All internal links resolve without 404s"
+      ],
+      "findings": [
+        {
+          "title": "No canonical tags on any page",
+          "severity": "High",
+          "description": "Neither rokyuddin.com nor www.rokyuddin.com has canonical tags. Both domains may resolve, creating duplicate content.",
+          "recommendation": "Add <link rel='canonical'> to every page. Prefer https://www.rokyuddin.com as canonical."
+        },
+        {
+          "title": "Non-standard Host directive in robots.txt",
+          "severity": "Medium",
+          "description": "robots.txt uses Host: directive which is Bing-specific and not widely supported.",
+          "recommendation": "Remove Host: directive. Use proper 301 redirects and canonical tags instead."
+        },
+        {
+          "title": "Sitemap missing /playground page",
+          "severity": "Medium",
+          "description": "The /playground page exists but is not listed in the sitemap.",
+          "recommendation": "Add all indexable pages to the sitemap."
+        },
+        {
+          "title": "Stale lastmod dates on blog and case study sitemap entries",
+          "severity": "Low",
+          "description": "Blog and case study entries show lastmod of 2026-01-07/08, while homepage shows 2026-08-25.",
+          "recommendation": "Update lastmod dates when content is actually modified."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 65,
+      "what_works": [
+        "Clear personal branding and value proposition",
+        "Well-structured case studies with challenge-solution-results format",
+        "FAQ section on About page with hiring-focused questions",
+        "Strong E-E-A-T signals: real projects, named employers, specific technologies"
+      ],
+      "findings": [
+        {
+          "title": "Critically thin blog content — only 3 articles",
+          "severity": "Critical",
+          "description": "Only 3 blog articles exist, all from Nov 2024. No new content in nearly 2 years.",
+          "recommendation": "Publish 1-2 quality articles per month targeting long-tail frontend keywords."
+        },
+        {
+          "title": "Blog titles contain outdated year '2024'",
+          "severity": "High",
+          "description": "Titles like 'Modern Web Design Trends Shaping 2024' signal stale content to users and search engines.",
+          "recommendation": "Update titles to remove year-specific references or update to 2026."
+        },
+        {
+          "title": "Blog articles are thin and generic",
+          "severity": "High",
+          "description": "Each article is ~500-800 words with generic advice. Doesn't demonstrate depth of a 3+ year developer.",
+          "recommendation": "Rewrite with project-specific examples. Aim for 1500-3000 words per article."
+        },
+        {
+          "title": "Case study metrics lack verification",
+          "severity": "Medium",
+          "description": "Claims like '95+ Performance Score' and '92% Recommendation Accuracy' have no verifiable sources.",
+          "recommendation": "Add Lighthouse screenshots or analytics data to back up claims."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 70,
+      "what_works": [
+        "Clear H1 on homepage with descriptive subtitle",
+        "Consistent navigation across all pages",
+        "Good internal linking between case studies, blog, and homepage",
+        "Contact information prominent and crawlable"
+      ],
+      "findings": [
+        {
+          "title": "Meta titles and descriptions need verification",
+          "severity": "High",
+          "description": "Unable to fully verify SSR meta tags from fetch. Each page needs unique title and description.",
+          "recommendation": "Verify in browser DevTools. Use format: 'Md Rokyuddin | Frontend Developer — React, Next.js & TypeScript'"
+        },
+        {
+          "title": "Open Graph and Twitter Card meta tags may be missing",
+          "severity": "High",
+          "description": "Portfolio sites rely on social sharing. OG/Twitter tags need verification.",
+          "recommendation": "Add og:title, og:description, og:image, twitter:card to every page via Next.js metadata API."
+        },
+        {
+          "title": "Homepage H1 is just a name, not keyword-rich",
+          "severity": "Medium",
+          "description": "H1 is 'Md Rokyuddin' — a name, not a descriptive heading.",
+          "recommendation": "Consider 'Md Rokyuddin — Frontend Developer' as the H1."
+        },
+        {
+          "title": "Case study titles lack context",
+          "severity": "Medium",
+          "description": "Titles are just project names ('AltSEO', 'Rydr') without descriptive context.",
+          "recommendation": "Use: 'AltSEO — AI-Powered Alt Text Generator Case Study'"
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 45,
+      "what_works": [
+        "llms.txt file present and well-structured"
+      ],
+      "findings": [
+        {
+          "title": "No JSON-LD structured data on any page",
+          "severity": "Critical",
+          "description": "Zero structured data detected. No Person, WebSite, BlogPosting, or CreativeWork schemas.",
+          "recommendation": "Add Person schema to homepage, BlogPosting to articles, CreativeWork to case studies."
+        },
+        {
+          "title": "No Person schema for entity association",
+          "severity": "High",
+          "description": "Google cannot reliably associate the site with Md Rokyuddin as an entity.",
+          "recommendation": "Add Person schema with name, jobTitle, url, sameAs (GitHub, LinkedIn), knowsAbout."
+        },
+        {
+          "title": "No breadcrumb navigation or schema",
+          "severity": "Medium",
+          "description": "No breadcrumbs detected on case studies or blog posts.",
+          "recommendation": "Add BreadcrumbList schema with corresponding visual breadcrumbs."
+        }
+      ]
+    },
+    {
+      "name": "Performance",
+      "score": 80,
+      "what_works": [
+        "Next.js 16 with App Router — strong SSR/ISR foundation",
+        "Image optimization via next/image with Sanity CDN",
+        "Tailwind CSS 4 with CSS variables — efficient styling",
+        "Cache Components with tag-based revalidation"
+      ],
+      "findings": [
+        {
+          "title": "Unable to obtain real CWV data",
+          "severity": "Medium",
+          "description": "PageSpeed Insights API quota exceeded. Lab-only estimates available.",
+          "recommendation": "Run PageSpeed Insights manually. Target: 90+ mobile, 95+ desktop."
+        },
+        {
+          "title": "Framer Motion bundle size",
+          "severity": "Low",
+          "description": "Framer Motion (~40KB gzipped) may be overkill for simple animations.",
+          "recommendation": "Audit motion usage. Replace simple animations with CSS where possible."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 82,
+      "what_works": [
+        "llms.txt file present — ahead of most portfolio sites",
+        "Well-structured: author info, key pages, contact, technology stack",
+        "Server-rendered (Next.js SSR) — easily crawlable by LLMs",
+        "GitHub profile links back to portfolio"
+      ],
+      "findings": [
+        {
+          "title": "llms.txt missing blog summaries and case study results",
+          "severity": "Medium",
+          "description": "AI systems use blog summaries and project results to generate citations.",
+          "recommendation": "Add blog section with one-line summaries and case study section with results."
+        },
+        {
+          "title": "No llms-full.txt extended document",
+          "severity": "Medium",
+          "description": "Some AI crawlers look for an extended llms-full.txt document.",
+          "recommendation": "Create llms-full.txt with full content summaries and detailed project descriptions."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 60,
+      "what_works": [
+        "Next.js Image component for optimization",
+        "Sanity CDN for image delivery",
+        "Remote patterns properly configured in next.config.ts"
+      ],
+      "findings": [
+        {
+          "title": "Case study images have non-descriptive alt text",
+          "severity": "High",
+          "description": "Alt text is category labels ('Image Alt text generator', 'HealthTech & Personalization') instead of descriptive text.",
+          "recommendation": "Use descriptive alt text: 'AltSEO platform screenshot showing AI-generated alt text results'"
+        },
+        {
+          "title": "OG/social images need verification",
+          "severity": "Medium",
+          "description": "Portfolio sites benefit from shareable preview images. Custom OG images may be missing.",
+          "recommendation": "Create page-specific OG images for homepage, blog articles, and case studies."
+        },
+        {
+          "title": "Sanity image sizing needs verification",
+          "severity": "Low",
+          "description": "Images served via cdn.sanity.io may not be properly sized.",
+          "recommendation": "Verify Sanity image pipeline uses auto=format and appropriate dimensions."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Add JSON-LD Person schema to homepage",
+          "Add canonical tags to every page",
+          "Set up non-www to www 301 redirect",
+          "Add WebSite schema to homepage"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Update blog titles to remove '2024'",
+          "Add Open Graph and Twitter Card meta tags",
+          "Improve case study image alt text",
+          "Add /playground to sitemap",
+          "Verify and enhance meta descriptions"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Expand blog to 10+ articles with project-specific content",
+          "Add client testimonials section",
+          "Create custom OG images",
+          "Add breadcrumb navigation and schema",
+          "Enhance contact page with form and availability"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Publish 1-2 blog articles per month",
+          "Create llms-full.txt",
+          "Build topical clusters with tag pages",
+          "Set up Google Search Console monitoring",
+          "Track keyword rankings and CWV"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

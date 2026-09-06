@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   category: "technology",
 
   // Allow all crawlers by default; individual pages tighten via their own
-  // metadata export (e.g. robots: { index: false } on /playground).
+  // metadata exports when needed.
   robots: {
     index: true,
     follow: true,

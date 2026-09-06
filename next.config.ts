@@ -27,6 +27,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/playground',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [{
       source: '/(.*)',

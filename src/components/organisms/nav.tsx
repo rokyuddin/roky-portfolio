@@ -80,8 +80,7 @@ const NestedMenu = ({ pathname }: { pathname: string }) => {
     };
 
     const isActive = pathname.startsWith("/case-studies") ||
-        pathname.startsWith("/blog") ||
-        pathname.startsWith("/playground");
+        pathname.startsWith("/blog");
 
     return (
         <div
@@ -127,16 +126,6 @@ const NestedMenu = ({ pathname }: { pathname: string }) => {
                             }`}
                     >
                         Blog
-                    </Link>
-                    <Link
-                        href="/playground"
-                        className={`block px-4 py-2.5 text-sm transition-colors flex items-center justify-between ${pathname.startsWith("/playground")
-                            ? "text-primary bg-primary/10"
-                            : "text-muted-foreground hover:text-primary hover:bg-muted/50"
-                            }`}
-                    >
-                        Playground
-                        <span className="flex bg-primary rounded-full w-1.5 h-1.5 animate-pulse"></span>
                     </Link>
                 </div>
             </div>
@@ -186,17 +175,6 @@ const MobileNestedMenu = ({ pathname, closeMobileMenu }: { pathname: string; clo
                             }`}
                     >
                         Blog
-                    </Link>
-                    <Link
-                        href="/playground"
-                        onClick={closeMobileMenu}
-                        className={`text-sm transition-colors flex items-center gap-1 ${pathname.startsWith("/playground")
-                            ? "text-primary"
-                            : "text-muted-foreground hover:text-primary"
-                            }`}
-                    >
-                        Playground
-                        <span className="flex bg-primary rounded-full w-1.5 h-1.5 animate-pulse"></span>
                     </Link>
                 </div>
             </div>

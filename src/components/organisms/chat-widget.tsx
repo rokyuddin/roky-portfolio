@@ -8,24 +8,17 @@ import { ChatMessage } from "./chat-message";
 import { ChatInput } from "./chat-input";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const pathaname = usePathname()
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
-
-  if (pathaname === "/playground") {
-    return null;
-  }
 
   return (
     <div className="right-10 bottom-20 z-50 fixed flex flex-col items-end gap-4">

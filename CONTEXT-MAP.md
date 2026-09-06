@@ -8,7 +8,6 @@ A starting map for navigating Roky Portfolio. Update this when a structural chan
 | Landing feature | Portfolio home-page feature code | `src/features/landing/`, `src/app/(landing)/` |
 | Blog feature | Blog listing and detail presentation | `src/features/blogs/`, `src/app/blog/` |
 | Case-study feature | Case-study listing and detail presentation | `src/features/case-studies/`, `src/app/case-studies/` |
-| Playground feature | Interactive playground UI and logic | `src/features/playground/`, `src/app/playground/`, `src/app/api/playground/` |
 | Shared UI | Atomic and composite UI components | `src/components/atoms/`, `src/components/molecules/`, `src/components/organisms/` |
 | Sanity integration | Schemas, typed GROQ queries, client, and image URL helpers | `src/sanity/` |
 | Shared utilities | Framework-independent shared helpers and legacy context data | `src/lib/` |
