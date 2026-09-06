@@ -13,7 +13,7 @@ import {
   GOOGLE_ANALYTICS_ID,
   GOOGLE_SITE_VERIFICATION,
 } from "@/lib/site";
-import { personJsonLd, websiteJsonLd, jsonLd } from "@/lib/schema";
+import { personJsonLd, websiteJsonLd, organizationJsonLd, jsonLd } from "@/lib/schema";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -127,6 +127,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(personJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(organizationJsonLd()) }}
         />
         <script
           type="application/ld+json"

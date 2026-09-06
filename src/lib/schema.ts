@@ -35,6 +35,33 @@ export function personJsonLd(image?: string) {
       "https://github.com/rokyuddin",
       "https://linkedin.com/in/itsrokyuddin",
     ],
+    worksFor: { "@id": `${SITE_URL}/#organization` },
+  };
+}
+
+export function organizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    url: SITE_URL,
+    email: "rokyuddin.dev@gmail.com",
+    sameAs: [
+      "https://github.com/rokyuddin",
+      "https://linkedin.com/in/itsrokyuddin",
+    ],
+  };
+}
+
+export function profilePageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/about#profile-page`,
+    url: `${SITE_URL}/about`,
+    // Reference the canonical Person entity by @id rather than duplicating it.
+    mainEntity: { "@id": `${SITE_URL}/#person` },
   };
 }
 
@@ -120,6 +147,7 @@ export function articleJsonLd(caseStudy: {
   description?: string;
   category?: string;
   heroImage?: string;
+  publishedDate?: string;
   updatedAt?: string;
 }) {
   const url = `${SITE_URL}/case-studies/${caseStudy.slug}`;
@@ -133,7 +161,9 @@ export function articleJsonLd(caseStudy: {
     name: caseStudy.title,
     ...(caseStudy.subtitle ? { alternativeHeadline: caseStudy.subtitle } : {}),
     ...(caseStudy.description ? { description: caseStudy.description } : {}),
-    ...(caseStudy.updatedAt ? { dateModified: caseStudy.updatedAt } : {}),
+    // Always emit both dates. Chain: publishedDate → updatedAt → build-time fallback.
+    datePublished: caseStudy.publishedDate ?? caseStudy.updatedAt ?? new Date().toISOString(),
+    dateModified: caseStudy.updatedAt ?? caseStudy.publishedDate ?? new Date().toISOString(),
     author: { "@id": `${SITE_URL}/#person` },
     publisher: { "@id": `${SITE_URL}/#person` },
     ...(caseStudy.category ? { articleSection: caseStudy.category } : {}),

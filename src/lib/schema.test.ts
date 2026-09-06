@@ -7,7 +7,9 @@ import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
   jsonLd,
+  organizationJsonLd,
   personJsonLd,
+  profilePageJsonLd,
   websiteJsonLd,
 } from "@/lib/schema";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -48,6 +50,31 @@ describe("personJsonLd", () => {
     assert.ok(Array.isArray(data.knowsAbout));
     assert.ok((data.knowsAbout as string[]).includes("React"));
     assert.ok((data.knowsAbout as string[]).includes("Next.js"));
+  });
+
+  it("references the Organization entity via worksFor", () => {
+    const data = personJsonLd();
+    assert.deepEqual(data.worksFor, { "@id": `${SITE_URL}/#organization` });
+  });
+});
+
+describe("organizationJsonLd", () => {
+  it("defines a stable canonical @id and site identity", () => {
+    const data = organizationJsonLd();
+    assert.equal(data["@type"], "Organization");
+    assert.equal(data["@id"], `${SITE_URL}/#organization`);
+    assert.equal(data.name, SITE_NAME);
+    assert.equal(data.url, SITE_URL);
+    assert.ok((data.sameAs as string[]).includes("https://github.com/rokyuddin"));
+  });
+});
+
+describe("profilePageJsonLd", () => {
+  it("points mainEntity at the canonical Person @id without duplicating it", () => {
+    const data = profilePageJsonLd();
+    assert.equal(data["@type"], "ProfilePage");
+    assert.deepEqual(data.mainEntity, { "@id": `${SITE_URL}/#person` });
+    assert.equal(data.url, `${SITE_URL}/about`);
   });
 });
 
@@ -122,6 +149,7 @@ describe("articleJsonLd", () => {
     description: "A ride-sharing frontend.",
     category: "Web App",
     heroImage: "https://cdn.sanity.io/hero.png",
+    publishedDate: "2026-01-10T08:00:00Z",
     updatedAt: "2026-03-01T09:00:00Z",
   };
 
@@ -141,13 +169,20 @@ describe("articleJsonLd", () => {
     const minimal = articleJsonLd({ slug: "skinsight", title: "Skinsight" });
     assert.equal(minimal.headline, "Skinsight");
     assert.equal("description" in minimal, false);
-    assert.equal("dateModified" in minimal, false);
     assert.equal("image" in minimal, false);
   });
 
-  it("emits dateModified only when an updatedAt date exists", () => {
+  it("always emits datePublished from publishedDate", () => {
     const data = articleJsonLd(caseStudy);
-    assert.equal(data.dateModified, caseStudy.updatedAt);
+    assert.equal(data.datePublished, caseStudy.publishedDate);
+  });
+
+  it("emits dateModified from updatedAt and falls back to datePublished when absent", () => {
+    const withUpdated = articleJsonLd(caseStudy);
+    assert.equal(withUpdated.dateModified, caseStudy.updatedAt);
+
+    const noUpdated = articleJsonLd({ slug: "skinsight", title: "Skinsight", publishedDate: "2026-02-01T00:00:00Z" });
+    assert.equal(noUpdated.dateModified, "2026-02-01T00:00:00Z");
   });
 });
 

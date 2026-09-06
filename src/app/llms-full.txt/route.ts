@@ -1,15 +1,11 @@
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "@/lib/site";
-import { buildLlmsTxt } from "@/lib/llms";
+import { buildLlmsFullTxt } from "@/lib/llms";
 import { getAllPosts } from "@/features/blogs";
 import { fetchCaseStudies } from "@/features/case-studies/lib";
 
 /**
- * llms.txt — a machine-readable summary for LLM crawlers (ChatGPT, Perplexity,
- * Bing Copilot, etc.) to accurately represent this site.
- * Spec: https://llmstxt.org/
- *
- * Content is generated from the same data the site fetches, so it can never
- * drift from what the pages actually say.
+ * llms-full.txt — long-form content summary for LLM crawlers, per
+ * https://llmstxt.org/. Complements llms.txt with deeper per-resource details.
  */
 export async function GET() {
   const [posts, caseStudies] = await Promise.all([
@@ -17,7 +13,7 @@ export async function GET() {
     fetchCaseStudies(),
   ]);
 
-  const body = buildLlmsTxt({
+  const body = buildLlmsFullTxt({
     siteName: SITE_NAME,
     siteUrl: SITE_URL,
     description: SITE_DESCRIPTION,

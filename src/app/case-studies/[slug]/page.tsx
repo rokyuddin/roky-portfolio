@@ -90,6 +90,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 caseStudy.seo?.description || caseStudy.overview.description,
               category: caseStudy.category,
               heroImage: caseStudy.heroImage || undefined,
+              publishedDate: caseStudy.publishedDate,
               updatedAt: caseStudy.updatedAt,
             }),
           ),

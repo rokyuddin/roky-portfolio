@@ -52,5 +52,6 @@ export interface CaseStudy {
         title?: string;
         description?: string;
     };
+    publishedDate?: string;
     updatedAt?: string;
 }

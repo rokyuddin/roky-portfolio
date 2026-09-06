@@ -68,6 +68,7 @@ function transformCaseStudy(sanityStudy: any): CaseStudy {
             caption: item.caption
         })),
         relatedProjects: sanityStudy.relatedProjects || [],
+        publishedDate: sanityStudy._createdAt,
         updatedAt: sanityStudy._updatedAt,
     };
 }
