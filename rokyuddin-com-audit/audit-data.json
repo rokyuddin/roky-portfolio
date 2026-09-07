@@ -1,0 +1,309 @@
+{
+  "summary": {
+    "health_score": 68,
+    "business_type": "Personal Portfolio / Freelance Developer",
+    "top_findings": [
+      "Title tag duplication on all 11 pages — site name appended twice via template + per-page title",
+      "Duplicate H1 tags on all 3 blog posts — BlogHeader and BlogContent both render h1",
+      "Missing security headers — no CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy",
+      "Thin blog content — 271-310 words per post, well below 600+ word SEO minimum",
+      "No llms.txt file for AI crawler guidance"
+    ],
+    "quick_wins": [
+      "Fix title template — remove | SITE_NAME from per-page title strings (15 min)",
+      "Fix duplicate H1 — change # rendering from h1 to h2 in BlogContent (10 min)",
+      "Add security headers in next.config.ts (15 min)",
+      "Create /public/llms.txt (10 min)",
+      "Add preconnect to cdn.sanity.io and googletagmanager.com (5 min)"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 72,
+      "what_works": [
+        "Clean URL structure with no query params or trailing slashes",
+        "Bare domain 308-redirects to www subdomain",
+        "robots.txt allows all crawlers, blocks /sanity, declares sitemap",
+        "XML sitemap lists all 11 pages with lastmod, changefreq, priority",
+        "All 11 sitemap URLs return HTTP 200",
+        "HTTPS enforced with HSTS max-age=63072000",
+        "Vercel + Cloudflare CDN with prerendered HTML",
+        "404 returns correct HTTP 404 status",
+        "Google Analytics uses lazyOnload strategy"
+      ],
+      "findings": [
+        {
+          "title": "Missing Security Headers",
+          "severity": "High",
+          "description": "No Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, or Permissions-Policy headers. Only HSTS is present.",
+          "recommendation": "Add headers() function to next.config.ts with all standard security headers."
+        },
+        {
+          "title": "No llms.txt",
+          "severity": "Medium",
+          "description": "GET /llms.txt returns 404. AI crawlers have no structured guidance.",
+          "recommendation": "Create /public/llms.txt with site summary and key page URLs."
+        },
+        {
+          "title": "Static Asset Caching Suboptimal",
+          "severity": "Medium",
+          "description": "Next.js static chunks cached for only 4 hours (max-age=14400) instead of immutable with long max-age.",
+          "recommendation": "Set longer cache-control for /_next/static/* in next.config.ts."
+        },
+        {
+          "title": "No Preconnect/DNS-prefetch",
+          "severity": "Low",
+          "description": "No preconnect for cdn.sanity.io or googletagmanager.com.",
+          "recommendation": "Add link rel=preconnect tags to layout.tsx."
+        },
+        {
+          "title": "No .well-known/security.txt",
+          "severity": "Low",
+          "description": "GET /.well-known/security.txt returns 404.",
+          "recommendation": "Create /public/.well-known/security.txt with contact info."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 55,
+      "what_works": [
+        "Homepage copy is clear and well-structured (481 words)",
+        "Case study pages are detailed with project context",
+        "Meta descriptions are unique per page and descriptive",
+        "Author E-E-A-T signals present via Person schema"
+      ],
+      "findings": [
+        {
+          "title": "Blog Posts Are Thin Content",
+          "severity": "High",
+          "description": "Word counts: 310, 273, 271. Well below 600+ word minimum. Posts are listicles with 3-4 sections and no code examples.",
+          "recommendation": "Expand each post to 800-1200+ words with code examples, real-world case study references, and practical how-to sections."
+        },
+        {
+          "title": "Contact Page Very Thin",
+          "severity": "Medium",
+          "description": "94 words, 0 H2 tags, no FAQ, no structured content.",
+          "recommendation": "Add H2 section, service description, response time, FAQ section. Target 300+ words."
+        },
+        {
+          "title": "Blog Listing Has No H2",
+          "severity": "Medium",
+          "description": "Blog listing page has 0 H2 tags and 3 H3 tags. Flat heading hierarchy.",
+          "recommendation": "Add an H2 like 'Frontend Articles & Tutorials' before the article cards."
+        },
+        {
+          "title": "No FAQ Section or FAQPage Schema",
+          "severity": "Low",
+          "description": "No FAQ content on any page, no FAQPage JSON-LD.",
+          "recommendation": "Add FAQ section to About or Contact page with FAQPage schema."
+        },
+        {
+          "title": "Blog Content Not Fresh",
+          "severity": "Low",
+          "description": "Blog dates are Nov 2024. No recent posts.",
+          "recommendation": "Publish new content regularly or update existing posts with new insights."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 68,
+      "what_works": [
+        "Single H1 on most pages",
+        "Meta descriptions present and unique on all 11 pages",
+        "Canonical tags correctly set on all pages",
+        "robots: index, follow on all indexable pages",
+        "Viewport and charset tags correct",
+        "Clean heading hierarchy on homepage"
+      ],
+      "findings": [
+        {
+          "title": "Title Tag Duplication on ALL Pages",
+          "severity": "Critical",
+          "description": "Every page title contains the site name twice. Per-page titles include '| Md Rokyuddin' and the layout template '%s | Md Rokyuddin' adds it again.",
+          "recommendation": "Remove '| ${SITE_NAME}' from per-page title strings. The template already handles it."
+        },
+        {
+          "title": "Duplicate H1 Tags on All Blog Posts",
+          "severity": "High",
+          "description": "All 3 blog posts have 2 identical h1 tags. BlogHeader renders h1 and BlogContent converts # markdown to h1.",
+          "recommendation": "Change BlogContent # rendering from h1 to h2, or strip first # heading if it matches the title."
+        },
+        {
+          "title": "OG Images Not Unique",
+          "severity": "Medium",
+          "description": "Blog posts and most pages use generic /twitter-image as OG image. Only homepage and case studies with cover images have unique images.",
+          "recommendation": "Generate unique OG images per blog post or use cover images."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 85,
+      "what_works": [
+        "Person schema on all pages with knowsAbout and sameAs",
+        "WebSite schema on all pages",
+        "BreadcrumbList schema on all subpages with correct hierarchy",
+        "BlogPosting schema with dates, author, publisher, keywords",
+        "CollectionPage schema with ItemList on listing pages",
+        "Article schema on case study pages",
+        "Correct @context, @type, @id usage throughout"
+      ],
+      "findings": [
+        {
+          "title": "Person Schema Missing Fields",
+          "severity": "Low",
+          "description": "Missing image, worksFor, alumniOf, award fields.",
+          "recommendation": "Add image (profile photo URL from Sanity) and worksFor fields."
+        },
+        {
+          "title": "BlogPosting Missing image Field",
+          "severity": "Low",
+          "description": "BlogPosting schema lacks image field. Google recommends image for Article rich results.",
+          "recommendation": "Add image field to BlogPosting JSON-LD."
+        },
+        {
+          "title": "No FAQPage Schema",
+          "severity": "Low",
+          "description": "No FAQPage schema on any page.",
+          "recommendation": "Add FAQPage JSON-LD to About or Contact page."
+        },
+        {
+          "title": "WebSite Schema Missing SearchAction",
+          "severity": "Low",
+          "description": "WebSite schema lacks potentialAction for Sitelinks Search Box.",
+          "recommendation": "Add potentialAction with SearchAction if site gets search."
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 70,
+      "what_works": [
+        "Next.js SSR/SSG with prerendered HTML",
+        "Vercel CDN with cache HIT",
+        "Google Analytics uses lazyOnload strategy",
+        "Font preloading via Next.js font optimization",
+        "Cloudflare HTTP/2 + HSTS"
+      ],
+      "findings": [
+        {
+          "title": "15 External Scripts + 42 Inline Scripts",
+          "severity": "Medium",
+          "description": "Homepage loads 15 external JS files and 42 inline script blocks (41.5KB). Only 1 preload directive.",
+          "recommendation": "Audit Next.js chunk strategy. Consider dynamic imports for below-the-fold components."
+        },
+        {
+          "title": "Homepage HTML is 104KB",
+          "severity": "Low",
+          "description": "Raw HTML response is 104,289 bytes due to Next.js RSC payload and hydration data.",
+          "recommendation": "Typical for Next.js App Router. Monitor LCP in the field."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 55,
+      "what_works": [
+        "Clean semantic HTML structure",
+        "Server-rendered HTML (no SPA hydration required for content)",
+        "Person schema provides strong author/entity signals",
+        "Site is fully crawlable"
+      ],
+      "findings": [
+        {
+          "title": "No llms.txt",
+          "severity": "Medium",
+          "description": "/llms.txt returns 404. AI crawlers have no structured guidance.",
+          "recommendation": "Create /public/llms.txt with site summary and key page URLs."
+        },
+        {
+          "title": "Thin Content Limits AI Citability",
+          "severity": "Medium",
+          "description": "Blog posts (271-310 words) lack depth for AI systems to extract and cite.",
+          "recommendation": "Expand content with specific, citable information: code snippets, metrics, unique insights."
+        },
+        {
+          "title": "No HowTo or FAQPage Schema",
+          "severity": "Low",
+          "description": "Missing schema types that AI systems prefer for extraction.",
+          "recommendation": "Add FAQPage and HowTo schema where applicable."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 90,
+      "what_works": [
+        "All 13 images on homepage have alt text",
+        "All images on case study pages have alt text",
+        "Next.js Image component used for Sanity images",
+        "Only cdn.sanity.io whitelisted (good security)",
+        "OG image has proper dimensions on homepage"
+      ],
+      "findings": [
+        {
+          "title": "OG Image Missing Dimensions on Subpages",
+          "severity": "Low",
+          "description": "OG image on About, Contact, Blog, Case Studies pages lacks width/height.",
+          "recommendation": "Add width: 1200, height: 630 to socialMetadata() image config."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Fix title tag duplication — remove | SITE_NAME from per-page title strings (15 min)",
+          "Fix duplicate H1 on blog posts — change # rendering from h1 to h2 in BlogContent (10 min)",
+          "Add security headers in next.config.ts (15 min)"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Create /public/llms.txt (10 min)",
+          "Add preconnect tags to layout.tsx (5 min)",
+          "Expand blog posts to 800-1200+ words (3-5 hrs)",
+          "Enrich contact page with H2 and FAQ (30 min)",
+          "Add H2 to blog listing page (15 min)",
+          "Add OG image dimensions to socialMetadata() (5 min)",
+          "Add image to BlogPosting schema (10 min)",
+          "Add image to Person schema (10 min)"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Publish 1-2 new blog posts per month",
+          "Add FAQPage schema",
+          "Create .well-known/security.txt",
+          "Add related blog posts to case study pages",
+          "Submit sitemap to Google Search Console"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Monitor GSC for indexation, clicks, CTR",
+          "Track Core Web Vitals via CrUX",
+          "Publish content calendar",
+          "Validate JSON-LD quarterly",
+          "Monitor keyword rankings"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
-import { ChevronDown } from "lucide-react";
 
 const NavItem = ({
     href,
@@ -56,129 +55,6 @@ const NavItem = ({
         >
             {label}
         </Link>
-    );
-};
-
-// Nested Menu Component
-const NestedMenu = ({ pathname }: { pathname: string }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-
-    const handleMouseEnter = () => {
-        if (timeoutId) {
-            clearTimeout(timeoutId);
-            setTimeoutId(null);
-        }
-        setIsOpen(true);
-    };
-
-    const handleMouseLeave = () => {
-        const id = setTimeout(() => {
-            setIsOpen(false);
-        }, 150);
-        setTimeoutId(id);
-    };
-
-    const isActive = pathname.startsWith("/case-studies") ||
-        pathname.startsWith("/blog");
-
-    return (
-        <div
-            className="relative"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
-            <button
-                className={`text-sm uppercase tracking-widest transition-all duration-300 flex items-center gap-1 ${isActive
-                    ? "text-primary border-b border-primary pb-1"
-                    : "text-muted-foreground hover:text-primary"
-                    }`}
-            >
-                Explore
-                <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-                />
-            </button>
-
-            {/* Dropdown Menu */}
-            <div
-                className={`absolute top-full left-0 mt-2 w-48 bg-background border border-border rounded-md shadow-lg overflow-hidden transition-all duration-300 origin-top ${isOpen
-                    ? "opacity-100 scale-y-100 translate-y-0"
-                    : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none"
-                    }`}
-            >
-                <div className="py-2">
-                    <Link
-                        href="/case-studies"
-                        className={`block px-4 py-2.5 text-sm transition-colors ${pathname.startsWith("/case-studies")
-                            ? "text-primary bg-primary/10"
-                            : "text-muted-foreground hover:text-primary hover:bg-muted/50"
-                            }`}
-                    >
-                        Case Studies
-                    </Link>
-                    <Link
-                        href="/blog"
-                        className={`block px-4 py-2.5 text-sm transition-colors ${pathname.startsWith("/blog")
-                            ? "text-primary bg-primary/10"
-                            : "text-muted-foreground hover:text-primary hover:bg-muted/50"
-                            }`}
-                    >
-                        Blog
-                    </Link>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-// Mobile Nested Menu Component
-const MobileNestedMenu = ({ pathname, closeMobileMenu }: { pathname: string; closeMobileMenu: () => void }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
-
-    return (
-        <div>
-            <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="flex items-center gap-1 w-full text-muted-foreground hover:text-primary text-sm uppercase tracking-widest transition-all duration-300"
-            >
-                Explore
-                <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
-                />
-            </button>
-
-            {/* Expandable Menu Items */}
-            <div
-                className={`overflow-hidden transition-all duration-300 ${isExpanded ? "max-h-40 mt-4" : "max-h-0"
-                    }`}
-            >
-                <div className="flex flex-col gap-3 pl-4 border-border border-l-2">
-                    <Link
-                        href="/case-studies"
-                        onClick={closeMobileMenu}
-                        className={`text-sm transition-colors ${pathname.startsWith("/case-studies")
-                            ? "text-primary"
-                            : "text-muted-foreground hover:text-primary"
-                            }`}
-                    >
-                        Case Studies
-                    </Link>
-                    <Link
-                        href="/blog"
-                        onClick={closeMobileMenu}
-                        className={`text-sm transition-colors ${pathname.startsWith("/blog")
-                            ? "text-primary"
-                            : "text-muted-foreground hover:text-primary"
-                            }`}
-                    >
-                        Blog
-                    </Link>
-                </div>
-            </div>
-        </div>
     );
 };
 
@@ -292,7 +168,24 @@ export function Nav() {
                                 label="Projects"
                                 active={activeSection === "projects"}
                             />
-                            <NestedMenu pathname={pathname} />
+                            <Link
+                                href="/case-studies"
+                                className={`text-sm uppercase tracking-widest transition-all duration-300 ${pathname.startsWith("/case-studies")
+                                    ? "text-primary border-b border-primary pb-1"
+                                    : "text-muted-foreground hover:text-primary"
+                                    }`}
+                            >
+                                Case Studies
+                            </Link>
+                            <Link
+                                href="/blog"
+                                className={`text-sm uppercase tracking-widest transition-all duration-300 ${pathname.startsWith("/blog")
+                                    ? "text-primary border-b border-primary pb-1"
+                                    : "text-muted-foreground hover:text-primary"
+                                    }`}
+                            >
+                                Blog
+                            </Link>
                             <NavItem
                                 href="#contact"
                                 label="Connect"
@@ -384,7 +277,28 @@ export function Nav() {
                                 active={activeSection === "projects"}
                             />
                         </div>
-                        <MobileNestedMenu pathname={pathname} closeMobileMenu={closeMobileMenu} />
+                        <div onClick={closeMobileMenu}>
+                            <Link
+                                href="/case-studies"
+                                className={`text-sm uppercase tracking-widest transition-all duration-300 ${pathname.startsWith("/case-studies")
+                                    ? "text-primary border-b border-primary pb-1"
+                                    : "text-muted-foreground hover:text-primary"
+                                    }`}
+                            >
+                                Case Studies
+                            </Link>
+                        </div>
+                        <div onClick={closeMobileMenu}>
+                            <Link
+                                href="/blog"
+                                className={`text-sm uppercase tracking-widest transition-all duration-300 ${pathname.startsWith("/blog")
+                                    ? "text-primary border-b border-primary pb-1"
+                                    : "text-muted-foreground hover:text-primary"
+                                    }`}
+                            >
+                                Blog
+                            </Link>
+                        </div>
                         <div onClick={closeMobileMenu}>
                             <NavItem
                                 href="#contact"

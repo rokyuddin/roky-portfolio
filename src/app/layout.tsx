@@ -124,15 +124,18 @@ export default function RootLayout({
             Server Component so it lands in static HTML. Using next/script
             <Script> (or RSC page elements) keeps it out of the served HTML —
             it only materialises client-side and is invisible to crawlers. */}
-        <script
+        <Script
+          id="person-jsonld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(personJsonLd()) }}
         />
-        <script
+        <Script
+          id="organization-jsonld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(organizationJsonLd()) }}
         />
-        <script
+        <Script
+          id="website-jsonld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd()) }}
         />
