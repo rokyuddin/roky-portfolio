@@ -10,6 +10,7 @@ import {
   organizationJsonLd,
   personJsonLd,
   profilePageJsonLd,
+  serviceJsonLd,
   websiteJsonLd,
 } from "@/lib/schema";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -208,6 +209,33 @@ describe("collectionPageJsonLd", () => {
       items: [],
     });
     assert.equal("mainEntity" in data, false);
+    assert.equal("description" in data, false);
+  });
+});
+
+describe("serviceJsonLd", () => {
+  it("references the Person provider and keeps the canonical service URL", () => {
+    const data = serviceJsonLd({
+      name: "Custom Ecommerce Development Services",
+      url: `${SITE_URL}/services`,
+      description: "Custom ecommerce storefronts built with Next.js.",
+      serviceType: "Ecommerce Development",
+      areaServed: "Bangladesh",
+    });
+    assert.equal(data["@type"], "Service");
+    assert.equal(data.name, "Custom Ecommerce Development Services");
+    assert.equal(data.url, `${SITE_URL}/services`);
+    assert.equal(data.serviceType, "Ecommerce Development");
+    assert.equal(data.areaServed, "Bangladesh");
+    assert.deepEqual(data.provider, { "@id": `${SITE_URL}/#person` });
+  });
+
+  it("omits description when not provided", () => {
+    const data = serviceJsonLd({
+      name: "Custom Ecommerce Development Services",
+      url: `${SITE_URL}/services`,
+      serviceType: "Ecommerce Development",
+    });
     assert.equal("description" in data, false);
   });
 });

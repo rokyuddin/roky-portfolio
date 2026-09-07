@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const role = profile?.role || "Frontend Developer";
   const title = profile?.name ? `${profile.name} | ${role}` : SITE_TITLE;
   const description =
-    "Frontend Developer based in Bangladesh, available for remote roles and client projects worldwide. I build fast, accessible web apps with React, Next.js, and TypeScript, open to hire for full-time roles or freelance work.";
+    "Frontend Developer in Bangladesh for custom ecommerce development and AI automation. I build custom storefronts, checkout flows, and web apps with React, Next.js, and TypeScript — open to remote roles and client projects worldwide.";
   const imageUrl = profile?.profileImage
     ? urlFor(profile.profileImage).width(1200).height(630).fit("crop").url()
     : undefined;

@@ -17,7 +17,7 @@ export const GOOGLE_SITE_VERIFICATION = process.env.GOOGLE_SITE_VERIFICATION;
 export const SITE_NAME = "Md Rokyuddin";
 export const SITE_TITLE = `${SITE_NAME} | Frontend Developer`;
 export const SITE_DESCRIPTION =
-  "Frontend Developer specializing in React, Next.js, and TypeScript.";
+  "Frontend developer for custom ecommerce development and AI automation. I build custom storefronts and checkout flows with Next.js, React, and TypeScript. No template platforms.";
 
 // `/twitter-image` is the dynamic route (Next.js file-convention route),
 // returns image/png; `/twitter-image.jpg` (with extension) 404s.

@@ -169,6 +169,15 @@ export function Nav() {
                                 active={activeSection === "projects"}
                             />
                             <Link
+                                href="/services"
+                                className={`text-sm uppercase tracking-widest transition-all duration-300 ${pathname.startsWith("/services")
+                                    ? "text-primary border-b border-primary pb-1"
+                                    : "text-muted-foreground hover:text-primary"
+                                    }`}
+                            >
+                                Services
+                            </Link>
+                            <Link
                                 href="/case-studies"
                                 className={`text-sm uppercase tracking-widest transition-all duration-300 ${pathname.startsWith("/case-studies")
                                     ? "text-primary border-b border-primary pb-1"
@@ -276,6 +285,17 @@ export function Nav() {
                                 label="Projects"
                                 active={activeSection === "projects"}
                             />
+                        </div>
+                        <div onClick={closeMobileMenu}>
+                            <Link
+                                href="/services"
+                                className={`text-sm uppercase tracking-widest transition-all duration-300 ${pathname.startsWith("/services")
+                                    ? "text-primary border-b border-primary pb-1"
+                                    : "text-muted-foreground hover:text-primary"
+                                    }`}
+                            >
+                                Services
+                            </Link>
                         </div>
                         <div onClick={closeMobileMenu}>
                             <Link

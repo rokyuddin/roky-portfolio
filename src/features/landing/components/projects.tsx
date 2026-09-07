@@ -136,6 +136,13 @@ export function Projects({ projects }: ProjectsProps) {
                         <ArrowUpRight size={14} />
                     </Link>
                     <Link
+                        href="/services"
+                        className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary text-sm transition-colors"
+                    >
+                        See what I build on the services page
+                        <ArrowUpRight size={14} />
+                    </Link>
+                    <Link
                         href="/blog"
                         className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary text-sm transition-colors"
                     >
@@ -170,7 +177,7 @@ export function Projects({ projects }: ProjectsProps) {
                         >
                             <Image
                                 src={urlFor(selectedImage).url()}
-                                alt={selectedImage.alt || "Project Preview"}
+                                alt={selectedImage.alt || "Project screenshot"}
                                 fill
                                 className="object-cover"
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"

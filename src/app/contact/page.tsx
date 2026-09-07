@@ -8,7 +8,7 @@ import { breadcrumbJsonLd, jsonLd } from "@/lib/schema";
 
 const CONTACT_TITLE = "Contact";
 const CONTACT_DESCRIPTION =
-  "Contact Md Rokyuddin, a Frontend Developer specializing in React, Next.js, and TypeScript, for freelance projects or full-time roles.";
+  "Contact Md Rokyuddin, a Frontend Developer available for custom ecommerce development and AI automation projects, plus freelance React, Next.js, and TypeScript work or full-time roles.";
 
 export const metadata: Metadata = {
   title: CONTACT_TITLE,

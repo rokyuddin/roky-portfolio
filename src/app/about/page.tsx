@@ -13,7 +13,7 @@ import {
 
 const ABOUT_TITLE = "About";
 const ABOUT_DESCRIPTION =
-  "Frontend Developer based in Bangladesh, available for remote roles worldwide. 3+ years of experience building production React, Next.js, and TypeScript applications. Currently a Frontend Developer L2, open to new opportunities and client projects.";
+  "Frontend Developer based in Bangladesh, available for remote roles worldwide. 3+ years of experience building production React, Next.js, and TypeScript applications, including custom ecommerce development. Open to new opportunities and client projects.";
 
 const FAQS = [
   {
@@ -107,6 +107,17 @@ export default function AboutPage() {
           <h2 className="mb-8 font-serif text-primary text-3xl tracking-tight">
             Core Focus
           </h2>
+          <p className="mb-8 text-sm text-muted-foreground leading-relaxed">
+            Beyond product frontends, I offer custom ecommerce development
+            services — see the{" "}
+            <Link
+              href="/services"
+              className="text-primary hover:text-primary/80 underline underline-offset-4 transition-colors"
+            >
+              services page
+            </Link>{" "}
+            for storefronts, checkout, and AI automation work.
+          </p>
           <div className="gap-6 grid md:grid-cols-2">
             {aboutData.coreFocus.map((focus) => (
               <div

@@ -171,6 +171,27 @@ export function articleJsonLd(caseStudy: {
   };
 }
 
+export function serviceJsonLd(params: {
+  name: string;
+  url: string;
+  description?: string;
+  serviceType?: string;
+  areaServed?: string;
+}) {
+  const { name, url, description, serviceType, areaServed } = params;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    url,
+    serviceType,
+    ...(description ? { description } : {}),
+    ...(areaServed ? { areaServed } : {}),
+    provider: { "@id": `${SITE_URL}/#person` },
+  };
+}
+
 export function faqPageJsonLd(faqs: Array<{ question: string; answer: string }>) {
   return {
     "@context": "https://schema.org",
